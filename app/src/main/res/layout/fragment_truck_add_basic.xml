@@ -1,0 +1,529 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:id="@+id/ll_all"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/rl_head"
+            android:layout_width="match_parent"
+            android:background="@color/hand_blue"
+            android:layout_height="@dimen/head_w">
+
+            <LinearLayout
+                android:id="@+id/ll_back"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:paddingTop="2dp"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:paddingLeft="8dp"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@mipmap/title_back"
+                    />
+                <TextView
+                    android:id="@+id/tv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="返回"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16dp"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_para_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="基本信息"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_white"
+            android:layout_below="@+id/rl_head"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:background="@color/bg_light_gray"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_select_company"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="ID:"/>
+
+                <TextView
+                    android:id="@+id/et_id"
+                    style="@style/EditorStyle"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="车牌:"
+                    />
+
+                <TextView
+                    android:id="@+id/et_stuck_number"
+                    style="@style/EditorStyle"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:hint="请输入车牌"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="公司:"
+                    />
+
+                <TextView
+                    android:id="@+id/et_company"
+                    style="@style/EditorStyle"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:hint="请选择公司"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="载重量:"
+                    />
+
+                <EditText
+                    android:id="@+id/et_count"
+                    style="@style/EditorStyle"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:inputType="numberDecimal"
+                    android:background="@drawable/shape_fang_white"
+                    android:hint="请输入载重量"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="司机姓名:"
+                    />
+
+                <EditText
+                    android:id="@+id/et_dirver_name"
+                    style="@style/EditorStyle"
+                    android:hint="请输入司机姓名"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="司机号码:"
+                    />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    style="@style/EditorStyle"
+                    android:hint="请输入司机手机号码"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:inputType="number"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="车型:"
+                    />
+
+                <EditText
+                    android:id="@+id/et_thruck_type"
+                    style="@style/EditorStyle"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:hint="请输入车型"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="用途:"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_useful"
+                    style="@style/EditorStyle"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:hint="请选择"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="12sp"
+                    android:text="硬件版本号:"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_hard_soft"
+                    style="@style/EditorStyle"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:hint="硬件版本号"
+                    />
+
+                <Button
+                    android:id="@+id/btn_1"
+                    android:layout_width="70dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/shape_bg_blue"
+                    android:text="获取"
+                    android:textColor="@color/bg_white"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="12sp"
+                    android:text="固件版本号:"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_gu_soft"
+                    style="@style/EditorStyle"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:hint="固件版本号"
+                    />
+                <Button
+                    android:id="@+id/btn_2"
+                    android:layout_width="70dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/shape_bg_blue"
+                    android:text="获取"
+                    android:textColor="@color/bg_white"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="14sp"
+                    android:text="轴数:"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        android:id="@+id/spinner_zhou"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/zhounumber"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="12sp"
+                    android:text="传感器类型:"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/shape_fang_white"
+                    android:layout_height="match_parent">
+                    <Spinner
+                        android:id="@+id/spinner_moto_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:spinnerMode="dropdown"
+                        android:dropDownVerticalOffset="-50dp"
+                        android:dropDownHorizontalOffset="20dp"
+                        android:entries="@array/mototype"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="12sp"
+                    android:text="传感器:"
+                    />
+                <TextView
+                    android:id="@+id/tv_channeal"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="12dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/hand_txt"
+                    android:textSize="15sp"
+                    android:text="1,2,3"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:layout_width="80dp"
+                    android:textColor="@color/text_color_shen"
+                    android:textSize="12sp"
+                    android:text="传感器数量:"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_channeal_number"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical|right"
+                    android:paddingLeft="12dp"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/hand_txt"
+                    android:textSize="15sp"
+                    android:text="3"
+                    />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/ll_1"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="46dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="4dp"
+                >
+
+                <TextView
+                    android:text="车辆照片: "
+                    android:paddingLeft="12dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="80dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:layout_height="match_parent"/>
+                <ImageView
+                    android:id="@+id/img_add"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@mipmap/user_photo_add"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/btn_round_corner"
+            android:text="下一步"
+            android:textColor="@color/bg_white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+</ScrollView>

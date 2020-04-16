@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+   <dimen name="talk_img_w">90dip</dimen>
+    <dimen name="talk_img_h">90dip</dimen>
+    <dimen name="login_auth_size">30dp</dimen>
+    <dimen name="login_margin_size">40dp</dimen>
+    
+    <!-- shareDialog -->
+    <dimen name="share_margin">10dp</dimen>
+    
+    <dimen name="login_popwindow_leftpadding">14dip</dimen>
+    <dimen name="login_popwindow_rightpadding">14dip</dimen>
+    
+    <!-- app顶部导航条高度 -->
+    <dimen name="actionBarHeight">52dp</dimen>
+    
+    <!-- 商铺首页约车入口顶部距离 -->
+    <dimen name="store_home_car_top">70dp</dimen>
+    
+
+    <dimen name="tab_height">50dp</dimen>
+    <dimen name="imageview_height">200dp</dimen>
+    <dimen name="header_height">250dp</dimen>
+    <dimen name="min_header_height">250dp</dimen>
+</resources>

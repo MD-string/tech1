@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#837e7e"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_bg_white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/hint"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/enter_plate_number"
+            android:textColor="@color/black"
+            android:textSize="22sp"/>
+
+
+        <com.parkingwang.keyboard.view.InputView
+                android:id="@+id/input_view"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:pwkInputTextSize="22sp"
+                android:padding="12dp"
+                ></com.parkingwang.keyboard.view.InputView>
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_margin="12dp"
+            android:visibility="gone"
+            android:background="@drawable/shape_fang_white"
+            android:layout_height="46dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:textSize="16sp"
+                android:textColor="@color/hand_blue"
+                android:layout_alignParentRight="true"
+                android:text="其他"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorGray"
+
+
+            ></View>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/tv_okTruckN"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/sure"
+                android:textSize="22sp"
+                android:background="@drawable/sel_bg_white_gray"
+                />
+
+            <!--<View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorGray"
+                ></View>
+
+            <TextView
+                android:id="@+id/tv_cancelTruckN"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/cancel"
+                />-->
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

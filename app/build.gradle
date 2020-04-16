@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+    defaultConfig {
+        applicationId "cn.hand.tech3"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 51
+        versionName "v1.7.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+       // multiDexEnabled true
+        ndk {
+            moduleName "JniLibrary"
+            ldLibs "log"
+            //设置支持的SO库架构
+            abiFilters  'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+    signingConfigs {
+        release {
+            keyAlias 'hande'
+            keyPassword '123456'
+            storeFile file('../hande.jks')
+            storePassword '123456'
+//            v2SigningEnabled false
+        }
+
+    }
+    sourceSets.main {
+        jniLibs.srcDir 'libs'
+        jni.srcDirs = []
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+    /*谷歌Gson*/
+    compile 'com.google.code.gson:gson:2.2.4'
+    /*车牌键盘*/
+    compile 'com.parkingwang:keyboard:0.5.3'
+    compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.3'
+    compile files('libs/okhttp-2.7.5.jar')
+    implementation files('libs/universal-image-loader-1.9.3.jar')
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+    compile files('libs/mail.jar')
+    compile files('libs/jxl.jar')
+    compile files('libs/AMapSearch_6.9.2_AMapLocation_4.7.0_20190711.jar')
+    implementation files('libs/pinyin4j-2.5.0.jar')
+    compile 'com.contrarywind:Android-PickerView:3.2.7'
+    //号，例如1.2.0
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.4.1'
+    dependencies {
+        implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    }
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+}

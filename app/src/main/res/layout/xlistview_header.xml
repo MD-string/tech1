@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom" >
+
+    <RelativeLayout
+        android:id="@+id/xlistview_header_content"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical" android:id="@+id/xlistview_header_text">
+
+            <TextView
+                android:id="@+id/xlistview_header_hint_textview"
+                android:layout_width="80dp"
+                android:gravity="center"
+                android:visibility="visible"
+                android:layout_height="wrap_content"
+                android:textColor="@color/back2"
+                android:textSize="12sp"
+                android:text="@string/xlistview_header_hint_normal" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="3dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/xlistview_header_last_time"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/xlistview_header_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_marginTop="3dp" >
+
+                <TextView
+                    android:id="@+id/xlistview_header_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/back2"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/xlistview_header_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/xlistview_header_text"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="-20dp"
+            android:visibility="visible"
+            android:src="@mipmap/xlistview_arrow" />
+
+        <ProgressBar
+            android:id="@+id/xlistview_header_progressbar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            style="@style/mProgress_circle"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="-40dp"
+            android:visibility="visible" />
+        
+        <cn.hand.tech.weiget.RoundProgressBar
+            android:id="@+id/xlistview_header_round_bar"
+            app:style="STROKE"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            app:roundColor="#0000"
+            app:roundProgressColor="#D1D1D1"
+            app:roundWidth="2dp"
+            app:textIsDisplayable="false"
+            app:startAngle="-81.5"
+             />
+
+        <ImageView
+            android:id="@+id/xlistview_header_hui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/progressbar"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</LinearLayout>

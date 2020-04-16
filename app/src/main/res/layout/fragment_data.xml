@@ -1,0 +1,160 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/color1"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rl_head"
+            android:layout_width="match_parent"
+            android:background="@color/hand_blue"
+            android:layout_height="@dimen/head_w">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="汉德称重"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_et"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:layout_marginRight="12dp"
+                android:gravity="center_vertical|right"
+                android:paddingLeft="20dp"
+                android:text="编辑"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dip"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/save_list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:divider="#00000000"
+                    android:dividerHeight="10dp"
+                    android:layout_weight="1"
+                    >
+                </ListView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dip"
+                android:orientation="horizontal"
+                android:background="@color/colorWhite"
+                >
+
+                <Button
+                    android:id="@+id/btn_save_send"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_bg_blue"
+                    android:text="计算系数"
+                    android:textColor="@color/bg_white"
+                    />
+
+                <Button
+                    android:id="@+id/btn_send_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    android:background="@drawable/shape_bg_blue"
+                    android:text="保存数据"
+                    android:textColor="@color/bg_white"
+                    />
+
+                <Button
+                    android:id="@+id/btn_local_data"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_margin="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_bg_blue"
+                    android:text="本地数据"
+                    android:textColor="@color/bg_white"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dip"
+                android:background="@color/colorWhite"
+                android:padding="8dp">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:id="@+id/tv_k"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="K:"/>
+                    <TextView
+                        android:id="@+id/save_k_label"
+                        android:layout_toRightOf="@+id/tv_k"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginLeft="4dp"
+                        android:textSize="10sp"
+                        android:text="0.280`0.280`0.280`1"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:id="@+id/tv_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="B:"/>
+                    <TextView
+                        android:id="@+id/save_b_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_toRightOf="@+id/tv_b"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginLeft="4dp"
+                        android:textSize="10sp"
+                        android:text="0.00000000"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

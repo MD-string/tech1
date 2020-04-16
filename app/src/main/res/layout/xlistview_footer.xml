@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/xlistview_footer_content"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:gravity="top" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="top">
+        <ProgressBar
+            android:id="@+id/xlistview_footer_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/mProgress_circle"
+            android:layout_centerInParent="true"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/xlistview_footer_hint_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:textColor="@color/back2"
+            android:textSize="12sp"
+            android:text="@string/xlistview_footer_hint_normal" />
+        <LinearLayout
+            android:id="@+id/xlistview_footer_error_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:visibility="visible"
+	            android:textColor="@color/back2"
+	            android:textSize="12sp"
+	            android:text="@string/xlistview_footer_hint_error" />
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:visibility="visible"
+	            android:layout_marginTop="3dp"
+	            android:textColor="@color/back2"
+	            android:textSize="12sp"
+	            android:autoLink="web"
+	            android:text="@string/xlistview_footer_hint_reload" />
+        </LinearLayout>
+        <cn.hand.tech.weiget.RoundProgressBar
+            android:id="@+id/xlistview_footer_round_bar"
+            app:style="STROKE"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:roundColor="#0000"
+            app:roundProgressColor="#D1D1D1"
+            app:roundWidth="2dp"
+            app:textIsDisplayable="false"
+            app:startAngle="-81.5"
+            app:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/xlistview_footer_hui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

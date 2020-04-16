@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_channel"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_channel"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="通道10"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        />
+    <ImageView
+        android:id="@+id/iv_channel_normal"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/sel_channel"
+        />
+</LinearLayout>

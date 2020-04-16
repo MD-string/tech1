@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sw_height_1">48dp</dimen>
+    <dimen name="sw_height_2">46dp</dimen>
+    <dimen name="sw_height_3">50dp</dimen>
+    <dimen name="sw_height_4">30dp</dimen>
+    <dimen name="sw_height_5">20dp</dimen>
+    
+    <dimen name="height_banner">90dp</dimen>
+    <dimen name="height_orange_image">72dp</dimen>
+    <dimen name="height_subject_banner">202.5dp</dimen>
+    <dimen name="height_subject_image">102dp</dimen>
+    <dimen name="height_subject_all">135dp</dimen>
+    <dimen name="height_famous_product_item">170dp</dimen>
+    <dimen name="head_w">42dp</dimen>
+    
+    <dimen name="single_line_height">0.5dip</dimen>
+    <dimen name="tiptext_bottom_margin">197.0dip</dimen>
+    
+    <!-- agreement hint layout  -->
+    <!-- scrollerview height -->
+    <dimen name="scroller_view_height">340dip</dimen>
+    <dimen name="check_box_margin_top">14dip</dimen>
+    <dimen name="agree_box_margin_top">8dip</dimen>
+    
+    <!-- login page -->
+    <dimen name="checkbox_textSize">16sp</dimen>
+    <dimen name="login_btn_textSize">18sp</dimen>
+    <dimen name="checkbox_area_layout_marginTop">8dip</dimen>
+    <dimen name="checkbox_area_layout_marginBottom">8dip</dimen>
+    
+    <!-- setting page -->
+    <dimen name="exit_logout_width">300dip</dimen>
+    <dimen name="setinfo_lay_height">120dip</dimen>
+    <dimen name="info_imglay_size">90dip</dimen>
+    <dimen name="dealername_text_size">16sp</dimen>
+    <dimen name="dealername_value_size">16sp</dimen>
+    <dimen name="storename_text_size">16sp</dimen>
+    <dimen name="storename_value_size">16sp</dimen>
+    <dimen name="rqcode_save_text_size">14sp</dimen>
+    <dimen name="func_rightimg_marginRight">8dip</dimen>
+    <dimen name="func_item_testsize">16sp</dimen>
+    <dimen name="eqcode_lay_marginBottom">5dip</dimen>
+    
+    <!-- 设置界面顶部文字之间的间距 -->
+    <dimen name="top_content_margin">2dip</dimen>
+    <!-- 设置界面顶部文字距离顶部的距离 -->
+    <dimen name="top_content_top_margin">13dip</dimen>
+    
+    <!-- 聊天界面 -->
+    <!-- 按住录音按钮字体大小 -->
+    <dimen name="chat_record_voice_btn_text_size">18sp</dimen>
+    <!-- 新消息提示字体大小 -->
+    <dimen name="chat_new_message_hint_text_size">8sp</dimen>
+    <!-- 聊天界面顶部名字显示长度 -->
+    <dimen name="chat_top_part_name_width">150dip</dimen>
+    
+    <dimen name="rightbar_img_marginRight">12dip</dimen>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_mian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sel_bg_white_gray"
+        android:padding="10dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+
+        >
+        <TextView
+            android:id="@+id/tv_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/hd_black"
+            android:text="深圳汉德网络科技有深圳深圳深圳深圳深圳深圳"
+            android:singleLine="true"
+            android:layout_marginTop="7dp"
+            android:maxLength="16"
+            android:layout_marginRight="10dp"
+            />
+        <ImageView
+            android:id="@+id/iv_truckInfo_arrow"
+            android:layout_width="12dp"
+            android:layout_height="7.5dp"
+            android:src="@mipmap/icon_arrow_bto"
+            android:scaleType="centerCrop"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

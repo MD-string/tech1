@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:fitsSystemWindows="true">
+
+
+    <include
+        android:id="@+id/dialog_truckN_input"
+        layout="@layout/dialog_weight_input"
+        android:visibility="gone"
+        ></include>
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="290dip"
+        android:background="@color/hand_blue"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_head"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/head_w">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="汉德称重"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/title_ble"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:layout_marginRight="12dp"
+                android:gravity="center_vertical|right"
+                android:paddingLeft="20dp"
+                android:text="蓝牙"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_btn"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/rl_head"
+            android:layout_height="32dip">
+            <LinearLayout
+                android:id="@+id/ll_zero"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="12dip"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shape_fang_white"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/icon_clear"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="清零"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="4dip"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_save"
+                android:layout_width="wrap_content"
+                android:background="@drawable/shape_fang_white"
+                android:layout_marginRight="12dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/icon_save"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="保存"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="4dip"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_repair"
+            android:layout_width="wrap_content"
+            android:background="@drawable/shape_fang_white"
+            android:layout_marginRight="12dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="90dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/icon_setting_repair_1"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="维修"
+                android:textSize="14sp"
+                android:layout_marginLeft="4dip"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_auto_check"
+            android:layout_width="88dp"
+            android:background="@drawable/shape_fang_white"
+            android:layout_marginRight="12dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="135dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:src="@mipmap/icon_auto_check_white"
+                android:layout_height="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="自动检测"
+                android:textSize="13sp"
+                android:layout_marginLeft="4dip"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_online"
+            android:layout_width="88dp"
+            android:background="@drawable/shape_fang_white"
+            android:layout_marginLeft="12dip"
+            android:layout_marginTop="90dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/icon_setting_check_1"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="检测在线"
+                android:textSize="13sp"
+                android:layout_marginLeft="4dip"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_choose_pass"
+            android:layout_width="88dp"
+            android:background="@drawable/shape_fang_white"
+            android:layout_marginLeft="12dip"
+            android:layout_marginTop="135dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/icon_pass_choose_1"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="通道选择"
+                android:textSize="13sp"
+                android:layout_marginLeft="4dip"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bin_upper"
+            android:layout_width="88dp"
+            android:background="@drawable/shape_fang_white"
+            android:layout_marginLeft="12dip"
+            android:layout_marginTop="180dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:src="@mipmap/icon_bin_upper_white"
+                android:layout_height="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="固件升级"
+                android:textSize="13sp"
+                android:layout_marginLeft="4dip"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/rl_oval"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/rl_btn"
+            android:layout_centerInParent="true"
+            android:background="@drawable/oval_white"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35sp"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:text="0.00"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_jnit"
+            android:layout_below="@+id/rl_btn"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/rl_oval"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="100dip"
+            android:text="公斤"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/rl_carid"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/rl_oval"
+            android:layout_marginTop="12dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/icon_car_id"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="车牌号:"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginLeft="8dip"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_car_id"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginLeft="3dip"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dip"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="ID:"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="8dip"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_ble_id"
+                    android:layout_width="wrap_content"
+                    android:text="000000"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="3dip"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="计数器:"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="8dip"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:text="00000"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="3dip"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/ll_tab_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_top"
+        layout="@layout/frg_title" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_page_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_tab_title" >
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

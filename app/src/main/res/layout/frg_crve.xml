@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color1"
+              android:fitsSystemWindows="true">
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:background="@color/hand_blue"
+        android:layout_height="@dimen/head_w">
+
+        <TextView
+            android:id="@+id/tv_tong_dao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:text="通道选择"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="汉德称重"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_shen"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:text="历史数据"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_rooter"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/rl_head"
+        android:background="@color/bg_white"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_no_weightData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无数据"
+            android:layout_centerInParent="true"
+            android:textColor="@color/lightGray1"
+            android:textSize="14sp"
+            android:visibility="visible"
+            />
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="visible">
+
+        </com.github.mikephil.charting.charts.LineChart>
+        <TextView
+            android:id="@+id/tv_y"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:text="ad值(10^2)"
+            android:textSize="10sp"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <declare-styleable name="XListViewAttrs">  
+        <attr name="pullType">
+            <enum name="PULL_ARROW" value="0"></enum>
+            <enum name="PULL_HUI" value="1"></enum>
+        </attr>
+        <attr name="loadType">
+            <enum name="LOAD_PROGRESS" value="0"></enum>
+            <enum name="LOAD_HUI" value="1"></enum>
+        </attr>
+        <attr name="loadMargin" format="dimension"></attr>
+    </declare-styleable> 
+</resources>

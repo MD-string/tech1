@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="cn.hand.tech"
+    >
+
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!--获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <!-- 网络访问权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <!-- 允许请求访问使用照相设备 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera2"></uses-feature>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <!-- 锁屏 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <!--振动权限-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 蓝牙权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!--&lt;!&ndash; 用于进行网络定位,安卓6.0需要开启定位才能搜索蓝牙ble设备 - app build.gradle 改成targetSdkVersion 22，就不用申请的定位权限了-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.BATTERY_CHANGED"></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"></uses-permission>
+
+    <!--按时required为true时，则应用只能在支持BLE的Android设备上安装运行；required为false时，
+    Android设备均可正常安装运行，需要在代码运行时判断设备是否支持BLE feature：-->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true"/>
+    <application
+        android:name=".BApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.home.MainFragmentActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="cn.hand.tech.provider3"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider" />
+        </provider>
+        <activity android:name=".ui.data.EmailStateAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.data.LocalDataActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.data.LocalDataDetailActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.PassSettingActNew"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.AboutUsAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.UnitSettingAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.CoefficientSettingAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.IPAddressAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ArmAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.TruckNeedRepairActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.CompanyTruckForRepairActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ReloadSysAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.SearchTruckForRepairActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.BindCarNOAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.SaveBtnAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.WeightSettingAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.weight.CompanyTruckActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.weight.SearchTruckActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ClearZeroSettingAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.weight.AddTruckActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.MvvCheckAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.weight.BleAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.weight.AddTruckBasicActivity"
+                  android:launchMode="singleTask"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.weight.InformationBasicActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.RepairAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.PassCheckAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.CarInputAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.SecondRepairAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.AddRepairAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.AutoCheckAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.UpBinAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.EnterPlantCheckAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.LookImageActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.ImageGridActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <!--<receiver android:name="cn.hand.tech.mail.PhoneReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.PHONE_STATE"/>-->
+                <!--<action android:name="android.intent.action.NEW_OUTGOING_CALL" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+        <!--<receiver android:name="cn.hand.tech.mail.PhoneReceiver">-->
+            <!--<intent-filter> <action android:name="android.intent.action.PHONE_STATE"/>-->
+                <!--<action android:name="android.intent.action.NEW_OUTGOING_CALL" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+        <service
+            android:name="cn.hand.tech.ble.BluetoothLeService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.hxz.aidl"></action>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.amap.api.location.APSService"></service>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="c7b2138694be2fc85c52624c08e8c4c5"/>
+    </application>
+</manifest>

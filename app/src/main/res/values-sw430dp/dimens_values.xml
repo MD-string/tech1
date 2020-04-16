@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="height_banner">108dp</dimen>
+    <dimen name="height_orange_image">86dp</dimen>
+    <dimen name="height_subject_banner">242dp</dimen>
+    <dimen name="height_subject_image">121dp</dimen>
+    <dimen name="height_subject_all">162dp</dimen>
+    <dimen name="height_famous_product_item">198dp</dimen>
+    
+    <dimen name="head_w">49dp</dimen>
+</resources>

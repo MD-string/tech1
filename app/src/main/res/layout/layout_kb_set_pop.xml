@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_bg_white"
+        android:orientation="vertical"
+        android:layout_margin="40dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:text="提示"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/line_color"
+            >
+        </View>
+
+        <TextView
+            android:id="@+id/tv_k_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="K值设定"
+            android:textColor="@color/colorBtn"
+            android:textSize="16sp"
+            android:background="@drawable/sel_bg_white_gray"
+
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_color"
+            >
+        </View>
+
+        <TextView
+            android:id="@+id/tv_b_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="B值设定"
+            android:textColor="@color/colorBtn"
+            android:textSize="16sp"
+            android:background="@drawable/sel_bg_white_gray"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_color"
+            >
+        </View>
+
+        <TextView
+            android:id="@+id/tv_kb_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:text="取消"
+            android:textColor="@color/colorBtn"
+            android:textSize="16sp"
+            android:paddingBottom="5dp"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

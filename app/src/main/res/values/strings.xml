@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">汉德装车pro</string>
+    <string name="app_version">v1.7.1</string>
+    <!-- XListView -->
+    <string name="hxlistview_header_hint_normal">向左拉动刷新</string>
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">最近更新：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="xlistview_footer_hint_finish">没有更多了</string>
+    <string name="xlistview_footer_hint_error">加载失败</string>
+    <string name="xlistview_footer_hint_reload"><u>点击重新加载</u></string>
+    <string name="viewpager_indicator">%1$d/%2$d</string>
+
+    <!-- 网络和内存卡提示 -->
+    <string name="prompt">提示</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_about">关于</string>
+    <string name="check_connection">无可用网络连接，请检查网络设置！</string>
+    <string name="close">关闭</string>
+    <string name="exit">退出</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="login_reset">重新登录</string>
+    <string name="title">请选择时间</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="select_date">选择日期</string>
+    <string name="current_date">当前日期</string>
+    <string name="commit">确定</string>
+
+    <!-- 启动页 -->
+    <string name="loading_text">加载中，请稍候......</string>
+	<string name="loadfail">加载失败，请重试</string>
+
+
+    <!-- login page -->
+    <string name="login_title">登录</string>
+    <string name="login_load_text">登录中</string>
+    <string name="up_load_text">上传中</string>
+    <string name="pwd_forget">忘记密码?</string>
+    <string name="name_hint">请输入经销商编号或手机号</string>
+    <string name="pwd_hint">请输入密码</string>
+    <string name="sel_stores">选择门店</string>
+    <string name="login_btn_text">登录</string>
+    <string name="login_save_mark_text">记住密码</string>
+    <string name="content_des_mark">退出登录</string>
+
+    <!-- main page -->
+    <string name="main_title">汉德称重</string>
+    <string name="tab_01">测量</string>
+    <string name="tab_02">数据</string>
+    <string name="tab_03">曲线</string>
+    <string name="tab_04">设定</string>
+    <string name="location_update_time">位置更新时间</string>
+    <string name="input_device_number">请输入设备编号</string>
+    <string name="gps_number"> GPS 编 号:</string>
+    <string name="input_gps_number">请输入GPS编号</string>
+    <string name="input_truck_number">请输入车牌号码</string>
+    <string name="phone">电 话 号 码:</string>
+    <string name="input_phone">请输入电话号码</string>
+    <string name="load_capacity">载重量(吨):</string>
+    <string name="input_load_capacity">请输入载重量</string>
+    <string name="production_time">生 产 日 期:</string>
+    <string name="input_production_time">请选择车辆生产日期</string>
+    <string name="company_name">公 司 名 称:</string>
+    <string name="select_company_name">请选择公司名称</string>
+    <string name="device_number">设 备 编 号:</string>
+    <string name="home_title">称重软件</string>
+    <string name="device_title">称重设备</string>
+    <string name="truck_number">车 牌 号 码:</string>
+    <string name="logo_sign">物流信息互通共享技术及应用国家工程实验室</string>
+    <string name="connect_ble">蓝牙</string>
+    <string name="ble_no_connect">蓝牙未连接</string>
+    <string name="ble_connect_succeed">蓝牙连接成功</string>
+    <string name="save">保存</string>
+    <string name="filter_vcode">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="goods_weight">货物重量</string>
+    <string name="weight_kg">公斤</string>
+    <string name="weight_ton">吨</string>
+    <string name="zero_clearing">清零</string>
+    <string name="is_zero_clearing">是否清零</string>
+    <string name="zero_clearing_succeed">清零成功</string>
+    <string name="zero_clearing_fail">清零失败</string>
+    <string name="device_name">设备名称</string>
+    <string name="scanner_end">(扫描结束)</string>
+    <string name="is_unbund">是否解绑?</string>
+    <string name="hint">提示</string>
+    <string name="sure">确定</string>
+    <string name="enter_plate_number">请输入车牌号码</string>
+    <string name="enter_correct_plate_number">请输入正确的车牌号码</string>
+    <string name="plate_number_no_null">车牌号码不能为空</string>
+    <string name="plate_number_add_succeed">车牌号码添加成功</string>
+    <string name="discount_ble">断开蓝牙</string>
+    <string name="is_discount_ble">是否断开蓝牙设备?</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="ble_discount_already">蓝牙已断开</string>
+    <string name="select_plate_number">请选择车牌号码</string>
+    <string name="add">新增</string>
+    <string name="enter_real_weight">请输入实际重量(公斤)</string>
+    <string name="real_weight_no_null">实际重量不能为空</string>
+    <string name="save_ing">保存中...</string>
+    <string name="save_succeed">数据保存成功</string>
+    <string name="ble_service_empty">蓝牙设备服务未获取到，请靠近设备</string>
+    <string name="no_support_ble">您的设备不支持蓝牙BLE</string>
+    <string name="ble_not_open">蓝牙未打开,请开启蓝牙</string>
+    <string name="connect_ble_ing">连接蓝牙设备中...</string>
+    <string name="device_exception">设备异常，请重新连接</string>
+    <string name="device_id_empty">设备ID未获取到，请检查蓝牙连接是否正常</string>
+    <string name="weight_time_empty">载重数据采集时间未获取到，请检查蓝牙连接是否正常</string>
+    <string name="net_not_connect">网络未连接，请检查您的网络连接情况</string>
+    <string name="ble_connect_failure">蓝牙设备连接失败,请靠近设备</string>
+    <string name="ble_rssi_weak">蓝牙设备信号弱,请靠近设备</string>
+    <string name="web_service_connect_failure">服务器连接失败</string>
+    <string name="enter_true_phone_num">请输入正确的手机号</string>
+    <string name="exit_application">再按一次返回键退出</string>
+    <string name="photo_str">相册</string>
+    <string name="master_map">原图</string>
+    <string name="submit_bottom">确定</string>
+    <string name="authorities">cn.hand.tech.provider3</string>//必须和manifest 中provider 一致
+</resources>

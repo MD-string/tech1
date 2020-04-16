@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="height_orange_image">128dp</dimen>
+    <dimen name="height_subject_image">176dp</dimen>
+    <dimen name="sw_height_5">40dp</dimen>
+</resources>

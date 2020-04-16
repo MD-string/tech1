@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:minHeight="35dp"
+                android:orientation="vertical"
+                android:id="@+id/rl_1"
+                android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="13sp"
+            android:text="wenzi"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/img_1"
+            android:layout_width="10dp"
+            android:layout_height="11dp"
+            android:layout_toRightOf="@+id/tv_1"
+            android:layout_marginLeft="4dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/gray_right_arrow"
+            />
+    </RelativeLayout>
+    <CheckBox
+        android:id="@+id/ck_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        style="@style/CustomCheckBoxTheme"
+        android:drawablePadding="8dp"
+        android:focusable="false"
+        android:layout_marginLeft="8dp"
+        android:clickable="false"
+        android:textSize="13sp"
+        android:visibility="gone"
+        android:paddingTop="0dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="4dp"
+        android:text="GPS丢失"/>
+
+</RelativeLayout>

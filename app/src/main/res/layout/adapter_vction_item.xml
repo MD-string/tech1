@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              android:orientation="vertical"
+                android:id="@+id/rl_1"
+                android:background="@color/white">
+    <CheckBox
+        android:id="@+id/ck_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        style="@style/CustomCheckBoxTheme"
+        android:drawablePadding="8dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:paddingTop="0dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="GPS丢失"/>
+
+</RelativeLayout>

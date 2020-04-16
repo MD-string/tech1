@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="languages">
+        <item></item>
+    </string-array>
+    <string-array name="repairtype">
+        <item>请选择</item>
+        <item>主机问题</item>
+        <item>传感器问题</item>
+        <item>GPS问题</item>
+        <item>线材问题</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="zhuji">
+        <item>请选择</item>
+        <item>离线</item>
+        <item>未识别上货</item>
+    </string-array>
+
+    <string-array name="chuanganqi">
+        <item>请选择</item>
+        <item>传感器1</item>
+        <item>传感器2</item>
+        <item>传感器3</item>
+        <item>传感器4</item>
+        <item>传感器5</item>
+        <item>传感器6</item>
+        <item>传感器7</item>
+        <item>传感器8</item>
+        <item>传感器9</item>
+        <item>传感器10</item>
+        <item>传感器11</item>
+        <item>传感器12</item>
+        <item>传感器13</item>
+        <item>传感器14</item>
+        <item>传感器15</item>
+        <item>传感器16</item>
+    </string-array>
+
+    <string-array name="cgqstatus">
+        <item>请选择</item>
+        <item>正负52万</item>
+        <item>超过52万</item>
+        <item>零值</item>
+        <item>平直</item>
+        <item>乱跳</item>
+        <item>方向反</item>
+    </string-array>
+
+    <string-array name="gpswenti">
+        <item>请选择</item>
+        <item>GPS丢失</item>
+        <item>GPS漂移</item>
+    </string-array>
+    <string-array name="xiancai">
+        <item>请选择</item>
+        <item>无通道</item>
+        <item>全部平直</item>
+        <item>过磅传感器不跳</item>
+    </string-array>
+
+    <string-array name="stucktype">
+        <item></item>
+    </string-array>
+
+
+    <string-array name="zhounumber">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="softversion">
+        <item>v4</item>
+        <item>v7</item>
+    </string-array>
+
+
+    <string-array name="yongtu">
+        <item>请选择</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+
+    <string-array name="motonumber">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+    </string-array>
+
+
+    <string-array name="mototype">
+        <item>应变计</item>
+        <item>17-4</item>
+        <item>拉力传感器</item>
+    </string-array>
+</resources>

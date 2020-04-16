@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:layout_marginRight="3dp"
+                android:background="@color/white">
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="94dp"
+            android:paddingLeft="3dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_car_number"/>
+
+            <TextView
+                android:id="@+id/tv_car_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/img_1"
+                android:text="粤B456741"
+                android:textSize="13sp"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="63dp"
+            android:layout_marginLeft="2dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_dirver_name"/>
+
+            <TextView
+                android:id="@+id/tv_dirver_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@+id/img_2"
+                android:layout_toRightOf="@+id/img_2"
+                android:text="某某某"
+                android:textSize="13sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_phone"
+            android:layout_width="103dp"
+            android:layout_marginLeft="2dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_phone"/>
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/img_3"
+                android:text="18721669078"
+                android:textSize="13sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:visibility="invisible"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_address"/>
+            <TextView
+                android:id="@+id/tv_current_distance"
+                android:layout_toRightOf="@+id/img_4"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="10sp"
+                android:layout_height="wrap_content"
+                android:text="离我23.5km"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_color"
+        />
+</LinearLayout>
