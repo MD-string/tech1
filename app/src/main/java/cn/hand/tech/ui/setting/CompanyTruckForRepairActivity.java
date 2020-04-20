@@ -59,63 +59,71 @@ public class CompanyTruckForRepairActivity extends Activity implements View.OnCl
     }
 
     protected void findViews() {
-        List<CompanyBean> listBean=companyResult.getResult();
-        mGroupList=new ArrayList<>();
-        if(listBean !=null && listBean.size() >0){
-            for(int i=0;i<listBean.size();i++){
-                CompanyBean bean=listBean.get(i);
-                String parentId=bean.getParentId();
-                String parentName=bean.getParentName();
-                String id=bean.getId();
-                if(Tools.isEmpty(parentId) && Tools.isEmpty(parentName)){
-                    CompanyTruckGroupBean cbean=new CompanyTruckGroupBean();
-                    cbean.setName(bean.getCompanyName());
-                    cbean.setId(id);
-                    List<TruckChildBean> tlist=new ArrayList<>();
-                    for(int j=listBean.size()-1;j>=0;j--){ //分公司
-                        CompanyBean beanj=listBean.get(j);
-                        String parentIdj=beanj.getParentId();
-                        if(parentIdj.equals(id)){
-                            TruckChildBean tbean=new TruckChildBean();
-                            tbean.setName(beanj.getCompanyName());
-                            tbean.setChildId(beanj.getId());
-                            tlist.add(tbean);
-                        }
+        try{
+            mTvBack = (TextView) findViewById(R.id.tv_back);
+            mTvBack.setVisibility(View.VISIBLE);
+            mTvBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 
+            tv_search=(ImageView)findViewById(R.id.tv_search);
+            tv_search.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SearchTruckForRepairActivity.start(mContext);
+                    finish();
+                }
+            });
+
+
+            List<CompanyBean> listBean=companyResult.getResult();
+            mGroupList=new ArrayList<>();
+            if(listBean !=null && listBean.size() >0){
+                for(int i=0;i<listBean.size();i++){
+                    CompanyBean bean=listBean.get(i);
+                    String parentId=bean.getParentId();
+                    String parentName=bean.getParentName();
+                    String id=bean.getId();
+                    if(Tools.isEmpty(parentId) && Tools.isEmpty(parentName)){
+                        CompanyTruckGroupBean cbean=new CompanyTruckGroupBean();
+                        cbean.setName(bean.getCompanyName());
+                        cbean.setId(id);
+                        List<TruckChildBean> tlist=new ArrayList<>();
+                        for(int j=listBean.size()-1;j>=0;j--){ //分公司
+                            CompanyBean beanj=listBean.get(j);
+                            String parentIdj=beanj.getParentId();
+                            if(parentIdj.equals(id)){
+                                TruckChildBean tbean=new TruckChildBean();
+                                tbean.setName(beanj.getCompanyName());
+                                tbean.setChildId(beanj.getId());
+                                tlist.add(tbean);
+                            }
+
+                        }
+                        cbean.setChildren(tlist);
+                        mGroupList.add(cbean);
                     }
-                    cbean.setChildren(tlist);
-                    mGroupList.add(cbean);
                 }
             }
-        }
-        acache.put("truck_list",(Serializable) mGroupList);
-        mTvBack = (TextView) findViewById(R.id.tv_back);
-        mTvBack.setVisibility(View.VISIBLE);
-        mTvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+            acache.put("truck_list",(Serializable) mGroupList);
 
-        tv_search=(ImageView)findViewById(R.id.tv_search);
-        tv_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchTruckForRepairActivity.start(mContext);
-                finish();
-            }
-        });
 
-        list_1=(ExpandableListView)findViewById(R.id.list_1);
-        madapter=new CompanyTruckForRepairAdapter(mContext,mGroupList);
-        list_1.setGroupIndicator(null);//不使用系统提供的展开和收起的图标  左边有个下的图标
-        list_1.setAdapter(madapter);
-        int groupCount = list_1.getCount()-1;//减去头部
-        for (int i=0; i<groupCount; i++)
-        {
-            list_1.expandGroup(i);
+            list_1=(ExpandableListView)findViewById(R.id.list_1);
+            madapter=new CompanyTruckForRepairAdapter(mContext,mGroupList);
+            list_1.setGroupIndicator(null);//不使用系统提供的展开和收起的图标  左边有个下的图标
+            list_1.setAdapter(madapter);
+            int groupCount = list_1.getCount()-1;//减去头部
+            for (int i=0; i<groupCount; i++)
+            {
+                list_1.expandGroup(i);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
 

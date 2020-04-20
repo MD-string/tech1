@@ -26,6 +26,7 @@ public class PassCheckAct extends Activity {
     private EditText et_date,et_fa;
     private Button bt_save_mv;
     private ACache acache;
+    private EditText et_ad_value;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, PassCheckAct.class);
@@ -69,6 +70,12 @@ public class PassCheckAct extends Activity {
             et_fa.setSelection(et2.length());
         }
 
+        et_ad_value=(EditText)findViewById(R.id.et_ad_value);
+        String adValue =acache.getAsString("setting_ad_value");
+        if(!Tools.isEmpty(adValue)){
+            et_ad_value.setText(adValue);
+        }
+
         bt_save_mv=(Button)findViewById(R.id.bt_save_mv);
         bt_save_mv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +86,14 @@ public class PassCheckAct extends Activity {
                     showTips("时间或阀值不能为空");
                     return;
                 }
+                String adValue=et_ad_value.getText().toString();
+                if(Tools.isEmpty(adValue)){
+                    adValue="131072";
+                }
+
                 acache.put("pass_time",date);
                 acache.put("pass_value",fazhi);
+                acache.put("setting_ad_value",adValue);
                 showTips("保存成功");
 
             }

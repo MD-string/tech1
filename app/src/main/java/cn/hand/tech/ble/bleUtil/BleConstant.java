@@ -65,6 +65,9 @@ public class BleConstant {
 	public final static String ACTION_CHUAN_GAN_QI = "cn.hande.ble.ACTION_CHUAN_GAN_QI"; //传感器检测
 	public final static String ACTION_CAI_JI_QI = "cn.hande.ble.ACTION_CAI_JI_QI"; //采集器检测
 
+	public final static String ACTION_RESTART_AUTO_CHECK = "cn.hande.ble.ACTION_RESTART_AUTO_CHECK"; //重新检测
+
+
 	public final static String ACTION_READ_DEVICE_ID = "cn.hande.ble.ACTION_READ_DEVICE_ID"; //主动获取设备ID
 
     public final static String ACTION_START_UPDATE_BIN = "cn.hande.ble.ACTION_START_UPDATE_BIN"; //准备升级固件

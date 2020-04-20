@@ -175,6 +175,9 @@
         <activity android:name=".ui.setting.EnterPlantCheckAct"
                   android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.CheckMainAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.LookImageActivity"
                   android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
                   android:screenOrientation="portrait"/>

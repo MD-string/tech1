@@ -115,7 +115,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()){
 			case R.id.ll_auto_check:
-				AutoCheckAct.start(mactivity);
+				CheckMainAct.start(mactivity);
 				break;
 			case R.id.ll_update_bin:
 				UpBinAct.start(mactivity);

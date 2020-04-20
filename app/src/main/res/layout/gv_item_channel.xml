@@ -5,22 +5,41 @@
     android:layout_height="wrap_content"
     android:id="@+id/ll_channel"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/tv_channel"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="通道10"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:paddingBottom="1dp"
+            />
+        <ImageView
+            android:id="@+id/iv_channel_normal"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/sel_channel"
+            />
+    </LinearLayout>
     <TextView
-        android:id="@+id/tv_channel"
+        android:id="@+id/tv_ad"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:text="通道10"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:padding="5dp"
+        android:text="AD不通过"
+        android:layout_marginLeft="8dp"
+        android:textSize="12sp"
+        android:textColor="@color/red"
         />
-    <ImageView
-        android:id="@+id/iv_channel_normal"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/sel_channel"
-        />
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package cn.hand.tech.ui.setting.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by hand-hitech2 on 2018-02-07.
@@ -21,6 +22,7 @@ public class CarNumberInfo implements Serializable {
     private String phone;
     private String driverName;
     private String hwVersion; //硬件版本号
+    private List<String> activeChannels;
     /**
      *设备运行状态0：停止运行，1：正在运行，2：正在升级，3：升级失败
      */
@@ -31,6 +33,14 @@ public class CarNumberInfo implements Serializable {
      */
     private String version;
     private String companyName;
+
+    public List<String> getActiveChannels() {
+        return activeChannels;
+    }
+
+    public void setActiveChannels(List<String> activeChannels) {
+        this.activeChannels = activeChannels;
+    }
 
     public String getCompanyName() {
         return companyName;

@@ -1,5 +1,6 @@
 package cn.hand.tech.ui.setting;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +46,7 @@ import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
 
 /*
- *自动检测
+ *自动检测  主机检测
  */
 public class AutoCheckAct extends Activity implements  IAutoCheckView{
     private static final String TAG ="AutoCheckAct" ;
@@ -92,6 +95,7 @@ public class AutoCheckAct extends Activity implements  IAutoCheckView{
     private AutoCheckFrgBean mAutoCheckFrgBean;
     private TextView tv_check_status;
     private boolean isZhuji;
+    private  List<String> sensorHaveList=new ArrayList<>();
 
     public static void start(Context context) {
         Intent intent = new Intent(context, AutoCheckAct.class);
@@ -657,6 +661,20 @@ public class AutoCheckAct extends Activity implements  IAutoCheckView{
         String count="huxinzhao"; //去检查gprs是否在线
         String psw="hd123456";
         submit(count,psw);
+
+        if(companyResult !=null){
+            try{
+                List<String> sensorList=companyResult.getActiveChannels(); //设备存在多少通道
+                if(sensorList !=null && sensorList.size() >0){
+                    sensorHaveList=sensorList;
+                    DLog.e("AutoCheckAct","doInfo="+sensorList.size()+"/"+ Arrays.asList(sensorHaveList));
+                }else{
+                    sensorHaveList=new ArrayList<>();
+                }
+            }catch (Exception e){
+                sensorHaveList=new ArrayList<>();
+            }
+        }
     }
 
     @Override
@@ -1175,6 +1193,7 @@ public class AutoCheckAct extends Activity implements  IAutoCheckView{
     private void registerBrodcat() {
         receiver=new BroadcastReceiver() {
 
+            @TargetApi(Build.VERSION_CODES.O)
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -1397,7 +1416,20 @@ public class AutoCheckAct extends Activity implements  IAutoCheckView{
                         mHandler.sendEmptyMessage(8);
                     }
 
-                    doshowSennr4(sensor.toString(),"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",16);
+                    int leng=16;
+                    String strb="";
+                    if(sensorHaveList !=null && sensorHaveList.size() >0){
+                        leng=sensorHaveList.size();
+                        for(int i=0;i<sensorHaveList.size();i++){
+                            strb=strb+sensorHaveList.get(i)+",";
+                        }
+                        strb=strb.substring(0,strb.length()-1);
+                    }else{
+                        leng=16;
+                        strb="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16";
+                    }
+                    DLog.e("ACTION_CHUAN_GAN_QI","sensorHaveList="+leng+"/"+strb);
+                    doshowSennr4(sensor.toString(),strb,leng);
                 }
                 else if(action.equals(BleConstant.ACTION_CAI_JI_QI)){
                     String colection=intent.getStringExtra("colection_status");

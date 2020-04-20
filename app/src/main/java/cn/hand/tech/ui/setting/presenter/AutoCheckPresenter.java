@@ -57,6 +57,8 @@ public class AutoCheckPresenter {
 					try {
 						if(!Tools.isEmpty(result) && result.length()> 0){
 							CarNumberInfo companyResult = CommonKitUtil.parseJsonWithGson(result.toString(), CarNumberInfo.class);
+//							List<String> mslit=companyResult.getActiveChannels();
+//							DLog.e("checkCarNumberExisit","checkCarNumberExisit="+mslit.size()+"/"+ Arrays.asList(mslit));
 							mView.doInfo(companyResult);
 						}
 					} catch (Exception e) {

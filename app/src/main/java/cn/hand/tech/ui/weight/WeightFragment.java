@@ -66,7 +66,7 @@ import cn.hand.tech.dao.WeightDao;
 import cn.hand.tech.log.DLog;
 import cn.hand.tech.ui.home.BaseFragment;
 import cn.hand.tech.ui.home.MainFragmentActivity;
-import cn.hand.tech.ui.setting.AutoCheckAct;
+import cn.hand.tech.ui.setting.CheckMainAct;
 import cn.hand.tech.ui.setting.PassSettingActNew;
 import cn.hand.tech.ui.setting.RepairAct;
 import cn.hand.tech.ui.setting.UpBinAct;
@@ -627,7 +627,7 @@ public class WeightFragment extends BaseFragment implements OnClickListener,IEve
 				RepairAct.start(mactivity);
 				break;
 			case R.id.ll_auto_check:
-				AutoCheckAct.start(mactivity);
+				CheckMainAct.start(mactivity);
 				break;
 			case R.id.ll_online:
                 doCheckOnline(1);

@@ -350,7 +350,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
                     }
                     /*判断通道检测*/
                     if (bChannelDetect) {
-                        invoke(data);
+                        invokeAD(data);
                     }
 
                     /*判断MV/V检测*/
@@ -713,7 +713,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
 
 
 
-    private void invoke(HDModelData data1) {
+    private void invokeAD(HDModelData data1) {
 
         String date =acache.getAsString("pass_time");
         if(Tools.isEmpty(date)){
@@ -847,37 +847,37 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
     }
 
     private void doRefresh(int now){
-        boolean b1 = channelDetect(list0);
+        boolean b1 = channelDetect(list0,1);
         channelDetectList.get(0).setChannelNormal(b1);
-        boolean b2 = channelDetect(list1);
+        boolean b2 = channelDetect(list1,2);
         channelDetectList.get(1).setChannelNormal(b2);
-        boolean b3 = channelDetect(list2);
+        boolean b3 = channelDetect(list2,3);
         channelDetectList.get(2).setChannelNormal(b3);
-        boolean b4 = channelDetect(list3);
+        boolean b4 = channelDetect(list3,4);
         channelDetectList.get(3).setChannelNormal(b4);
-        boolean b5 = channelDetect(list4);
+        boolean b5 = channelDetect(list4,5);
         channelDetectList.get(4).setChannelNormal(b5);
-        boolean b6 = channelDetect(list5);
+        boolean b6 = channelDetect(list5,6);
         channelDetectList.get(5).setChannelNormal(b6);
-        boolean b7 = channelDetect(list6);
+        boolean b7 = channelDetect(list6,7);
         channelDetectList.get(6).setChannelNormal(b7);
-        boolean b8 = channelDetect(list7);
+        boolean b8 = channelDetect(list7,8);
         channelDetectList.get(7).setChannelNormal(b8);
-        boolean b9 = channelDetect(list8);
+        boolean b9 = channelDetect(list8,9);
         channelDetectList.get(8).setChannelNormal(b9);
-        boolean b10 = channelDetect(list9);
+        boolean b10 = channelDetect(list9,10);
         channelDetectList.get(9).setChannelNormal(b10);
-        boolean b11 = channelDetect(list10);
+        boolean b11 = channelDetect(list10,11);
         channelDetectList.get(10).setChannelNormal(b11);
-        boolean b12 = channelDetect(list11);
+        boolean b12 = channelDetect(list11,12);
         channelDetectList.get(11).setChannelNormal(b12);
-        boolean b13 = channelDetect(list12);
+        boolean b13 = channelDetect(list12,13);
         channelDetectList.get(12).setChannelNormal(b13);
-        boolean b14 = channelDetect(list13);
+        boolean b14 = channelDetect(list13,14);
         channelDetectList.get(13).setChannelNormal(b14);
-        boolean b15 = channelDetect(list14);
+        boolean b15 = channelDetect(list14,15);
         channelDetectList.get(14).setChannelNormal(b15);
-        boolean b16 = channelDetect(list15);
+        boolean b16 = channelDetect(list15,16);
         channelDetectList.get(15).setChannelNormal(b16);
         if (NotNull.isNotNull(channelDetectAdapter)) {
             List<ChannealBean> havelist= doHandlerList(list);//保存的通道  显示 多个通道。
@@ -1011,16 +1011,38 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
         }
     }
 
-    private boolean channelDetect(ArrayList<Float> floatData) {
+    private boolean channelDetect(ArrayList<Float> floatData,int passway) {
         if(floatData ==null ||  floatData.size() <= 0){
             return false;
         }
         // LogUtil.e("变动后的adDifferenceValue==" + adDifferenceValue + "");
         float max = 0;
         float min = 0;
+        float pinjun=0;
         // Float[] numbers = { 0.1f, 0.22f, 0.7f, 0.21f,0.4f, 0.9f, 0.5f};
         max = Collections.max(floatData);
         min = Collections.min(floatData);
+
+        //求ad 平均值
+        if(bChannelDetect){  // 只通道检测 显示AD
+            for(int i=0;i<floatData.size();i++){ //求平均值
+                pinjun=pinjun+floatData.get(i);
+            }
+            pinjun=pinjun/(floatData.size());
+            String pjValue =acache.getAsString("setting_ad_value");
+            if(Tools.isEmpty(pjValue)){
+                pjValue="131072";
+            }
+            DLog.e("channelDetect","channelDetect="+pinjun+"/"+pjValue);
+            float adValue=Float.parseFloat(pjValue);//默认正值
+            if(pinjun  < adValue  && pinjun >(adValue*(-1f))){
+                acache.put("ad_check_"+passway,"1");
+            }else{
+                acache.put("ad_check_"+passway,"0");
+            }
+        }
+
+
         DLog.e(TAG,"最大值==" + max + ",=,最小值" + min);
         if(1==chooseId){
             String value =acache.getAsString("pass_value");

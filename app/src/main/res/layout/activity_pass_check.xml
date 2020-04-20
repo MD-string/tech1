@@ -53,7 +53,7 @@
 
         <TextView
             android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:text="时间:"
             android:layout_marginLeft="12dp"
@@ -86,7 +86,7 @@
         android:layout_height="46dp">
         <TextView
             android:id="@+id/tv_fa"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:text="阀值:"
             android:layout_marginLeft="12dp"
@@ -105,7 +105,39 @@
             android:layout_height="wrap_content"/>
 
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rl_1"
+        android:background="@color/line_color"
+        >
+    </View>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="46dp">
+        <TextView
+            android:id="@+id/tv_ad_value"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="A  D :"
+            android:layout_marginLeft="12dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/et_ad_value"
+            android:layout_width="match_parent"
+            android:text="131072"
+            android:inputType="numberSigned|numberDecimal"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:layout_toRightOf="@+id/tv_ad_value"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/shape_fang_white"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
     <Button
         android:id="@+id/bt_save_mv"
         android:layout_width="match_parent"
