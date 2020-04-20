@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:background="@color/hand_blue"
+        android:layout_height="@dimen/head_w">
+
+        <LinearLayout
+            android:id="@+id/ll_back"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:paddingLeft="12dp"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@mipmap/title_back"
+                />
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回"
+                android:textColor="@color/colorWhite"
+                android:textSize="16dp"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_para_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="自动检测"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_next_check"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:paddingRight="12dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="重新检测"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/ll_tab_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_head"
+        layout="@layout/frg_title_1" />
+    <cn.hand.tech.weiget.CustomScrollViewPager
+        android:id="@+id/id_page_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_tab_title"
+        >
+    </cn.hand.tech.weiget.CustomScrollViewPager>
+
+
+</RelativeLayout>
