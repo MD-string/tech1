@@ -85,6 +85,47 @@ public class BasicPresenter {
 //	}
 
 	/**
+	 * 判断车辆设备是否已经添加过api接口
+	 */
+	public void checkDeviceExsit(String id,String token) {
+		try {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("deviceId",id);
+			map.put("token",token);
+
+			HttpHandler.getInstance().postBasic(null, UrlConstant.HttpUrl.NET_CHECK_DEVICE_EXSIT, map, new NetCallBack() {
+				@Override
+				public void onSuccess(String result, String executeStatus) {//0:已经存在   1：不存在
+					JSONObject jsonObject = null;
+					try {
+						jsonObject = new JSONObject(result.toString());
+						String code = jsonObject.getString("code"); //车辆是否录入    录入：0    没录入：1
+						String isInstall = jsonObject.getString("isInstall");  //是否存在安装信息   存在安装记录：0      不存在安装记录：1
+						mView.doCheckAPISuccess(code,isInstall);
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+				@Override
+				public void onException(String errorCode, String errorMsg) {
+					mView.doError(" 判断车辆设备录车失败");
+
+				}
+				@Override
+				public void onError(Exception e) {
+					mView.doError("判断车辆设备录车失败");
+				}
+			});
+
+		} catch (Exception e1) {
+			mView.doError("判断车辆设备录车失败");
+			e1.printStackTrace();
+		}
+	}
+
+	/**
 	 * 检查ID是否已经录入
 	 */
 	public void checkID(String id,String token) {
@@ -168,7 +209,7 @@ public class BasicPresenter {
 	public void sendBasicData( AddTruckInfo bean,String token,String softVer,String fmVer,String sensorChannel,String companyid,String unitStr,String parent,String child,String dirverName,String path) {
 		try {
 
-            Bitmap bitmap = ImageUtil.getImage(path,480,800); //此时返回 bm 为空
+            Bitmap bitmap = ImageUtil.getimage(path); //此时返回 bm 为空
             // 计算图片缩放比例
 
             // 首先保存图片
@@ -313,7 +354,7 @@ public class BasicPresenter {
         }
         try {
             FileOutputStream out = new FileOutputStream(f);
-            bm.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
         } catch (FileNotFoundException e) {

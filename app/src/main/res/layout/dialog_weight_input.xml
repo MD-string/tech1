@@ -87,32 +87,30 @@
             >
 
             <TextView
+                android:id="@+id/tv_cancelTruckN"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:text="@string/cancel"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorGray"
+            ></View>
+            <TextView
                 android:id="@+id/tv_okTruckN"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="15dp"
                 android:text="@string/sure"
                 android:textSize="22sp"
                 android:background="@drawable/sel_bg_white_gray"
                 />
 
-            <!--<View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorGray"
-                ></View>
-
-            <TextView
-                android:id="@+id/tv_cancelTruckN"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/cancel"
-                />-->
         </LinearLayout>
 
 

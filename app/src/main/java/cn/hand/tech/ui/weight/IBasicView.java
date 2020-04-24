@@ -7,6 +7,7 @@ import cn.hand.tech.ui.weight.bean.CompanyResultBean;
  */
 public interface IBasicView {
 	void doSuccess(String msg);
+	void doCheckAPISuccess(String msg,String msg1);
 	void doError(String msg);
 
 	void  doCompanySuccess(CompanyResultBean bean);

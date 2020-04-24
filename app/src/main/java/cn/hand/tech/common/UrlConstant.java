@@ -62,6 +62,8 @@ public class UrlConstant {
 
 		/*是否进厂  POST*/
 		public static final String AUTO_CHECK_INPUT_FRAGORY = GET_URL() + "/dataserver/realtime.html";
+		/*是否进厂  POST*/
+		public static final String NET_CHECK_DEVICE_EXSIT = GET_URL() + "/carserver/checkDeviceIsExist.html";
 	}
 	public static String GET_URL() {
 		String url = "";

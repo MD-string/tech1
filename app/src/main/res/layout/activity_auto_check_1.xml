@@ -460,7 +460,7 @@
                             android:layout_marginRight="42dp"
                             android:background="@mipmap/icon_data_ing"
                             android:gravity="center"
-                            android:text="无线网络状态"/>
+                            android:text="GPRS状态"/>
 
                         <RelativeLayout
                             android:id="@+id/rl_network_probar"
@@ -1299,6 +1299,15 @@
                                 android:gravity="center_vertical"
                                 android:text="传感器状态:"
                                 android:textSize="10sp"/>
+
+                            <TextView
+                                android:id="@+id/tv_uninstall_sensior"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="6dp"
+                                android:visibility="gone"
+                                android:textSize="10sp"
+                                android:text="传感器未安装"/>
                             <LinearLayout
                                 android:id="@+id/ll_sensor"
                                 android:layout_width="match_parent"

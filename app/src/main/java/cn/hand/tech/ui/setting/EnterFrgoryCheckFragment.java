@@ -278,6 +278,10 @@ public class EnterFrgoryCheckFragment extends BaseFragment implements  IAutoChec
                             tv_cause_content.setText("传感器异常【维修后请提交维修记录】");
                             tv_measure_content.setText("");
                             isZhuji=false;
+                        } else if("7".equals(type)){
+                            tv_cause_content.setText("设备离线【检查主机是否异常】");
+                            tv_measure_content.setText("");
+                            isZhuji=false;
                         }else{
                             isZhuji=false;
                             DLog.e("AutoCheck","mAutoCheckFrgBean.AlarmType"+"不在范围内");

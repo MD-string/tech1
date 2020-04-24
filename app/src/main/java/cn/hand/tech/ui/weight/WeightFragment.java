@@ -167,6 +167,7 @@ public class WeightFragment extends BaseFragment implements OnClickListener,IEve
 	private Timer timer;
 	private AlertDialog devtempDialog;
 	private TimerTask task;
+	private TextView tv_cancelTruckN;
 
 
 	@Override
@@ -271,6 +272,18 @@ public class WeightFragment extends BaseFragment implements OnClickListener,IEve
 		tv_okTruckN = (TextView)view.findViewById(R.id.tv_okTruckN);
 		tv_okTruckN.setOnClickListener(this);
 		tv_other.setOnClickListener(this);
+		tv_cancelTruckN=(TextView)view.findViewById(R.id.tv_cancelTruckN);
+		tv_cancelTruckN.setVisibility(View.GONE);
+		tv_cancelTruckN.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog_truckN_input.setVisibility(View.GONE);
+				if (mPopupKeyboard.isShown()) {
+					mPopupKeyboard.dismiss(getActivity());
+				}
+				hideSoft(et_input);
+			}
+		});
 
 		mPopupKeyboard = new PopupKeyboard(mactivity);
 		// 弹出键盘内部包含一个KeyboardView，在此绑定输入两者关联。

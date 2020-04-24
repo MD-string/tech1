@@ -220,7 +220,7 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
         btn_next = (Button) findViewById(R.id.btn_next);
 
         et_id.setText(deviceId);
-        mpresenter.checkID(deviceId,token);
+        mpresenter.checkDeviceExsit(deviceId,token);
         AddTruckInfo bean=(AddTruckInfo)acache.getAsObject("add_truck");
         if(bean !=null){
             String weight=bean.getWeight();
@@ -908,20 +908,59 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
             isEnter=true;
             btn_next.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_corner_hui));
 
-//            //弹出对话框
-//            if("0".equals(passCheckStr)){
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        showNextDialog(mContext,passCheckStr);
-                    }
-                },100);
+////            //弹出对话框
+////            if("0".equals(passCheckStr)){
+//                mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        showNextDialog(mContext,passCheckStr);
+//                    }
+//                },100);
 //            }
+            mpresenter.checkDeviceExsit(deviceId,token);
         } else {
 //            showTips("该设备未被录入");
             isEnter=false;
             btn_next.setEnabled(true);
             btn_next.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_corner));
+        }
+
+    }
+
+    @Override
+    public void doCheckAPISuccess(String msg, String msg1) {  //msg车辆是否录入    录入：0    没录入：1
+        //msg1  //是否存在安装信息   存在安装记录：0      不存在安装记录：1
+        mHandler.sendEmptyMessage(1);
+
+        if("1".equals(msg)){//未录入基本信息
+            isEnter=false;
+            btn_next.setEnabled(true);
+            btn_next.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_corner));
+
+            if("0".equals(msg1)){
+                DLog.d("doCheckAPISuccess", "doCheckAPISuccess录车异常");
+            }
+
+        }else{ //录入基本信息
+            btn_next.setEnabled(false);
+            isEnter=true;
+            btn_next.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_round_corner_hui));
+
+            if("1".equals(msg1)){ //补录安装人员信息
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showNext(mContext,passCheckStr);
+                    }
+                },100);
+            }else{             //基本信息 安装人员信息 都录入完成
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showNextDialog(mContext,"1");
+                    }
+                },100);
+            }
         }
 
     }
@@ -1136,17 +1175,17 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
 //    }
 
 
-    //对话框
+    //对话框    //补录安装人员信息
     public void showNextDialog(final Context context,final String passCheckStr) {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         View view = LayoutInflater.from(context).inflate(R.layout.layout_next, null);
         TextView tv_title=(TextView)view.findViewById(R.id.tv_title);
         TextView tv_ok = (TextView) view.findViewById(R.id.tv_ok);
         if("0".equals(passCheckStr)){
-            tv_title.setText("车辆信息已录入成功,请补录安装人员信息");
+            tv_title.setText("基本信息已录入,未提交安装人员信息");
             tv_ok.setText("补录");
         }else{
-            tv_title.setText("车辆信息已录入成功");
+            tv_title.setText("基本信息已录入,已提交安装人员信息");
             tv_ok.setText("确定");
         }
         TextView tv_cancel = (TextView) view.findViewById(R.id.tv_cancel);
@@ -1184,17 +1223,17 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
         mtempDialog.show();
     }
 
-    //对话框
+    //对话框   继续录安装人员信息
     public void showNext(final Context context,final String passCheckStr) {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         View view = LayoutInflater.from(context).inflate(R.layout.layout_next, null);
         TextView tv_title=(TextView)view.findViewById(R.id.tv_title);
         TextView tv_ok = (TextView) view.findViewById(R.id.tv_ok);
         if("0".equals(passCheckStr)){
-            tv_title.setText("车辆信息已录入成功,请录入安装人员信息");
+            tv_title.setText("基本信息已录入,请录入安装人员信息");
             tv_ok.setText("录入");
         }else{
-            tv_title.setText("车辆信息已录入成功");
+            tv_title.setText("基本信息已录入成功");
             tv_ok.setText("确定");
         }
         TextView tv_cancel = (TextView) view.findViewById(R.id.tv_cancel);

@@ -132,7 +132,8 @@ public class AddTruckActivity extends AppCompatActivity implements View.OnClickL
         tv_other.setVisibility(View.GONE);
         TextView  tv_okTruckN = (TextView)findViewById(R.id.tv_okTruckN);
         tv_okTruckN.setOnClickListener(this);
-
+        TextView   tv_cancelTruckN=(TextView)findViewById(R.id.tv_cancelTruckN);
+        tv_cancelTruckN.setVisibility(View.GONE);
         mPopupKeyboard = new PopupKeyboard(mContext);
         // 弹出键盘内部包含一个KeyboardView，在此绑定输入两者关联。
         mPopupKeyboard.attach(mInputView, this);

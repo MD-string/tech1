@@ -1127,11 +1127,16 @@ public class AddRepairAct extends Activity implements IAddRecodeView, RepairAdap
         showTips("获取车辆信息成功");
         LogUtil.d("根据车牌号获取车辆信息成功=" + info.getDeviceId());
 
+        bt_save_re.setEnabled(true);
+        bt_save_re.setBackground(getResources().getDrawable(R.drawable.shape_bg_blue));
+
     }
 
     @Override
     public void doCompanyError(String msg) {
         showTips(msg);
+        bt_save_re.setEnabled(false);
+        bt_save_re.setBackground(getResources().getDrawable(R.drawable.shape_bg_hui));
     }
 
     @Override

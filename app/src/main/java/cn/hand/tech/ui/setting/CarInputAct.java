@@ -396,6 +396,11 @@ public class CarInputAct extends AppCompatActivity implements View.OnClickListen
     }
 
     @Override
+    public void doCheckAPISuccess(String msg, String msg1) {
+
+    }
+
+    @Override
     public void doError(String msg) {
         showTips(msg);
     }

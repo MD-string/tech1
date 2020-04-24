@@ -117,6 +117,8 @@ public class RepairAct extends Activity implements IRepairView,RepairAdapter.onN
     private AlertDialog tempDialog;
     private String mId;
     private TextView tv_repair_add;
+    private TextView tv_cancelTruckN;
+    private boolean isother;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, RepairAct.class);
@@ -285,34 +287,99 @@ public class RepairAct extends Activity implements IRepairView,RepairAdapter.onN
         et_input.setVisibility(View.GONE);
         tv_other=(TextView)findViewById(R.id.tv_other);
         tv_other.setText("其他");
-        tv_other.setVisibility(View.GONE);
+        tv_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isother){
+                    et_input.setVisibility(View.VISIBLE);
+                    mInputView.setVisibility(View.GONE);
+                    tv_other.setText("国内");
+                    isother=true;
+                    showSoft(et_input);
+                    if (mPopupKeyboard.isShown()) {
+                        mPopupKeyboard.dismiss(RepairAct.this);
+                    }
+                }else{
+                    et_input.setVisibility(View.GONE);
+                    mInputView.setVisibility(View.VISIBLE);
+                    tv_other.setText("其他");
+                    isother=false;
+                    hideSoft(et_input);
+                    if(!mPopupKeyboard.isShown()){
+                        mPopupKeyboard.show(RepairAct.this);
+                    }
+                }
+            }
+        });
+        tv_other.setVisibility(View.VISIBLE);
+        tv_cancelTruckN=(TextView)findViewById(R.id.tv_cancelTruckN);
+        tv_cancelTruckN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_truckN_input.setVisibility(View.GONE);
+                ll_content.setVisibility(View.VISIBLE);
+                if (mPopupKeyboard.isShown()) {
+                    mPopupKeyboard.dismiss(RepairAct.this);
+                }
+                hideSoft(et_input);
+            }
+        });
         tv_okTruckN = (TextView)findViewById(R.id.tv_okTruckN);
         tv_okTruckN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String etNumber=mInputView.getNumber().toString().trim();
-                if (TextUtils.isEmpty(etNumber)) {
-                    showTips("车牌号码不能为空");
-                    return;
-                } else if (etNumber.length() < 7) {
-                    showTips("请输入正确的车牌号码");
-                    return;
-                }
-                truckNum=etNumber;
-                tv_car_number.setText(truckNum);
-                if (mPopupKeyboard.isShown()) {
-                    mPopupKeyboard.dismiss((RepairAct)context);
-                }
-                dialog_truckN_input.setVisibility(View.GONE);
-                ll_content.setVisibility(View.VISIBLE);
+                if(!isother){
+                    String etNumber=mInputView.getNumber().toString().trim();
+                    if (TextUtils.isEmpty(etNumber)) {
+                        showTips("车牌号码不能为空");
+                        return;
+                    } else if (etNumber.length() < 7) {
+                        showTips("请输入正确的车牌号码");
+                        return;
+                    }
+                    truckNum=etNumber;
+                    tv_car_number.setText(truckNum);
+                    if (mPopupKeyboard.isShown()) {
+                        mPopupKeyboard.dismiss((RepairAct)context);
+                    }
+                    hideSoft(et_input);
+                    dialog_truckN_input.setVisibility(View.GONE);
+                    ll_content.setVisibility(View.VISIBLE);
 
-                String carNum=acache.getAsString("truck_number");
-                if(etNumber.equals(carNum)){
-                    ll_search.setVisibility(View.VISIBLE);
+                    String carNum=acache.getAsString("truck_number");
+                    if(etNumber.equals(carNum)){
+                        ll_search.setVisibility(View.VISIBLE);
+                    }else{
+                        ll_search.setVisibility(View.GONE);
+                    }
+                    acache.put("truck_number",etNumber);
                 }else{
-                    ll_search.setVisibility(View.GONE);
+                    String etNumb1=et_input.getText().toString();
+                    if (TextUtils.isEmpty(etNumb1)) {
+                        showTips("车牌号码不能为空");
+                        return;
+                    } else if (etNumb1.length() < 7) {
+                        showTips("请输入正确的车牌号码");
+                        return;
+                    }
+
+                    truckNum=etNumb1;
+                    tv_car_number.setText(truckNum);
+                    if (mPopupKeyboard.isShown()) {
+                        mPopupKeyboard.dismiss((RepairAct)context);
+                    }
+                    hideSoft(et_input);
+                    dialog_truckN_input.setVisibility(View.GONE);
+                    ll_content.setVisibility(View.VISIBLE);
+
+                    String carNum=acache.getAsString("truck_number");
+                    if(etNumb1.equals(carNum)){
+                        ll_search.setVisibility(View.VISIBLE);
+                    }else{
+                        ll_search.setVisibility(View.GONE);
+                    }
+                    acache.put("truck_number",etNumb1);
                 }
-                acache.put("truck_number",etNumber);
             }
         });
         //        tv_other.setOnClickListener();
@@ -329,6 +396,11 @@ public class RepairAct extends Activity implements IRepairView,RepairAdapter.onN
         mapParams.put("version", "2");
         mpresenter.getCompanyList(mapParams);
 
+    }
+
+    public void showSoft(View view){
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);
     }
     public void  showTips(String tip){
         ToastUtil.getInstance().showCenterMessage(context,tip);

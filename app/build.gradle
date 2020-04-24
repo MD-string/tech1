@@ -7,7 +7,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 51
-        versionName "v1.7.2"
+        versionName "v1.7.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
        // multiDexEnabled true
         ndk {
