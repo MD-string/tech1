@@ -10,6 +10,24 @@ public class TruckChildBean implements Serializable {
     private String name;
     private String sign;
     private String childId;
+    private boolean isSelectedOrChrend;
+    private String  parentId;
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public boolean isSelectedOrChrend() {
+        return isSelectedOrChrend;
+    }
+
+    public void setSelectedOrChrend(boolean selectedOrChrend) {
+        isSelectedOrChrend = selectedOrChrend;
+    }
 
     public String getChildId() {
         return childId;

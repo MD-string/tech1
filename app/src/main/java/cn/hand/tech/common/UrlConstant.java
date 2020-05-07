@@ -64,12 +64,16 @@ public class UrlConstant {
 		public static final String AUTO_CHECK_INPUT_FRAGORY = GET_URL() + "/dataserver/realtime.html";
 		/*是否进厂  POST*/
 		public static final String NET_CHECK_DEVICE_EXSIT = GET_URL() + "/carserver/checkDeviceIsExist.html";
+
+
+		/*上传写入系数日志*/
+		public static final String URL_UPLOAD_WRITE_RATIO = GET_URL() + "/bininfoserver/addDeviceCoefLog.html";
 	}
 	public static String GET_URL() {
 		String url = "";
 		switch (BApplication.environment) {//192.168.10.43:8088  192.168.10.88:8088
 			case 0:
-				url = "http://192.168.10.43:8089/api";//测试环境
+				url = "http://192.168.10.43:8088/api";//测试环境
 				break;
 			case 1:
 				url = "http://www.truckloading.cn/api";//生产环境

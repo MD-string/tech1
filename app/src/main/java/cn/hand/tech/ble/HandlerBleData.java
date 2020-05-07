@@ -94,6 +94,7 @@ public class HandlerBleData {
                     return;
                 } else {
                     unpackData();
+
                 }
             }
 
@@ -1024,7 +1025,10 @@ public class HandlerBleData {
 
             //            DLog.e(TAG,"setp3:HandlerBleData发送eventbus。");
 
-            EventBus.getDefault().post(uMode);
+            if(nABuffer[6] == 0x03){ //判断数据包类型 是不是 0x03 周期上传数据包
+                EventBus.getDefault().post(uMode);
+            }
+            DLog.e("HandlerBleData","unpackData="+nABuffer[6]);
 
             //
             //            new Thread("ble_msg") {

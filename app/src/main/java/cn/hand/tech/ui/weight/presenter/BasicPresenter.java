@@ -206,7 +206,7 @@ public class BasicPresenter {
 	 * 录车
 	 * 上传基本信息数据
 	 */
-	public void sendBasicData( AddTruckInfo bean,String token,String softVer,String fmVer,String sensorChannel,String companyid,String unitStr,String parent,String child,String dirverName,String path) {
+	public void sendBasicData( AddTruckInfo bean,String token,String softVer,String fmVer,String sensorChannel,String companyid,String unitStr,String parent,String child,String dirverName,String path,String gsm,String gps) {
 		try {
 
             Bitmap bitmap = ImageUtil.getimage(path); //此时返回 bm 为空
@@ -254,6 +254,13 @@ public class BasicPresenter {
 			}
 			if(!Tools.isEmpty(companyid)){
 				map.put("companyId",companyid);
+			}
+			if(!Tools.isEmpty(gps)){
+				map.put("gpsAntenna",gps);
+			}
+
+			if(!Tools.isEmpty(gsm)){
+				map.put("gsmAntenna",gsm);
 			}
 			String sensorType=bean.getSensorType();
 			if(!Tools.isEmpty(sensorType)){

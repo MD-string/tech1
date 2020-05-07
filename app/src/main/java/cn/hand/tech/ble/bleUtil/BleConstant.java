@@ -24,6 +24,7 @@ public class BleConstant {
 	public final static String ACTION_BLE_READ_NOTY = "cn.hande.ble.ACTION_BLE_READ_NOTY"; //重量单位
 
 	public final static String ACTION_BLE_WRITE_COE = "cn.hande.ble.ACTION_BLE_WRITE_COE"; //重量单位
+	public final static String ACTION_BLE_WRITE_COE1 = "cn.hande.ble.ACTION_BLE_WRITE_COE1"; //重量单位
 
 	public final static String ACTION_BLE_WRITE_KB = "cn.hande.ble.ACTION_BLE_WRITE_KB"; //LocalDataDetailActivity KB
 

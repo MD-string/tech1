@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   >
+    >
     <RelativeLayout
         android:id="@+id/rl_head"
         android:layout_width="match_parent"
@@ -57,6 +57,9 @@
         android:id="@+id/list_1"
         android:layout_width="match_parent"
         android:layout_below="@+id/rl_head"
+        android:divider="@color/colorGray"
+        android:dividerHeight="1.0dp"
+        android:groupIndicator="@null"
         android:layout_height="match_parent">
     </ExpandableListView>
 

@@ -148,6 +148,8 @@ public class AddRepairAct extends Activity implements IAddRecodeView, RepairAdap
     private String path;
     private BroadcastReceiver receiver;
     private AlertDialog mtempDialog;
+    private Spinner addRepair_gps_spinner,addRepair_gsm_spinner;
+    private String gpsPo,gsmName;
 
     public static void start(Context context,int number,String fault,String guide,String id,String truck) {
         Intent intent = new Intent(context, AddRepairAct.class);
@@ -874,7 +876,8 @@ public class AddRepairAct extends Activity implements IAddRecodeView, RepairAdap
                         showTips("该车辆设备ID为空");
                         return;
                     }
-                    mpresenter.sendRepairRecord(devId,token,carNumer,mrepairType,guzhangStatus,repairGudie,repairedRecords,zongjie,mark,repName,dirverName,dirverPhone,mList);
+                    mpresenter.sendRepairRecord(devId,token,carNumer,mrepairType,guzhangStatus,repairGudie,
+                                                repairedRecords,zongjie,mark,repName,dirverName,dirverPhone,mList,gpsPo,gsmName);
                 }else{
                     showTips("该车辆信息为空");
                 }
@@ -882,6 +885,43 @@ public class AddRepairAct extends Activity implements IAddRecodeView, RepairAdap
             }
         });
 
+        addRepair_gps_spinner=(Spinner)findViewById(R.id.addRepair_gps_spinner);
+        addRepair_gps_spinner.setSelection(0);
+        addRepair_gsm_spinner =(Spinner)findViewById(R.id.addRepair_gsm_spinner);
+        addRepair_gsm_spinner.setSelection(0);
+        addRepair_gps_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] gps = getResources().getStringArray(R.array.gps_spinner); //gpsAntenna
+                if(0==position){
+                    gpsPo="";
+                }else{
+                    gpsPo = gps[position];
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        addRepair_gsm_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] gsm = getResources().getStringArray(R.array.gsm_spinner); //gsmAntenna
+                if(0==position){
+                    gsmName="";
+                }else{
+                    gsmName = gsm[position];
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         gridView=(MyGridView)findViewById(R.id.pic_gridview);
 

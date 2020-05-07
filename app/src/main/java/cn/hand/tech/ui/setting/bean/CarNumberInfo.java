@@ -23,6 +23,10 @@ public class CarNumberInfo implements Serializable {
     private String driverName;
     private String hwVersion; //硬件版本号
     private List<String> activeChannels;
+
+    private List<String> sensorChannel;
+
+
     /**
      *设备运行状态0：停止运行，1：正在运行，2：正在升级，3：升级失败
      */
@@ -33,6 +37,14 @@ public class CarNumberInfo implements Serializable {
      */
     private String version;
     private String companyName;
+
+    public List<String> getSensorChannel() {
+        return sensorChannel;
+    }
+
+    public void setSensorChannel(List<String> sensorChannel) {
+        this.sensorChannel = sensorChannel;
+    }
 
     public List<String> getActiveChannels() {
         return activeChannels;

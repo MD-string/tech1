@@ -23,6 +23,7 @@ import cn.hand.tech.common.ACache;
 import cn.hand.tech.ui.setting.adapter.CompanyTruckForRepairAdapter;
 import cn.hand.tech.ui.weight.bean.CompanyTruckGroupBean;
 import cn.hand.tech.ui.weight.bean.TruckChildBean;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.PinyinUtils;
 import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
@@ -40,7 +41,6 @@ public class SearchTruckForRepairActivity extends Activity implements View.OnCli
     private TextView tv_cancle,tv_search;
     private ACache acache;
     private List<CompanyTruckGroupBean> mGroupList;
-    private static final String TAG = "WeightFragment";
     private List<CompanyTruckGroupBean> mlist=new ArrayList<>();
     private CompanyTruckForRepairAdapter madapter;
     private Context mContext;
@@ -53,7 +53,7 @@ public class SearchTruckForRepairActivity extends Activity implements View.OnCli
         super.onCreate(savedInstanceState);
         mContext=this;
         setContentView(R.layout.fragment_search_truck);
-        acache= ACache.get(mContext,TAG);
+        acache= ACache.get(mContext, CommonUtils.TAG);
         findViews();
         setListeners();
     }

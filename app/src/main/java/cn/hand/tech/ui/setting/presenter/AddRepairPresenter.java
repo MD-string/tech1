@@ -174,7 +174,8 @@ public class AddRepairPresenter {
 	/**
 	 * 新增故障待维修记录
 	 */
-	public void sendRepairRecord(String devid,String token,String carNumer,String mrepairType,String guzhangStatus,String repairGudie,String repairedRecords,String repairedConclusion,String remark,String repName,String dirverName,String dirverPhone,List<PicBean> mList) {
+	public void sendRepairRecord(String devid,String token,String carNumer,String mrepairType,String guzhangStatus,String repairGudie,String repairedRecords,String repairedConclusion,String remark,String repName,String dirverName,
+								 String dirverPhone,List<PicBean> mList,String gps,String gsm) {
 		try {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("deviceId",devid);
@@ -189,6 +190,14 @@ public class AddRepairPresenter {
 			String now=simpleDateFormat.format(date);
 
 			map.put("faultTime",now);
+
+			if(!Tools.isEmpty(gps)){ //GPS天线
+				map.put("gpsAntenna",gps);
+			}
+
+			if(!Tools.isEmpty(gsm)){  //GSM天线
+				map.put("gsmAntenna",gsm);
+			}
 
 			if(!Tools.isEmpty(guzhangStatus)){//故障现象
 				map.put("faultPhenomenon",guzhangStatus);

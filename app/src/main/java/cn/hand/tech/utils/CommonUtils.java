@@ -35,6 +35,8 @@ import cn.hand.tech.ui.home.MainFragmentActivity;
  */
 public class CommonUtils {
 
+	public static final String TAG = "WeightFragment";
+
 	private static List<Activity> activityList = new ArrayList<Activity>();
 
 	/************************ 模拟堆栈，管理Activity start ************************/

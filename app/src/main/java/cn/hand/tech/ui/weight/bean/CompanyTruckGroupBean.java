@@ -14,6 +14,15 @@ public class CompanyTruckGroupBean implements Serializable {
     private int onlineNumber;
     private List<TruckChildBean> children;
     private String letters;//显示拼音的首字母
+    private boolean isSelectedOr;
+
+    public boolean isSelectedOr() {
+        return isSelectedOr;
+    }
+
+    public void setSelectedOr(boolean selectedOr) {
+        isSelectedOr = selectedOr;
+    }
 
     public String getId() {
         return id;

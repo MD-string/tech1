@@ -15,4 +15,7 @@ public interface IInformationBasicView {
 
 	void loadSuccess(String msg);
 	void loadFail(String msg);
+
+	void uploadRadioSuccess(String msg);
+	void uploadFail(String msg);
 }

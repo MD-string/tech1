@@ -77,9 +77,20 @@ public class HDSendDataModel implements Serializable {
     public float weight;
     public Boolean bIsSelected;
     public long time;
+    public String ratioStr;
+
+
     public HDSendDataModel()
     {
 
+    }
+
+    public String getRatioStr() {
+        return ratioStr;
+    }
+
+    public void setRatioStr(String ratioStr) {
+        this.ratioStr = ratioStr;
     }
 
     public int getId() {

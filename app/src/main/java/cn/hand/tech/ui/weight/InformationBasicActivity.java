@@ -1,17 +1,13 @@
 package cn.hand.tech.ui.weight;
 
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -37,12 +33,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.hand.tech.R;
+import cn.hand.tech.bean.HDSendDataModel;
+import cn.hand.tech.ble.bleUtil.BleConstant;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.common.KeyConstants;
 import cn.hand.tech.common.OnMyItemClickListener;
 import cn.hand.tech.log.DLog;
+import cn.hand.tech.ui.setting.UpBinActFromAddCar;
 import cn.hand.tech.ui.weight.bean.AddTruckInfo;
 import cn.hand.tech.ui.weight.bean.CompanyBean;
 import cn.hand.tech.ui.weight.bean.InstallerInfo;
@@ -74,7 +75,6 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
     private boolean isConnect;
     private String carNumber,deviceId;
     private CompanyBean mCompanyBean;//当前选择的公司
-    private static final String TAG = "WeightFragment";
     private Button btn_next;
     private int REQUEST_WRITE_EXTERNAL_STORAGE=2;
     private ACache acache;
@@ -104,6 +104,11 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
     private TextView tv_start_time;
     private CustomDatePicker customDatePickerS;
     private AlertDialog inftempDialog;
+    private String mchildCode,mSensorNumb;
+    public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    private Timer timer;
+    private boolean isWriteOK;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -143,11 +148,14 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         mContext=this;
         setContentView(R.layout.fragment_install_information);
-        acache= ACache.get(mContext,TAG);
+        acache= ACache.get(mContext, CommonUtils.TAG);
         token=acache.getAsString("login_token");
         deviceId=acache.getAsString("dev_id");
         stuckNumber= acache.getAsString("car_num");
-        companyId= acache.getAsString("company_id");
+        companyId= acache.getAsString("company_id"); //父类ID
+
+        mchildCode=acache.getAsString("car_childCode");
+        mSensorNumb=acache.getAsString("current_sensor");//当前的传感器
 
         mpresenter=new InformationBasicPresenter(mContext,this);
         findViews();
@@ -234,10 +242,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                if(inlist !=null && inlist.size() > 0) {
-//                    xp2 = inlist.get(0).getId();
-//                    name_xp2=inlist.get(0).getName();
-//                }
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    xp2 = inlist.get(0).getId();
+                //                    name_xp2=inlist.get(0).getName();
+                //                }
             }
         });
         tiepian_1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -256,10 +264,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                if(inlist !=null && inlist.size() > 0) {
-//                    tp1 =inlist.get(0).getId();
-//                    name_tp1=inlist.get(0).getName();
-//                }
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    tp1 =inlist.get(0).getId();
+                //                    name_tp1=inlist.get(0).getName();
+                //                }
             }
         });
         tiepian_2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -283,10 +291,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                if(inlist !=null && inlist.size() > 0) {
-//                    tp2 = inlist.get(0).getId();
-//                    name_tp2=inlist.get(0).getName();
-//                }
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    tp2 = inlist.get(0).getId();
+                //                    name_tp2=inlist.get(0).getName();
+                //                }
             }
         });
         fengjiao_1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -305,10 +313,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                if(inlist !=null && inlist.size() > 0) {
-//                    fj1 =inlist.get(0).getId();
-//                    name_fj1=inlist.get(0).getName();
-//                }
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    fj1 =inlist.get(0).getId();
+                //                    name_fj1=inlist.get(0).getName();
+                //                }
             }
         });
         fengjiao_2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -332,10 +340,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                if(inlist !=null && inlist.size() > 0) {
-//                    fj2 = inlist.get(0).getId();
-//                    name_fj2=inlist.get(0).getName();
-//                }
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    fj2 = inlist.get(0).getId();
+                //                    name_fj2=inlist.get(0).getName();
+                //                }
             }
         });
         chuanxian_1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -354,10 +362,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                if(inlist !=null && inlist.size() > 0) {
-//                    cx1 = inlist.get(0).getId();
-//                    name_cx1=inlist.get(0).getName();
-//                }
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    cx1 = inlist.get(0).getId();
+                //                    name_cx1=inlist.get(0).getName();
+                //                }
 
             }
         });
@@ -382,11 +390,11 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//
-//                if(inlist !=null && inlist.size() > 0) {
-//                    cx2 = inlist.get(0).getId();
-//                    name_cx2=inlist.get(0).getName();
-//                }
+                //
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    cx2 = inlist.get(0).getId();
+                //                    name_cx2=inlist.get(0).getName();
+                //                }
             }
         });
         install_1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -405,10 +413,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                if(inlist !=null && inlist.size() > 0) {
-//                    it1 = inlist.get(0).getId();
-//                    name_it1=inlist.get(0).getName();
-//                }
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    it1 = inlist.get(0).getId();
+                //                    name_it1=inlist.get(0).getName();
+                //                }
 
             }
         });
@@ -432,10 +440,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                if(inlist !=null && inlist.size() > 0) {
-//                    it2 = inlist.get(0).getId();
-//                    name_it2=inlist.get(0).getName();
-//                }
+                //                if(inlist !=null && inlist.size() > 0) {
+                //                    it2 = inlist.get(0).getId();
+                //                    name_it2=inlist.get(0).getName();
+                //                }
             }
         });
 
@@ -482,11 +490,11 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
                 if(CommonUtils.isFastDoubleClick()){
                     return;
                 }
-//                if(isEnterCar){
-//                   showTips("安装人员信息已经上传");
-//                   checkPermission();
-//                   return;
-//                }
+                //                if(isEnterCar){
+                //                   showTips("安装人员信息已经上传");
+                //                   checkPermission();
+                //                   return;
+                //                }
                 if(Tools.isEmpty(xp1) || Tools.isEmpty(tp1)  || Tools.isEmpty(fj1) || Tools.isEmpty(cx1) || Tools.isEmpty(it1)){
                     showTips("请选择安装人员");
                     return;
@@ -595,14 +603,14 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
         mHandler.sendEmptyMessage(1);
 
     }
-//
-//    //判断车辆是否在线
-//    private void  doCheckOnline(){
-//        HashMap<String, String> mapParams = new HashMap<>();
-//        mapParams.put("token", token);
-//        mapParams.put("deviceId", deviceId);
-//        mpresenter.checkCarOnline(mapParams);
-//    }
+    //
+    //    //判断车辆是否在线
+    //    private void  doCheckOnline(){
+    //        HashMap<String, String> mapParams = new HashMap<>();
+    //        mapParams.put("token", token);
+    //        mapParams.put("deviceId", deviceId);
+    //        mpresenter.checkCarOnline(mapParams);
+    //    }
 
     @Override
     public void doError(String str) {
@@ -612,10 +620,43 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
     @Override
     public void sendSuccess(String msg) {  //上传安装人员信息成功  。
-//        showTips("安装人员信息添加成功");
-//        isEnterCar=true;
-//        finish();
-        showNextDialog(mContext,"安装人员信息添加成功");
+        //        showTips("安装人员信息添加成功");
+        //        isEnterCar=true;
+        //        finish();
+
+        dojudge();
+    }
+
+    //判断是否显示升级对话框还是 提示安装成功提示
+    private void dojudge() {
+        List<String> slist= ( List<String>)acache.getAsObject("CompanyListActivity_company_list"); //可升级的公司id 列表
+        if(slist !=null && slist.size() >0  && !Tools.isEmpty(companyId) ){
+            boolean isSame=false;
+            for(int i=0;i<slist.size();i++){
+                String compStr=slist.get(i);
+                if(companyId.equals(compStr)){
+                    isSame=true;
+                    break;
+                }
+            }
+
+            if(isSame){  //可升级列表中包含选定的公司
+
+                if(!Tools.isEmpty(mchildCode)   && !Tools.isEmpty(mSensorNumb)  &&  (mchildCode.equals("0102") || mchildCode.equals("0104") || mchildCode.equals("0101"))
+                        &&  (("1,2").equals(mSensorNumb) ||  ("1,2,3").equals(mSensorNumb) || ("1,2,3,4").equals(mSensorNumb))){
+
+                    showNextDialog(mContext,"安装人员信息添加成功,是否写入系数?","1");
+                }else{
+                    showNextDialog(mContext,"安装人员信息添加成功,是否升级固件?","2");
+                }
+
+            }else{
+                showNextDialog(mContext,"安装人员信息添加成功","0");
+            }
+
+        }else{
+            showNextDialog(mContext,"安装人员信息添加成功","0");
+        }
     }
 
 
@@ -631,14 +672,134 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
         sendMsgToDD();
     }
 
+    @Override
+    public void uploadRadioSuccess(String msg) { //上传日志
+        showTips(msg);
+        closeProgressDialog();
+        showNextDialog(mContext,"上传写入系数日志成功,是否升级固件?","2");
+    }
+
+    @Override
+    public void uploadFail(String msg) { //上传日志失败
+        showTips(msg);
+        closeProgressDialog();
+        showNextDialog(mContext,"上传写入系数日志失败,是否升级固件?","2");
+    }
+
 
     public void  showTips(String tip){
         ToastUtil.getInstance().showCenterMessage(mContext,tip);
     }
 
+    //上传系数
+    private void uploadRatio(){
+        try{
+            showProgressDialog();
+            isWriteOK=false;
 
-    //对话框
-    public void showNextDialog(final Context context,String msg) {
+            String number="0";
+            HDSendDataModel model = new HDSendDataModel();
+            if(mchildCode.equals("0102") || mchildCode.equals("0104")){//0102 0104 袋装   0101散装
+                if(("1,2").equals(mSensorNumb)){
+                    model.mmv1=0.0002f;
+                    model.mmv2=0.002f;
+                    model.setRatioStr("0.0002,0.002");
+                    number="2";
+                }else if(("1,2,3").equals(mSensorNumb)){
+                    model.mmv1=0.0001f;
+                    model.mmv2=0.0001f;
+                    model.mmv3=0.002f;
+                    model.setRatioStr("0.0001,0.0001,0.002");
+                    number="3";
+                }else if(("1,2,3,4").equals(mSensorNumb)){
+                    model.mmv1=0.0001f;
+                    model.mmv2=0.0001f;
+                    model.mmv3=0.001f;
+                    model.mmv4=0.001f;
+                    model.setRatioStr("0.0001,0.0001,0.001,0.001");
+                    number="4";
+                }else{
+                    number="0";
+                }
+            }else if(mchildCode.equals("0101")){
+                if(("1,2").equals(mSensorNumb)){
+                    model.mmv1=0.0015f;
+                    model.mmv2=0.0015f;
+                    model.setRatioStr("0.0015,0.0015");
+                    number="2";
+                }else if(("1,2,3").equals(mSensorNumb)){
+                    model.mmv1=0.001f;
+                    model.mmv2=0.001f;
+                    model.mmv3=0.001f;
+                    model.setRatioStr("0.001,0.001,0.001");
+                    number="3";
+                }else if(("1,2,3,4").equals(mSensorNumb)){
+                    model.mmv1=0.001f;
+                    model.mmv2=0.001f;
+                    model.mmv3=0.001f;
+                    model.mmv4=0.001f;
+                    model.setRatioStr("0.001,0.001,0.001,0.001");
+                    number="4";
+                }else{
+                    number="0";
+                }
+            }else{
+                DLog.e("UpBinActFromAddCar","uploadRatio=车辆类型=>"+"不是袋装也不是散装");
+            }
+
+            acache.put("sensor_string",model.getRatioStr());
+            Date date   =   new   Date(System.currentTimeMillis());//获取当前时间
+            String now=simpleDateFormat.format(date);
+            acache.put("set_sensor_date",now);
+            doStartTimer(); //开始计时 8秒钟
+
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("coefficient_act1",model);
+            bundle.putString("sensor_number",number);
+            Intent readIntent=new Intent(BleConstant.ACTION_BLE_WRITE_COE1);
+            readIntent.putExtras(bundle);
+            sendBroadcast(readIntent);
+
+            DLog.e("UpBinActFromAddCar","uploadRatio=isSendRaio=>"+number+"/"+now);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    public void doStartTimer(){
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                if(!isWriteOK){
+                    //上传写入失败日志
+                    String sersorString= acache.getAsString("sensor_string");
+                    String date=acache.getAsString("set_sensor_date");
+
+                    HashMap<String, String> mapParams1 = new HashMap<>();
+                    mapParams1.put("token", token);
+                    mapParams1.put("deviceId", deviceId);
+                    mapParams1.put("type","2");
+                    mapParams1.put("status","已下发");
+                    mapParams1.put("newCoef",sersorString); //下发系数
+                    mapParams1.put("sendTime",date);//设置时间
+                    mapParams1.put("remark","Android");
+
+                    mpresenter.upLoadWriteRatio(mapParams1);
+                }
+            }
+        };
+        if(timer ==null){
+            timer=new Timer();
+        }
+        timer.schedule(task, 8000);//
+    }
+    //对话框 tag  0 不提示写入系数和升级  1 提示写入系数 2 提示固件升级
+    public void showNextDialog(final Context context, String msg, final String tag) {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         /*dialog.setTitle("提示");
         dialog.setMessage(message);*/
@@ -646,6 +807,13 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
         TextView tv_title=(TextView)view.findViewById(R.id.tv_title);
         tv_title.setText(msg);
         TextView tv_ok = (TextView) view.findViewById(R.id.tv_ok);
+        if("1".equals(tag)){
+            tv_ok.setText("写入系数");
+        }else if("2".equals(tag)){
+            tv_ok.setText("升级固件");
+        }else{
+            tv_ok.setText("确定");
+        }
         TextView tv_cancel = (TextView) view.findViewById(R.id.tv_cancel);
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -653,7 +821,15 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
                 if(inftempDialog != null){
                     inftempDialog.dismiss();
                 }
-                finish();
+                if("1".equals(tag)){
+                    uploadRatio();
+                }else if("2".equals(tag)){
+                    UpBinActFromAddCar.start(context,companyId);
+                    finish();
+                }else{
+                    finish();
+                }
+
             }
         });
         tv_cancel.setOnClickListener(new View.OnClickListener() {
@@ -783,24 +959,24 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
     private void showProgressDialog() {
         dialog = new CustomDialog(mContext, R.style.LoadDialog);
         dialog.show();
-        new Thread("cancle_progressDialog") {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(7000);
-                    // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
-                    // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
-                    if(dialog !=null ){
-                        dialog.cancel();
-                    }
-                    // dialog.dismiss();
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            }
-        }.start();
+        //        new Thread("cancle_progressDialog") {
+        //            @Override
+        //            public void run() {
+        //                try {
+        ////                    Thread.sleep(7000);
+        //                    // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
+        //                    // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
+        //                    if(dialog !=null ){
+        //                        dialog.cancel();
+        //                    }
+        //                    // dialog.dismiss();
+        //                } catch (InterruptedException e) {
+        //                    // TODO Auto-generated catch block
+        //                    e.printStackTrace();
+        //                }
+        //
+        //            }
+        //        }.start();
     }
     /**
      * 关闭进度对话框
@@ -829,12 +1005,33 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
                     path=pickedImg.get(0);//路径
                     filepath = "file://"+path;
                     mpresenter.sendPersonalHeader(cameraFile.getAbsolutePath(),deviceId,stuckNumber,token,companyId);
+                }else if(action.equals(BleConstant.ACTION_SEND_DATA)){
+                    HDSendDataModel sMode = (HDSendDataModel) intent.getSerializableExtra("data");
+                    DLog.e("UpBinActFromAddCar","sMode==" + sMode.weight);
+                    DLog.e("UpBinActFromAddCar","sMode111==" + sMode.mmv1);
+                    showTips( "写入成功");
+                    isWriteOK=true;
+                    //上传系数
+                    String sersorString= acache.getAsString("sensor_string");
+                    String date=acache.getAsString("set_sensor_date");
+
+                    HashMap<String, String> mapParams1 = new HashMap<>();
+                    mapParams1.put("token", token);
+                    mapParams1.put("deviceId", deviceId);
+                    mapParams1.put("type","3");
+                    mapParams1.put("status","设置成功");
+                    mapParams1.put("newCoef",sersorString); //下发系数
+                    mapParams1.put("sendTime",date);//设置时间
+                    mapParams1.put("remark","Android");
+
+                    mpresenter.upLoadWriteRatio(mapParams1);
                 }
             }
 
         };
         IntentFilter filter = new IntentFilter();
         filter.addAction(KeyConstants.BROADCAST_PATH);
+        filter.addAction(BleConstant.ACTION_SEND_DATA);
         this.registerReceiver(receiver, filter);
     }
     /**
@@ -847,24 +1044,24 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
 
                 @Override
                 public void onItemClick(View parent, View view, int which) {
-//                    if (which == 0) {
-                        pickToCamera();
-//                    } else {
-//                        pickToAlbum();
-//                    }
+                    //                    if (which == 0) {
+                    pickToCamera();
+                    //                    } else {
+                    //                        pickToAlbum();
+                    //                    }
                 }
             });
         }
         pickPhotoDlg.showAtLocation(ll_all, Gravity.BOTTOM, 0, 0);
     }
 
-//    private void pickToAlbum() {
-//        LookImageActivity.startPick(this, MAX_SHEET_COUNT, "选择头像",from_Flag);
-//    }
+    //    private void pickToAlbum() {
+    //        LookImageActivity.startPick(this, MAX_SHEET_COUNT, "选择头像",from_Flag);
+    //    }
     private void pickToCamera() {
         cameraFile = new File(FileUtils.getAppSdcardDir() + "/" + System.currentTimeMillis() + ".jpg");
         cameraFile.getParentFile().mkdirs();
-//        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)), REQUEST_CODE_CAMERA_P);
+        //        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)), REQUEST_CODE_CAMERA_P);
 
         CameraUtil.openCamera(this,cameraFile,REQUEST_CODE_CAMERA_P);
     }
@@ -878,10 +1075,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
                 path.add(cameraFile.getAbsolutePath());
                 Intent intent = new Intent(KeyConstants.BROADCAST_PATH);
                 intent.putExtra("path", path);
-//                intent.putExtra(KeyConstants.IMAGE_FROM_FLAG, from_Flag);
+                //                intent.putExtra(KeyConstants.IMAGE_FROM_FLAG, from_Flag);
                 sendBroadcast(intent);
             }else{
-                DLog.d(TAG,"拍照结果返回有問題");
+                DLog.d( CommonUtils.TAG,"拍照结果返回有問題");
 
             }
         }
@@ -895,40 +1092,40 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
             receiver = null;
         }
     }
-
-    private void checkPermission() {
-        //检查权限（NEED_PERMISSION）是否被授权 PackageManager.PERMISSION_GRANTED表示同意授权
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //用户已经拒绝过一次，再次弹出权限申请对话框需要给用户一个解释
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission
-                    .WRITE_EXTERNAL_STORAGE)) {
-                //                Toast.makeText(this, "请开通相关权限，否则无法正常使用本应用！", Toast.LENGTH_SHORT).show();
-            }
-            //申请权限
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA}, REQUEST_WRITE_EXTERNAL_STORAGE);
-
-        } else {//已经授权
-
-            photoDialogPop();//下载文档
-
-            DLog.e(TAG,"TAG_SERVICE"+ "checkPermission: 已经授权！");
-        }
-    }
-
-    //系统方法,从requestPermissions()方法回调结果
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        //确保是我们的请求
-         if(requestCode == REQUEST_WRITE_EXTERNAL_STORAGE){
-             mHandler.post(new Runnable() {
-                 @Override
-                 public void run() {
-                     photoDialogPop();
-                 }
-             });
-        }
-    }
+//
+//    private void checkPermission() {
+//        //检查权限（NEED_PERMISSION）是否被授权 PackageManager.PERMISSION_GRANTED表示同意授权
+//        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            //用户已经拒绝过一次，再次弹出权限申请对话框需要给用户一个解释
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission
+//                    .WRITE_EXTERNAL_STORAGE)) {
+//                //                Toast.makeText(this, "请开通相关权限，否则无法正常使用本应用！", Toast.LENGTH_SHORT).show();
+//            }
+//            //申请权限
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA}, REQUEST_WRITE_EXTERNAL_STORAGE);
+//
+//        } else {//已经授权
+//
+//            photoDialogPop();//下载文档
+//
+//            DLog.e( CommonUtils.TAG,"TAG_SERVICE"+ "checkPermission: 已经授权！");
+//        }
+//    }
+//
+//    //系统方法,从requestPermissions()方法回调结果
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        //确保是我们的请求
+//        if(requestCode == REQUEST_WRITE_EXTERNAL_STORAGE){
+//            mHandler.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    photoDialogPop();
+//                }
+//            });
+//        }
+//    }
 
     private SimpleDateFormat getDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);

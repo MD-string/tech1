@@ -22,6 +22,7 @@ import cn.hand.tech.ui.setting.bean.CarNumberInfo;
 import cn.hand.tech.ui.setting.presenter.EnterPlantCheckPresenter;
 import cn.hand.tech.ui.weight.bean.UserResultBean;
 import cn.hand.tech.utils.Aes;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
 import cn.hand.tech.weiget.NavigationConfig;
@@ -37,7 +38,6 @@ public class EnterPlantCheckAct extends BaseActivity implements  IEnterPlantChec
     private Button bt_enter_plant_check;
     private TextView tv_result;
     private static final String PASSWORD_STRING = "6a9fd0d1a950420b812f27e970afcd8f"; // static final 静态常量
-    private static final String TAG = "WeightFragment";
     private ACache acache;
     private String token;
     private TextView tv_plant_address,tv_dev_status;
@@ -53,7 +53,7 @@ public class EnterPlantCheckAct extends BaseActivity implements  IEnterPlantChec
         super.onCreate(savedInstanceState);
         context=this;
         setContentView(R.layout.activity_enterplant_check);
-        acache = ACache.get(context, TAG);
+        acache = ACache.get(context,  CommonUtils.TAG);
         token = acache.getAsString("login_token");
         mpresenter = new EnterPlantCheckPresenter(context, this);
         initView();

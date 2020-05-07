@@ -131,19 +131,22 @@ public class UpBinAdapter extends BaseExpandableListAdapter {
         int binNumber=cb.getPacketTotal();
         holder.tv_bin_number.setText(binNumber+"");
 
-        if(mpostion ==i1){
-            holder.checkbox_1.setChecked(true);
-        }else{
-            holder.checkbox_1.setChecked(false);
-        }
-       final int mpo=i1;
-        final  String binId=cb.getId();
-        holder.rl_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCallback.onTocheck(v,mpo,binId);
-            }
-        });
+        holder.checkbox_1.setChecked(true);
+        holder.checkbox_1.setEnabled(false);
+//        if(mpostion ==i1){
+//            holder.checkbox_1.setChecked(true);
+//        }else{
+//            holder.checkbox_1.setChecked(false);
+////        }
+//       final int mpo=i1;
+//        final  String binId=cb.getId();
+//        mCallback.onTocheck( holder.checkbox_1,mpo,binId);
+//        holder.rl_1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mCallback.onTocheck(v,mpo,binId);
+//            }
+//        });
         return view;
     }
 

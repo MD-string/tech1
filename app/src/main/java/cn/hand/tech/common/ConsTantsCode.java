@@ -35,6 +35,8 @@ public class ConsTantsCode {
     /*保存本地失败*/
     public static final int REQUEST_CODE_SAVE_LOCAL_FAIL = 1005;
 
+    public static final String PASSWORD_STRING = "6a9fd0d1a950420b812f27e970afcd8f"; // static final 静态常量
+
 }
 
 

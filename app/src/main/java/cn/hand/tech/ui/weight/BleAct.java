@@ -26,12 +26,12 @@ import cn.hand.tech.ble.bean.BleDevice;
 import cn.hand.tech.ble.bleUtil.BleConstant;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.ui.weight.adapter.mBleDeviceAdapter;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.ToastUtil;
 
 //蓝牙搜索 显示页面
 public class BleAct extends Activity implements View.OnClickListener{
 
-    private static final String TAG = "WeightFragment";
     private Context context;
     private ProgressBar roudProgressBar;
     private TextView title_ble;
@@ -54,7 +54,7 @@ public class BleAct extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         context=this;
         setContentView(R.layout.activity_ble_connect);
-        acache= ACache.get(context,TAG);
+        acache= ACache.get(context,CommonUtils.TAG);
         List<BleDevice> emlist=new ArrayList<>();
         acache.put("dev_list",(Serializable)emlist);
         acache.put("click_once","false");

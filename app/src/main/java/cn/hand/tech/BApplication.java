@@ -28,7 +28,7 @@ public class BApplication extends Application {
 	public static Context mContext;
 	public static final String APP_ID = "530c6c8f10"; // TODO 替换成bugly上注册的appid
 	public static final String APP_CHANNEL = "DEBUG"; // TODO 自定义渠道
-	public static int environment =1;//项目当前所用的服务器(0代表测试环境，1代表正式环境)  等接口发布了 改成正式环境
+	public static int environment =0;//项目当前所用的服务器(0代表测试环境，1代表正式环境)  等接口发布了 改成正式环境
 
 	public static boolean isTestLocal=false;//是否执行本地调试数据，打包的时候一定要false，(测试数据)
 	public static boolean isUseLocal=false;//是否用本地算法去核算重量

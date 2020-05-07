@@ -123,4 +123,16 @@
         <item>17-4</item>
         <item>拉力传感器</item>
     </string-array>
+    <string-array name="gps_spinner">
+        <item>请选择</item>
+        <item>博宇组合式天线</item>
+        <item>广元发组合式天线</item>
+        <item>博宇单GPS天线</item>
+    </string-array>
+    <string-array name="gsm_spinner">
+        <item>请选择</item>
+        <item>博宇组合式天线</item>
+        <item>博宇3GPCB天线</item>
+        <item>广元发组合式天线</item>
+    </string-array>
 </resources>

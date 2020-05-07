@@ -324,6 +324,47 @@
 
             </View>
             <LinearLayout
+                android:id="@+id/ll_company_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dip"
+                android:background="@drawable/sel_bg_white_gray"
+                >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/icon_compay_list"/>
+
+                <TextView
+                    android:id="@+id/tv_enable_company"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="可升级公司列表"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingLeft="6dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:layout_weight="1"
+                    />
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@mipmap/gray_right_arrow"
+                    android:layout_marginRight="12dp"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line_color"
+                >
+
+            </View>
+            <LinearLayout
                 android:id="@+id/ll_xishu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

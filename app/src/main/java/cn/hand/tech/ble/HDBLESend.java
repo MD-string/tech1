@@ -185,31 +185,75 @@ public class HDBLESend {
     //版本号
     public static void ReadVerCode(BluetoothGattCharacteristic characteristic, BluetoothGatt bluetoothGatt,int id) {
         //byte[] byteCommand = {0x7B,0xA5,0x00,0x00,0x00,0x00,0x01,0x01,0x0F,0x84,0x00,0x00,0x00,0x00,0x00,0x00,0xB7,0x5A};
-        String order = "7B A5 000000000101 0F0400000000 0000B75A";
-        byte[] send_data = BluetoothUtil.hex2Bytes(order);
+//        String order = "7B A5 000000000101 0F0400000000 0000B75A";
+//        byte[] send_data = BluetoothUtil.hex2Bytes(order);
+//
+//        char[] crc_data = CRC16.hexStringToByteArray(order);
+//        int crcData = CRC16.calcCrc16(crc_data, 0, crc_data.length - 4);
+//        byte[] crc_int_byte = CRC16.IntToByteArray(crcData);//1 0
+//        send_data[14] = crc_int_byte[1];
+//        send_data[15] = crc_int_byte[0];
+//        characteristic.setValue(send_data);
+//        bluetoothGatt.writeCharacteristic(characteristic);
 
-        char[] crc_data = CRC16.hexStringToByteArray(order);
-        int crcData = CRC16.calcCrc16(crc_data, 0, crc_data.length - 4);
-        byte[] crc_int_byte = CRC16.IntToByteArray(crcData);//1 0
-        send_data[14] = crc_int_byte[1];
-        send_data[15] = crc_int_byte[0];
-        characteristic.setValue(send_data);
-        bluetoothGatt.writeCharacteristic(characteristic);
+        try {
+            String order = "7B A5 000000000101 0F0400000000 0000B75A";
+            byte[] send_data = BluetoothUtil.hex2Bytes(order);
+            char[] crc_data = CRC16.hexStringToByteArray(order);
+            int crcData = CRC16.calcCrc16(crc_data, 0, crc_data.length - 4);
+            byte[] crc_int_byte = CRC16.IntToByteArray(crcData);//1 0
+            send_data[14] = crc_int_byte[1];
+            send_data[15] = crc_int_byte[0];
+            characteristic.setValue(send_data);
+            boolean istrue = bluetoothGatt.writeCharacteristic(characteristic);
+            while(!istrue){
+                Thread.sleep(20);
+                characteristic.setValue(send_data);
+                boolean istrue1 = bluetoothGatt.writeCharacteristic(characteristic);
+                if(istrue1){
+                    istrue=true;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
     //硬件版本号
     public static void ReadHardSotf(BluetoothGattCharacteristic characteristic, BluetoothGatt bluetoothGatt,int id) {
         //byte[] byteCommand = {0x7B,0xA5,0x00,0x00,0x00,0x00,0x01,0x01,0x0D,0x84,0x00,0x00,0x00,0x00,0x00,0x00,0xB7,0x5A};
-        String order = "7B A5 000000000101 0D0400000000 0000B75A";
-        byte[] send_data = BluetoothUtil.hex2Bytes(order);
-        char[] crc_data = CRC16.hexStringToByteArray(order);
-        int crcData = CRC16.calcCrc16(crc_data, 0, crc_data.length - 4);
-        byte[] crc_int_byte = CRC16.IntToByteArray(crcData);//1 0
-        send_data[14] = crc_int_byte[1];
-        send_data[15] = crc_int_byte[0];
-        characteristic.setValue(send_data);
-        bluetoothGatt.writeCharacteristic(characteristic);
+//        String order = "7B A5 000000000101 0D0400000000 0000B75A";
+//        byte[] send_data = BluetoothUtil.hex2Bytes(order);
+//        char[] crc_data = CRC16.hexStringToByteArray(order);
+//        int crcData = CRC16.calcCrc16(crc_data, 0, crc_data.length - 4);
+//        byte[] crc_int_byte = CRC16.IntToByteArray(crcData);//1 0
+//        send_data[14] = crc_int_byte[1];
+//        send_data[15] = crc_int_byte[0];
+//        characteristic.setValue(send_data);
+//        bluetoothGatt.writeCharacteristic(characteristic);
+        try {
+            String order2 = "7B A5 000000000101 0D0400000000 0000B75A";
+            byte[] send_data2 = BluetoothUtil.hex2Bytes(order2);
+            char[] crc_data2 = CRC16.hexStringToByteArray(order2);
+            int crcData2 = CRC16.calcCrc16(crc_data2, 0, crc_data2.length - 4);
+            byte[] crc_int_byte2 = CRC16.IntToByteArray(crcData2);//1 0
+            send_data2[14] = crc_int_byte2[1];
+            send_data2[15] = crc_int_byte2[0];
+            characteristic.setValue(send_data2);
+            boolean istrue = bluetoothGatt.writeCharacteristic(characteristic);
+            while(!istrue){
+                Thread.sleep(20);
+                characteristic.setValue(send_data2);
+                boolean istrue1 = bluetoothGatt.writeCharacteristic(characteristic);
+                if(istrue1){
+                    istrue=true;
+                }
+            }
+            //                    mWriteCharacteristic(characteristic,bluetoothGatt,send_data2);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -676,6 +720,219 @@ public class HDBLESend {
             //System.out.println(Arrays.toString(b));
             characteristic.setValue(b);
             bluetoothGatt.writeCharacteristic(characteristic);
+        }
+
+
+    }
+
+    public static void SendWritePara_2(BluetoothGattCharacteristic characteristic, BluetoothGatt bluetoothGatt, HDSendDataModel para) {
+        //Byte byteCommand[108] = {0x7B,0xA5,0x00,0x00,0x00,0x00,0x01,0x10, 0x01,0x02,0x00,0x00,0x00,0x00,  0x02,0x02,0x00,0x00,0x00,0x00,  0x03,0x02,0x00,0x00,0x00,0x00,  0x04,0x02,0x00,0x00,0x00,0x00,  0x05,0x02,0x00,0x00,0x00,0x00,  0x06,0x02,0x00,0x00,0x00,0x00,  0x07,0x02,0x00,0x00,0x00,0x00,  0x08,0x02,0x00,0x00,0x00,0x00,  0x09,0x02,0x00,0x00,0x00,0x00,  0x0A,0x02,0x00,0x00,0x00,0x00,  0x0B,0x02,0x00,0x00,0x00,0x00,  0x0C,0x02,0x00,0x00,0x00,0x00,  0x0D,0x02,0x00,0x00,0x00,0x00,  0x0E,0x02,0x00,0x00,0x00,0x00,  0x0F,0x02,0x00,0x00,0x00,0x00,  0x10,0x02,0x00,0x00,0x00,0x00,  0x00,0x00,0xB7,0x5A};
+
+        String order = "7BA5 000000000102 018200000000  028200000000    0000B75A";
+
+        byte[] send_data = BluetoothUtil.hex2Bytes(order);
+        //System.out.println(Arrays.toString(send_data));
+
+        float m1 = para.mmv1;
+        byte[] a1 = float2byte(m1);
+        for (int i = 0; i < 4; i++) {
+            send_data[10 + i] = a1[i];
+        }
+        float m2 = para.mmv2;
+        byte[] a2 = float2byte(m2);
+        for (int i = 0; i < 4; i++) {
+            send_data[16 + i] = a2[i];
+        }
+
+
+        //System.out.println(Arrays.toString(send_data));
+
+        final StringBuilder stringBuilder = new StringBuilder(send_data.length);
+        for (byte byteChar : send_data) {
+            stringBuilder.append(String.format("%02X", byteChar));
+        }
+        //                ToastUtil.showToast(mainActivity,stringBuilder.toString());
+        //Log.e("CRC16",stringBuilder.toString());
+        String value = stringBuilder.toString();
+        //System.out.println(stringBuilder.toString());
+        char[] crc_data = CRC16.hexStringToByteArray(value);
+
+        int crcData = CRC16.calcCrc16(crc_data, 0, crc_data.length - 4);
+        byte[] crc_int_byte = CRC16.IntToByteArray(crcData);//1 0
+        send_data[20] = crc_int_byte[1]; //104
+        send_data[21] = crc_int_byte[0];   //105
+        for (int i = 0; i < 2; i++) {
+            if(i==0){
+                byte[] b = new byte[18];
+                for (int j = 0; j < 18; j++) {
+                    b[j] = send_data[18 * i + j];
+                }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                characteristic.setValue(b);
+                bluetoothGatt.writeCharacteristic(characteristic);
+                DLog.e("SendWritePara_2","SendWritePara_2"+Arrays.toString(b));
+            }else{
+                byte[] b1 = new byte[6];
+                for (int j = 0; j < 6; j++) {
+                    b1[j] = send_data[18 * i + j];
+                }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                characteristic.setValue(b1);
+                bluetoothGatt.writeCharacteristic(characteristic);
+                DLog.e("SendWritePara_2","SendWritePara_2"+Arrays.toString(b1));
+            }
+        }
+
+
+    }
+
+    public static void SendWritePara_3(BluetoothGattCharacteristic characteristic, BluetoothGatt bluetoothGatt, HDSendDataModel para) {
+        //Byte byteCommand[108] = {0x7B,0xA5,0x00,0x00,0x00,0x00,0x01,0x10, 0x01,0x02,0x00,0x00,0x00,0x00,  0x02,0x02,0x00,0x00,0x00,0x00,  0x03,0x02,0x00,0x00,0x00,0x00,  0x04,0x02,0x00,0x00,0x00,0x00,  0x05,0x02,0x00,0x00,0x00,0x00,  0x06,0x02,0x00,0x00,0x00,0x00,  0x07,0x02,0x00,0x00,0x00,0x00,  0x08,0x02,0x00,0x00,0x00,0x00,  0x09,0x02,0x00,0x00,0x00,0x00,  0x0A,0x02,0x00,0x00,0x00,0x00,  0x0B,0x02,0x00,0x00,0x00,0x00,  0x0C,0x02,0x00,0x00,0x00,0x00,  0x0D,0x02,0x00,0x00,0x00,0x00,  0x0E,0x02,0x00,0x00,0x00,0x00,  0x0F,0x02,0x00,0x00,0x00,0x00,  0x10,0x02,0x00,0x00,0x00,0x00,  0x00,0x00,0xB7,0x5A};
+
+        String order = "7BA5 000000000103 018200000000  028200000000  038200000000   0000B75A";
+
+        byte[] send_data = BluetoothUtil.hex2Bytes(order);
+        //System.out.println(Arrays.toString(send_data));
+
+        float m1 = para.mmv1;
+        byte[] a1 = float2byte(m1);
+        for (int i = 0; i < 4; i++) {
+            send_data[10 + i] = a1[i];
+        }
+        float m2 = para.mmv2;
+        byte[] a2 = float2byte(m2);
+        for (int i = 0; i < 4; i++) {
+            send_data[16 + i] = a2[i];
+        }
+
+        float m3 = para.mmv3;
+        byte[] a3 = float2byte(m3);
+        for (int i = 0; i < 4; i++) {
+            send_data[22 + i] = a3[i];
+        }
+
+        //System.out.println(Arrays.toString(send_data));
+
+        final StringBuilder stringBuilder = new StringBuilder(send_data.length);
+        for (byte byteChar : send_data) {
+            stringBuilder.append(String.format("%02X", byteChar));
+        }
+        //                ToastUtil.showToast(mainActivity,stringBuilder.toString());
+        //Log.e("CRC16",stringBuilder.toString());
+        String value = stringBuilder.toString();
+        //System.out.println(stringBuilder.toString());
+        char[] crc_data = CRC16.hexStringToByteArray(value);
+
+        int crcData = CRC16.calcCrc16(crc_data, 0, crc_data.length - 4);
+        byte[] crc_int_byte = CRC16.IntToByteArray(crcData);//1 0
+        send_data[26] = crc_int_byte[1]; //104
+        send_data[27] = crc_int_byte[0];   //105
+        for (int i = 0; i < 2; i++) {
+            if(i==0){
+                byte[] b = new byte[18];
+                for (int j = 0; j < 18; j++) {
+                    b[j] = send_data[18 * i + j];
+                }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                characteristic.setValue(b);
+                bluetoothGatt.writeCharacteristic(characteristic);
+                DLog.e("SendWritePara_3","SendWritePara_3"+Arrays.toString(b));
+            }else{
+                byte[] b1 = new byte[12];
+                for (int j = 0; j < 12; j++) {
+                    b1[j] = send_data[18 * i + j];
+                }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                characteristic.setValue(b1);
+                bluetoothGatt.writeCharacteristic(characteristic);
+                DLog.e("SendWritePara_3","SendWritePara_3"+Arrays.toString(b1));
+            }
+
+        }
+
+
+    }
+
+    public static void SendWritePara_4(BluetoothGattCharacteristic characteristic, BluetoothGatt bluetoothGatt, HDSendDataModel para) {
+        //Byte byteCommand[108] = {0x7B,0xA5,0x00,0x00,0x00,0x00,0x01,0x10, 0x01,0x02,0x00,0x00,0x00,0x00,  0x02,0x02,0x00,0x00,0x00,0x00,  0x03,0x02,0x00,0x00,0x00,0x00,  0x04,0x02,0x00,0x00,0x00,0x00,  0x05,0x02,0x00,0x00,0x00,0x00,  0x06,0x02,0x00,0x00,0x00,0x00,  0x07,0x02,0x00,0x00,0x00,0x00,  0x08,0x02,0x00,0x00,0x00,0x00,  0x09,0x02,0x00,0x00,0x00,0x00,  0x0A,0x02,0x00,0x00,0x00,0x00,  0x0B,0x02,0x00,0x00,0x00,0x00,  0x0C,0x02,0x00,0x00,0x00,0x00,  0x0D,0x02,0x00,0x00,0x00,0x00,  0x0E,0x02,0x00,0x00,0x00,0x00,  0x0F,0x02,0x00,0x00,0x00,0x00,  0x10,0x02,0x00,0x00,0x00,0x00,  0x00,0x00,0xB7,0x5A};
+
+        String order = "7BA5 000000000104 018200000000  028200000000  038200000000  048200000000   0000B75A";
+
+        byte[] send_data = BluetoothUtil.hex2Bytes(order);
+        //System.out.println(Arrays.toString(send_data));
+
+        float m1 = para.mmv1;
+        byte[] a1 = float2byte(m1);
+        for (int i = 0; i < 4; i++) {
+            send_data[10 + i] = a1[i];
+        }
+        float m2 = para.mmv2;
+        byte[] a2 = float2byte(m2);
+        for (int i = 0; i < 4; i++) {
+            send_data[16 + i] = a2[i];
+        }
+
+        float m3 = para.mmv3;
+        byte[] a3 = float2byte(m3);
+        for (int i = 0; i < 4; i++) {
+            send_data[22 + i] = a3[i];
+        }
+
+        float m4 = para.mmv4;
+        byte[] a4 = float2byte(m4);
+        for (int i = 0; i < 4; i++) {
+            send_data[28 + i] = a4[i];
+        }
+
+
+        //System.out.println(Arrays.toString(send_data));
+
+        final StringBuilder stringBuilder = new StringBuilder(send_data.length);
+        for (byte byteChar : send_data) {
+            stringBuilder.append(String.format("%02X", byteChar));
+        }
+        //                ToastUtil.showToast(mainActivity,stringBuilder.toString());
+        //Log.e("CRC16",stringBuilder.toString());
+        String value = stringBuilder.toString();
+        //System.out.println(stringBuilder.toString());
+        char[] crc_data = CRC16.hexStringToByteArray(value);
+
+        int crcData = CRC16.calcCrc16(crc_data, 0, crc_data.length - 4);
+        byte[] crc_int_byte = CRC16.IntToByteArray(crcData);//1 0
+        send_data[32] = crc_int_byte[1]; //104
+        send_data[33] = crc_int_byte[0];   //105
+        for (int i = 0; i < 2; i++) {
+            byte[] b = new byte[18];
+            for (int j = 0; j < 18; j++) {
+                b[j] = send_data[18 * i + j];
+            }
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            //System.out.println(Arrays.toString(b));
+            characteristic.setValue(b);
+            bluetoothGatt.writeCharacteristic(characteristic);
+
+            DLog.e("SendWritePara_4","SendWritePara_4"+Arrays.toString(b));
         }
 
 

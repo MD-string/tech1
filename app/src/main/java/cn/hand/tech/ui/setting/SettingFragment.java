@@ -45,6 +45,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 	private LinearLayout ll_auto_check;
 	private LinearLayout ll_update_bin;
 	private LinearLayout ll_plant_enter;
+	private LinearLayout ll_company_list;
 
 
 	@Override
@@ -78,6 +79,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		ll_pass_checked=(LinearLayout)view.findViewById(R.id.ll_pass_checked);
 		ll_checked=(LinearLayout)view.findViewById(R.id.ll_checked);//通道和mv/v检测
 		ll_car_input=(LinearLayout)view.findViewById(R.id.ll_car_input); //车辆录入
+		ll_company_list=(LinearLayout)view.findViewById(R.id.ll_company_list); //车辆列表
 		ll_xishu=(LinearLayout)view.findViewById(R.id.ll_xishu);//系数设定
 		ll_address=(LinearLayout)view.findViewById(R.id.ll_address);//地址设定
 		ll_jixie=(LinearLayout)view.findViewById(R.id.ll_jixie);//机械臂系数
@@ -99,6 +101,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 		ll_checked.setOnClickListener(this);
 		ll_address.setOnClickListener(this);
 		ll_car_input.setOnClickListener(this);
+		ll_company_list.setOnClickListener(this);
 		ll_xishu.setOnClickListener(this);
 		ll_jixie.setOnClickListener(this);
 		ll_bind.setOnClickListener(this);
@@ -118,7 +121,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 				CheckMainAct.start(mactivity);
 				break;
 			case R.id.ll_update_bin:
-				UpBinAct.start(mactivity);
+				UpBinAct.start(mactivity,"0");
 				break;
 			case R.id.ll_plant_enter:
 				EnterPlantCheckAct.start(mactivity);
@@ -137,6 +140,9 @@ public class SettingFragment extends BaseFragment implements OnClickListener {
 				break;
 			case R.id.ll_car_input:
 //				CarInputAct.start(mactivity);
+				break;
+			case R.id.ll_company_list:
+				CompanyListActivity.start(mactivity);
 				break;
 			case R.id.ll_xishu:
 				CoefficientSettingAct.start(mactivity);

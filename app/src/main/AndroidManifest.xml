@@ -125,6 +125,9 @@
         <activity android:name=".ui.setting.WeightSettingAct"
                   android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.CompanyListActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".ui.weight.CompanyTruckActivity"
                   android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
                   android:screenOrientation="portrait"/>
@@ -176,6 +179,9 @@
                   android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
                   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.CheckMainAct"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.setting.UpBinActFromAddCar"
                   android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified"
                   android:screenOrientation="portrait"/>
         <activity android:name=".ui.setting.LookImageActivity"

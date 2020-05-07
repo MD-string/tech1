@@ -18,6 +18,7 @@ import java.util.List;
 import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.ui.home.BaseFragment;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
 
@@ -32,14 +33,13 @@ public class PassSettingValueFragment extends BaseFragment  {
     private List<String> mlist;
     private CheckBox cb_1;
     private String isVideo="0";
-    private static final String TAG = "WeightFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=getActivity();
         View view = inflater.inflate(R.layout.activity_pass_choose_value, container, false);
-        acache= ACache.get(context,TAG);
+        acache= ACache.get(context, CommonUtils.TAG);
         initView(view);
 
         return view;

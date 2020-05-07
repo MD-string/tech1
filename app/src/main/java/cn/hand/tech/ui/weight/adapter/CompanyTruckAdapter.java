@@ -87,7 +87,7 @@ public class CompanyTruckAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+    public View getGroupView(int i, boolean isExpanded, View view, ViewGroup viewGroup) {
         GroupHolder holder;
         if (view == null) {
             holder = new GroupHolder();
@@ -117,6 +117,7 @@ public class CompanyTruckAdapter extends BaseExpandableListAdapter {
                     TruckChildBean bean=new TruckChildBean();
                     bean.setChildId(cb1.getId());
                     bean.setName(cb1.getName());
+                    bean.setParentId(cb1.getId());
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("truckModel",(Serializable)bean);
                     //                CommonKitUtil.startActivity((Activity) mContext, WeightTrendActivity.class, bundle, false);
@@ -124,12 +125,16 @@ public class CompanyTruckAdapter extends BaseExpandableListAdapter {
                 }
             });
         }
-
+        if(isExpanded){
+            holder.iv_truckInfo_arrow.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.icon_arrow_bto));
+        }else{
+            holder.iv_truckInfo_arrow.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.screen_arrow));
+        }
         return view;
     }
 
     @Override
-    public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+    public View getChildView(final int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         ChildHolder holder;
         if (view == null) {
             holder = new ChildHolder();
@@ -147,11 +152,12 @@ public class CompanyTruckAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 TruckChildBean bean1=new TruckChildBean();
                 bean1.setChildId(cb.getChildId());
+                bean1.setParentId(cb.getParentId());
                 bean1.setName(cb.getName());
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("truckModel",(Serializable)bean1);
+                Bundle bundle1=new Bundle();
+                bundle1.putSerializable("truckModel",(Serializable)bean1);
                 //                CommonKitUtil.startActivity((Activity) mContext, WeightTrendActivity.class, bundle, false);
-                CommonKitUtil.startActivity((Activity) mContext, AddTruckBasicActivity.class, bundle, false);
+                CommonKitUtil.startActivity((Activity) mContext, AddTruckBasicActivity.class, bundle1, false);
             }
         });
         return view;

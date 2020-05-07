@@ -111,6 +111,8 @@ public class SecondRepairAct extends Activity implements IRepairView, RepairAdap
     private List<PicBean> mList=new ArrayList<>();
     private BroadcastReceiver receiver;
     private AlertDialog mtempDialog;
+    private Spinner addRepair_gps_spinner,addRepair_gsm_spinner;
+    private String gpsPo,gsmName;
 
     public static void start(Context context,int number,String fault,String guide,String id,String truck) {
         Intent intent = new Intent(context, SecondRepairAct.class);
@@ -528,6 +530,44 @@ public class SecondRepairAct extends Activity implements IRepairView, RepairAdap
             }
         });
 
+        addRepair_gps_spinner=(Spinner)findViewById(R.id.addRepair_gps_spinner);
+        addRepair_gps_spinner.setSelection(0);
+        addRepair_gsm_spinner =(Spinner)findViewById(R.id.addRepair_gsm_spinner);
+        addRepair_gsm_spinner.setSelection(0);
+        addRepair_gps_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] gps = getResources().getStringArray(R.array.gps_spinner); //gpsAntenna
+                if(0==position){
+                    gpsPo="";
+                }else{
+                    gpsPo = gps[position];
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        addRepair_gsm_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] gsm = getResources().getStringArray(R.array.gsm_spinner); //gsmAntenna
+                if(0==position){
+                    gsmName="";
+                }else{
+                    gsmName = gsm[position];
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 //        gridView=(MyGridView)findViewById(R.id.pic_gridview);
 //
 //        PicBean bean=new PicBean();
@@ -594,7 +634,7 @@ public class SecondRepairAct extends Activity implements IRepairView, RepairAdap
                 String repairedRecords=strC;
                 String mark=et_remark.getText().toString().trim();
 
-                mpresenter.sendRepairRecord(repairId,token,repairedRecords,zongjie,mark,xp1,dirverName,dirverPhone);
+                mpresenter.sendRepairRecord(repairId,token,repairedRecords,zongjie,mark,xp1,dirverName,dirverPhone,gpsPo,gsmName);
             }
         });
 

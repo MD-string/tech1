@@ -15,6 +15,7 @@ import java.util.TreeSet;
 import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.ui.data.bean.LocalDataTimeModel;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.Tools;
 
 /**
@@ -28,7 +29,6 @@ public class LocalDataAdapter extends BaseAdapter {
     public TreeSet<Integer> delContactsIdSet;
     private boolean mIsEditor = true;
     private ACache acache;
-    private static final String TAG = "WeightFragment";
 
     public LocalDataAdapter(List<LocalDataTimeModel> list, Context context) {
         mLayoutInflater = LayoutInflater.from(context);
@@ -36,7 +36,7 @@ public class LocalDataAdapter extends BaseAdapter {
         isMapSelected = new HashMap<Integer, Boolean>();
         delContactsIdSet = new TreeSet<Integer>();
         initData();
-        acache= ACache.get(context,TAG);
+        acache= ACache.get(context, CommonUtils.TAG);
 
     }
 

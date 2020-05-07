@@ -35,6 +35,7 @@ import cn.hand.tech.ui.setting.bean.RepairModel;
 import cn.hand.tech.ui.setting.presenter.RepairByTruckPresenter;
 import cn.hand.tech.ui.weight.bean.CompanyResultBean;
 import cn.hand.tech.ui.weight.bean.TruckChildBean;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.DataUtil;
 import cn.hand.tech.utils.LatLng;
 import cn.hand.tech.utils.ToastUtil;
@@ -49,7 +50,6 @@ public class TruckNeedRepairActivity extends Activity implements View.OnClickLis
 
 
     private ExpandableListView list_1;
-    private static final String TAG = "WeightFragment";
     private ACache acache;
     private TruckNeedRepairAdapter madapter;
     private TextView mTvBack;
@@ -81,7 +81,7 @@ public class TruckNeedRepairActivity extends Activity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         mContext=this;
         setContentView(R.layout.activity_truck_need_repair);
-        acache= ACache.get(mContext,TAG);
+        acache= ACache.get(mContext, CommonUtils.TAG);
         token = acache.getAsString("login_token");
         mPresenter=new RepairByTruckPresenter(mContext,this);
 

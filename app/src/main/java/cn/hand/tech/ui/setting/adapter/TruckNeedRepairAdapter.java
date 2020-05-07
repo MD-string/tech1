@@ -97,7 +97,7 @@ public class TruckNeedRepairAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+    public View getGroupView(int i, boolean isExpanded, View view, ViewGroup viewGroup) {
         GroupHolder holder;
         if (view == null) {
             holder = new GroupHolder();
@@ -122,7 +122,11 @@ public class TruckNeedRepairAdapter extends BaseExpandableListAdapter {
                 }
             });
         }
-
+        if(isExpanded){
+            holder.iv_truckInfo_arrow.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.icon_arrow_bto));
+        }else{
+            holder.iv_truckInfo_arrow.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.screen_arrow));
+        }
         return view;
     }
 

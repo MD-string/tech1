@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,9 +43,9 @@ import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
 
 /*
- *固件升级
+ *固件升级  录车
  */
-public class UpBinAct extends Activity implements IUpdateView {
+public class UpBinActFromAddCar extends Activity implements IUpdateView {
     private Context context;
     private LinearLayout ll_back;
     private TextView tv_para_title;
@@ -79,11 +80,14 @@ public class UpBinAct extends Activity implements IUpdateView {
     private TextView tv_bin1_name,tv_bin_content;
     private LinearLayout ll_bin_1;
     private AlertDialog mtempDialog;
-    private String mFromTag="0";
+    private TextView upBinActFromAddCar_car_status,upBinActFromAddCar_car_sensor;
+    private String mCompanyId;
+    private String mparentCode,mchildCode,mcarType;
+    private String mSensorNumb;
 
-    public static void start(Context context,String tag) {
-        Intent intent = new Intent(context, UpBinAct.class);
-        intent.putExtra("upBinAct_tag",tag);
+    public static void start(Context context,String companyId) {
+        Intent intent = new Intent(context, UpBinActFromAddCar.class);
+        intent.putExtra("company_id",companyId);
         context.startActivity(intent);
     }
     private Handler mHandler = new Handler() {
@@ -146,15 +150,29 @@ public class UpBinAct extends Activity implements IUpdateView {
                     listmap.put("deviceId",mdevId);
                     listmap.put("companyId",companyid);//公司ID
                     listmap.put("hwVersion",hmVerId);//硬件版本号 4：V4 和 7:V7 和 8：V8
+                    listmap.put("useTypeL1",mparentCode);//硬件版本号 4：V4 和 7:V7 和 8：V8
+                    listmap.put("useTypeL2",mchildCode);//硬件版本号 4：V4 和 7:V7 和 8：V8
                     mpresenter.updateBinList(listmap);
+                    break;
                 case 12:
                     madapter.updateListView(mgList);
+
+
                     //遍历所有group,将所有项设置成默认展开
                     int groupCount =mgList.size();
                     for (int i=0; i<groupCount; i++)
                     {
                         exlist_1.expandGroup(i);
                     }
+
+                    String binId=  mgList.get(0).getList().get(0).getId();
+                    mbinInfoId=binId;//固件ID
+                    GuJianBean bean= mgList.get(0).getList().get(0);
+                    String binname=bean.getBinName();
+                    tv_bin1_name.setText("固件名称:"+binname);
+                    String binContent=bean.getDescription();
+                    tv_bin_content.setText("固件描述:"+binContent);
+                    ll_bin_1.setVisibility(View.VISIBLE);
                     break;
                 default:
                     break;
@@ -165,7 +183,7 @@ public class UpBinAct extends Activity implements IUpdateView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=this;
-        setContentView(R.layout.activity_up_bin);
+        setContentView(R.layout.activity_up_bin_2);
         acache= ACache.get(context,"WeightFragment");
         mcache= ACache.get(BApplication.mContext,"BIN");
         mdevId=  acache.getAsString("n_id");
@@ -177,7 +195,11 @@ public class UpBinAct extends Activity implements IUpdateView {
         } else {
             isConnected = false;
         }
-        mFromTag=getIntent().getStringExtra("upBinAct_tag");
+        mCompanyId=getIntent().getStringExtra("company_id");
+        mparentCode=acache.getAsString("car_parentCode"); //
+        mchildCode=acache.getAsString("car_childCode");
+        mcarType=acache.getAsString("car_type");
+        mSensorNumb=acache.getAsString("current_sensor");//当前的传感器
 
         initView();
         doAddTruck();
@@ -260,6 +282,18 @@ public class UpBinAct extends Activity implements IUpdateView {
         tv_bin1_name=(TextView)findViewById(R.id.tv_bin1_name);
         tv_bin_content=(TextView)findViewById(R.id.tv_bin_content);
 
+        upBinActFromAddCar_car_status=(TextView)findViewById(R.id.upBinActFromAddCar_car_status);
+        upBinActFromAddCar_car_sensor=(TextView)findViewById(R.id.upBinActFromAddCar_car_sensor);
+
+        if(Tools.isEmpty(mcarType)){
+            mcarType="";
+        }
+        upBinActFromAddCar_car_status.setText(mcarType);
+        if(Tools.isEmpty(mSensorNumb)){
+            mSensorNumb="";
+        }
+        upBinActFromAddCar_car_sensor.setText(mSensorNumb);
+
         bt_upload_log=(Button)findViewById(R.id.bt_upload_log);
         bt_upload_log.setVisibility(View.GONE);
         bt_upload_log.setOnClickListener(new View.OnClickListener() {
@@ -287,17 +321,17 @@ public class UpBinAct extends Activity implements IUpdateView {
         madapter=new UpBinAdapter(context, mgList, new UpBinAdapter.Callback() {
             @Override
             public void onTocheck(View view, int position,String id) {
-                madapter.setCheck(position);
-                if(mgList !=null && mgList.size() >0){
-                    String binId=id;
-                    mbinInfoId=binId;//固件ID
-                    GuJianBean bean= mgList.get(0).getList().get(position);
-                    String binname=bean.getBinName();
-                    tv_bin1_name.setText("固件名称:"+binname);
-                    String binContent=bean.getDescription();
-                    tv_bin_content.setText("固件描述:"+binContent);
-                    ll_bin_1.setVisibility(View.VISIBLE);
-                }
+                //                madapter.setCheck(position);
+                //                if(mgList !=null && mgList.size() >0){
+                //                    String binId=id;
+                //                    mbinInfoId=binId;//固件ID
+                //                    GuJianBean bean= mgList.get(0).getList().get(position);
+                //                    String binname=bean.getBinName();
+                //                    tv_bin1_name.setText("固件名称:"+binname);
+                //                    String binContent=bean.getDescription();
+                //                    tv_bin_content.setText("固件描述:"+binContent);
+                //                    ll_bin_1.setVisibility(View.VISIBLE);
+                //                }
 
             }
         });
@@ -311,6 +345,7 @@ public class UpBinAct extends Activity implements IUpdateView {
 
         }
     }
+
     //开始升级固件
     public void  doUpperBin(){
         if(mStatus.equals("1")){
@@ -452,26 +487,37 @@ public class UpBinAct extends Activity implements IUpdateView {
     }
 
     @Override
-    public void doBinList(List<GuJianBean> bean) { //固件列表
-        if(bean !=null && bean.size() >0){
+    public void doBinList(List<GuJianBean> list) { //固件列表
+        if(list !=null && list.size() >0){
+            DLog.e("BGuJianBean","固件列表=="+ Arrays.asList(list));
+
+            List<GuJianBean> newlist=new ArrayList<>();
+            newlist.add(list.get(0)); //取第一个
 
             List<BGuJianBean> mlist=new ArrayList<>();
             BGuJianBean gbean=new BGuJianBean();
             gbean.setName("固件列表");
-            gbean.setList(bean);
+            gbean.setList(newlist);
             mlist.add(gbean);
 
             mgList=mlist;
             mHandler.sendEmptyMessage(12);
 
-            DLog.e("BGuJianBean","固件列表=="+bean.size());
+
+            bt_up_bin.setClickable(true);
+            bt_up_bin.setBackground(context.getResources().getDrawable(R.drawable.shape_bg_blue));
+        }else{
+            bt_up_bin.setClickable(false);
+            bt_up_bin.setText("没有可升级的固件");
+            bt_up_bin.setBackground(context.getResources().getDrawable(R.drawable.shape_bg_hui));
+            showTips("没有可升级的固件");
         }
 
     }
 
     @Override
     public void doBinListFail(String bean) {
-            showTips(bean);
+        showTips(bean);
     }
 
     @Override
@@ -683,7 +729,8 @@ public class UpBinAct extends Activity implements IUpdateView {
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doUpperBin(); //开始升级固件
+                  doUpperBin(); //开始升级固件
+
                 if(tempDialog !=null){
                     tempDialog.dismiss();
                 }

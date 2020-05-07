@@ -34,6 +34,7 @@ import cn.hand.tech.ui.weight.bean.CompanyBean;
 import cn.hand.tech.ui.weight.bean.CompanyResultBean;
 import cn.hand.tech.ui.weight.presenter.CompanyListPresenter;
 import cn.hand.tech.utils.CommonKitUtil;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.ToastUtil;
 
 
@@ -62,7 +63,6 @@ public class AddTruckActivity extends AppCompatActivity implements View.OnClickL
     private boolean isConnect;
     private String carNumber,deviceId;
     private CompanyBean mCompanyBean;//当前选择的公司
-    private static final String TAG = "WeightFragment";
 
     private ACache acache;
     private Handler mHandler = new Handler() {
@@ -80,7 +80,7 @@ public class AddTruckActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         mContext=this;
         setContentView(R.layout.fragment_truck_add);
-        acache= ACache.get(mContext,TAG);
+        acache= ACache.get(mContext, CommonUtils.TAG);
         token=acache.getAsString("login_token");
         carNumber=getIntent().getStringExtra("car_number");
         deviceId=getIntent().getStringExtra("device_id");

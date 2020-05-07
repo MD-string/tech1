@@ -77,7 +77,6 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
     private boolean isConnect;
     private String  deviceId;
     private CompanyBean mCompanyBean;//当前选择的公司
-    private static final String TAG = "WeightFragment";
     private EditText  et_count, et_phone;
     private TextView et_company,et_stuck_number;
     private TextView et_id;
@@ -133,13 +132,15 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
     private TextView tv_hard_soft,tv_gu_soft;
     private Button btn_1,btn_2;
     private AlertDialog nexttempDialog;
+    private Spinner addTruckAct_gps_spinner,addTruckAct_gsm_spinner;
+    private String gpsPo,gsmName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.fragment_truck_add_basic);
-        acache = ACache.get(mContext, TAG);
+        acache = ACache.get(mContext,CommonUtils.TAG);
         token = acache.getAsString("login_token");
         truckNum= acache.getAsString("car_num");
         deviceId = getIntent().getStringExtra("device_id");
@@ -154,7 +155,6 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
 
 
         findViews();
-        initCustomOptionPicker();
         setListeners();
         initData();
         registerBrodcat();
@@ -181,6 +181,9 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
         if(truckModel !=null){
             String name=truckModel.getName();
             companyId=truckModel.getChildId();
+            String paId=truckModel.getParentId();
+            acache.put("company_id",paId);//父类ID
+            DLog.e("AddTruckBasicActivity","company_id="+paId);
             if(!Tools.isEmpty(name)){
                 et_company.setText(name+"");
             }
@@ -254,6 +257,11 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
             spinner_moto_type.setSelection(0);
         }
 
+        addTruckAct_gps_spinner=(Spinner)findViewById(R.id.addTruckAct_gps_spinner);
+        addTruckAct_gps_spinner.setSelection(0);
+        addTruckAct_gsm_spinner=(Spinner)findViewById(R.id.addTruckAct_gsm_spinner);
+        addTruckAct_gsm_spinner.setSelection(0);
+
         img_add=(ImageView)findViewById(R.id.img_add);
 
         //        et_id.addTextChangedListener(new TextWatcherImpl(){  //方便测试
@@ -310,6 +318,40 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
                 String[] mototype = getResources().getStringArray(R.array.mototype);
                 mType = mototype[position];
                 mType_position=position+"";
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        addTruckAct_gps_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] gps = getResources().getStringArray(R.array.gps_spinner); //gpsAntenna
+                if(0==position){
+                    gpsPo="";
+                }else{
+                    gpsPo = gps[position];
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        addTruckAct_gsm_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] gsm = getResources().getStringArray(R.array.gsm_spinner); //gsmAntenna
+                if(0==position){
+                    gsmName="";
+                }else{
+                    gsmName = gsm[position];
+                }
             }
 
             @Override
@@ -518,7 +560,11 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
             UserfulData bean= ulist.get(parent);
             parentCode=bean.getParentCode();
             childCode=bean.getV1().get(child).getChildCode();
-            tv_useful.setText(bean.getV1().get(child).getName());
+            String name=bean.getV1().get(child).getName();
+            tv_useful.setText(name);
+            acache.put("car_type",name);
+            acache.put("car_parentCode",parentCode);
+            acache.put("car_childCode",childCode);
         }
 
     };
@@ -642,7 +688,7 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
                     }
 
 
-                    String stuckType = et_thruck_type.getText().toString().trim();
+                    String stuckType = et_thruck_type.getText().toString().trim(); //车辆类型
                     if (!Tools.isEmpty(stuckType)) {
                         bean.setTruckType(stuckType);
                     }
@@ -673,7 +719,7 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
 
                     String path=cameraFile.getAbsolutePath();
 
-                    mpresenter.sendBasicData(bean, token,softVer,fmVer,channelStr,companyId,unitStr,parentCode,childCode,dirverName,path);
+                    mpresenter.sendBasicData(bean, token,softVer,fmVer,channelStr,companyId,unitStr,parentCode,childCode,dirverName,path,gsmName,gpsPo);
 
                     acache.put("add_truck",(Serializable)bean);
                     acache.put("zh_positon",zhou_position);
@@ -701,7 +747,7 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
 
             photoDialogPop();//下载文档
 
-            DLog.e(TAG,"TAG_SERVICE"+ "checkPermission: 已经授权！");
+            DLog.e( CommonUtils.TAG,"TAG_SERVICE"+ "checkPermission: 已经授权！");
         }
     }
 
@@ -773,7 +819,7 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
                 msg.obj=picPath;
                 mHandler.sendMessage(msg);
             }else{
-                DLog.d(TAG,"拍照结果返回有問題");
+                DLog.d( CommonUtils.TAG,"拍照结果返回有問題");
 
             }
         }
@@ -848,6 +894,7 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
         if(!Tools.isEmpty(channelStr)){
             senStr= channelStr.substring(0,channelStr.length()-1);
         }
+        acache.put("current_sensor",senStr);//当前的传感器
         return senStr;
     }
 
@@ -932,6 +979,7 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
         //msg1  //是否存在安装信息   存在安装记录：0      不存在安装记录：1
         mHandler.sendEmptyMessage(1);
 
+        msg="1";
         if("1".equals(msg)){//未录入基本信息
             isEnter=false;
             btn_next.setEnabled(true);

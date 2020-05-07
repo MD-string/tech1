@@ -383,7 +383,8 @@ public class RepairPresenter {
 	/**
 	 * 上传故障待维修记录
 	 */
-	public void sendRepairRecord(String id,String token,String repairedRecords,String repairedConclusion,String remark,String repairId,String dirverName,String dirverPhone) {
+	public void sendRepairRecord(String id,String token,String repairedRecords,String repairedConclusion,String remark,String repairId,
+								 String dirverName,String dirverPhone,String gps,String gsm) {
 		try {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id",id);
@@ -402,6 +403,15 @@ public class RepairPresenter {
 			if(!Tools.isEmpty(dirverPhone)){  //司机电话
 				map.put("driverPhone",dirverPhone);
 			}
+
+			if(!Tools.isEmpty(gps)){ //GPS天线
+				map.put("gpsAntenna",gps);
+			}
+
+			if(!Tools.isEmpty(gsm)){  //GSM天线
+				map.put("gsmAntenna",gsm);
+			}
+
 
 			HttpHandler.getInstance().postBasic(null,  UrlConstant.HttpUrl.REPAIR_RECORD, map, new NetCallBack() {
 				@Override

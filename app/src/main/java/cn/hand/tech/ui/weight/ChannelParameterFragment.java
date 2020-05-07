@@ -50,6 +50,7 @@ import cn.hand.tech.ui.weight.bean.ChannelDetectModel;
 import cn.hand.tech.ui.weight.bean.UserResultBean;
 import cn.hand.tech.ui.weight.presenter.ChannelListPresenter;
 import cn.hand.tech.utils.Aes;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.MyPopupWindowUtil;
 import cn.hand.tech.utils.NotNull;
 import cn.hand.tech.utils.ToastUtil;
@@ -77,7 +78,6 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
     private ProgressDialog progressDialogDetectChannel;
     private TextView tv_value;
     private ChannelDetectAdapter channelDetectAdapter;
-    private static final String TAG = "WeightFragment";
     private ACache acache;
     private boolean isConnected;
     private HDModelData data;
@@ -122,7 +122,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
         super.onCreate(savedInstanceState);
         context = getActivity();
         final View view = inflater.inflate(R.layout.frg_channel_para, container, false);
-        acache = ACache.get(context, TAG);
+        acache = ACache.get(context,  CommonUtils.TAG);
         EventBus.getDefault().register(this);
         String date = acache.getAsString("mv_date");
         if (Tools.isEmpty(date)) {
@@ -730,7 +730,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
             // LogUtil.e("检查通道次数等于5时detectCount=5,=" + detectCount + "");
             doRefresh(100);
         }else if(detectCount > DETECT_MAX){
-            DLog.e(TAG,"检测通道需要值："+DETECT_MAX+"/当前值："+detectCount);
+            DLog.e("ChannelParameterFragment","检测通道需要值："+DETECT_MAX+"/当前值："+detectCount);
             list0.add(data1.getAd1());list0.remove(0);
             list1.add(data1.getAd2());list1.remove(0);
             list2.add(data1.getAd3());list2.remove(0);
@@ -767,7 +767,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
             list15.add(data1.getAd16());
 
         }
-        DLog.e(TAG,"检测通道:"+detectCount);
+        DLog.e("ChannelParameterFragment","检测通道:"+detectCount);
         detectCount++;
     }
 
@@ -805,7 +805,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
             // LogUtil.e("检查通道次数等于5时detectCount=5,=" + detectCount + "");
             doRefresh(100);
         }else if(detectCount > DETECT_MAX){
-            DLog.e(TAG,"检测MV需要值："+DETECT_MAX+"/当前值："+detectCount);
+            DLog.e("ChannelParameterFragment","检测MV需要值："+DETECT_MAX+"/当前值："+detectCount);
             list0.add(mvv1);list0.remove(0);
             list1.add(mvv2);list1.remove(0);
             list2.add(mvv3);list2.remove(0);
@@ -842,7 +842,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
             list15.add(mvv16);
 
         }
-        DLog.e(TAG,"检测MV:"+detectCount);
+        DLog.e("ChannelParameterFragment","检测MV:"+detectCount);
         detectCount++;
     }
 
@@ -884,7 +884,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
             List<ChannelDetectModel> newlist=  doHandlerData(havelist,channelDetectList);
             channelDetectAdapter.updateListView(newlist);
 
-            DLog.e(TAG,"检测通道和MV刷新页面"+list0.size()+"/"+list1.size()+"/"+list2.size()+"/"+list3.size()+list4.size()+"/"+list5.size()+"/"+list6.size()+"/"+list7.size()
+            DLog.e("ChannelParameterFragment","检测通道和MV刷新页面"+list0.size()+"/"+list1.size()+"/"+list2.size()+"/"+list3.size()+list4.size()+"/"+list5.size()+"/"+list6.size()+"/"+list7.size()
                     +"/"+list8.size()+"/"+list9.size()+"/"+list10.size()+"/"+list11.size()+"/"+list12.size()+"/"+list13.size()+"/"+list14.size()+"/"+list15.size());
         }
 
@@ -1043,7 +1043,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
         }
 
 
-        DLog.e(TAG,"最大值==" + max + ",=,最小值" + min);
+        DLog.e("ChannelParameterFragment","最大值==" + max + ",=,最小值" + min);
         if(1==chooseId){
             String value =acache.getAsString("pass_value");
             if(Tools.isEmpty(value)){
@@ -1103,7 +1103,7 @@ public class ChannelParameterFragment extends BaseFragment implements IChannelVi
                     Bundle bundle=intent.getExtras();
                     data=(HDModelData)bundle.getSerializable("ModelData");
                     mhandler.sendEmptyMessage(1);
-                    DLog.e(TAG,"setp3:ChannelParameterFragment接收展示。");
+                    DLog.e("ChannelParameterFragment","setp3:ChannelParameterFragment接收展示。");
                 }else if(action.equals(BleConstant.ACTION_CHANNEL_CHANGE)){//通道选择
                     channelModel = (HDKRModel)acache.getAsObject("channel_model");//保存多少通道
                     if(data !=null){

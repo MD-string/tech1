@@ -15,6 +15,7 @@ import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.log.DLog;
 import cn.hand.tech.ui.weight.bean.ChannelDetectModel;
+import cn.hand.tech.utils.CommonUtils;
 
 /**
  * Created by wcf on 2018/3/24.
@@ -24,13 +25,12 @@ public class ChannelDetectAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private List<ChannelDetectModel> mlist;
-    private static final String TAG = "WeightFragment";
 
     public ChannelDetectAdapter(Context context, List<ChannelDetectModel> list) {
         this.context = context;
         this.mlist = list;
         inflater = LayoutInflater.from(this.context);
-        acache = ACache.get(context, TAG);
+        acache = ACache.get(context,  CommonUtils.TAG);
 
     }
     public void updateListView(List<ChannelDetectModel> list) {

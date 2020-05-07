@@ -649,7 +649,7 @@ public class WeightFragment extends BaseFragment implements OnClickListener,IEve
 				PassSettingActNew.start(mactivity,"0");
 				break;
 			case R.id.ll_bin_upper:
-				UpBinAct.start(mactivity);
+				UpBinAct.start(mactivity,"0");
 				break;
 		}
 

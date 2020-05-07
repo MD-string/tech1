@@ -54,7 +54,6 @@ public class CarInputAct extends AppCompatActivity implements View.OnClickListen
     private boolean isConnect;
     private String  deviceId;
     private CompanyBean mCompanyBean;//当前选择的公司
-    private static final String TAG = "WeightFragment";
     private EditText et_count, et_phone;
     private TextView et_company,et_stuck_number;
     private TextView et_id;
@@ -99,7 +98,7 @@ public class CarInputAct extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.fragment_truck_add_basic);
-        acache = ACache.get(mContext, TAG);
+        acache = ACache.get(mContext,  CommonUtils.TAG);
         token = acache.getAsString("login_token");
         truckNum= acache.getAsString("car_num");
         deviceId = getIntent().getStringExtra("device_id");

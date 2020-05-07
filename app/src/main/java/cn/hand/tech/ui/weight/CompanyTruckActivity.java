@@ -22,6 +22,7 @@ import cn.hand.tech.ui.weight.bean.CompanyBean;
 import cn.hand.tech.ui.weight.bean.CompanyResultBean;
 import cn.hand.tech.ui.weight.bean.CompanyTruckGroupBean;
 import cn.hand.tech.ui.weight.bean.TruckChildBean;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
 
@@ -34,7 +35,6 @@ public class CompanyTruckActivity extends Activity implements View.OnClickListen
 
 
     private ExpandableListView list_1;
-    private static final String TAG = "WeightFragment";
     private ACache acache;
     private CompanyTruckAdapter madapter;
     private TextView mTvBack;
@@ -52,42 +52,45 @@ public class CompanyTruckActivity extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         mContext=this;
         setContentView(R.layout.activity_company_truck);
-        acache= ACache.get(mContext,TAG);
+        acache= ACache.get(mContext, CommonUtils.TAG);
         companyResult=(CompanyResultBean)acache.getAsObject("company_truck");
         findViews();
     }
 
     protected void findViews() {
-        List<CompanyBean> listBean=companyResult.getResult();
-        mGroupList=new ArrayList<>();
-        if(listBean !=null && listBean.size() >0){
-            for(int i=0;i<listBean.size();i++){
-                CompanyBean bean=listBean.get(i);
-                String parentId=bean.getParentId();
-                String parentName=bean.getParentName();
-                String id=bean.getId();
-                if(Tools.isEmpty(parentId) && Tools.isEmpty(parentName)){
-                    CompanyTruckGroupBean cbean=new CompanyTruckGroupBean();
-                    cbean.setName(bean.getCompanyName());
-                    cbean.setId(id);
-                    List<TruckChildBean> tlist=new ArrayList<>();
-                    for(int j=listBean.size()-1;j>=0;j--){ //分公司
-                        CompanyBean beanj=listBean.get(j);
-                        String parentIdj=beanj.getParentId();
-                        if(parentIdj.equals(id)){
-                            TruckChildBean tbean=new TruckChildBean();
-                            tbean.setName(beanj.getCompanyName());
-                            tbean.setChildId(beanj.getId());
-                            tlist.add(tbean);
-                        }
+        if(companyResult !=null){
+            List<CompanyBean> listBean=companyResult.getResult();
+            mGroupList=new ArrayList<>();
+            if(listBean !=null && listBean.size() >0){
+                for(int i=0;i<listBean.size();i++){
+                    CompanyBean bean=listBean.get(i);
+                    String parentId=bean.getParentId();
+                    String parentName=bean.getParentName();
+                    String id=bean.getId();
+                    if(Tools.isEmpty(parentId) && Tools.isEmpty(parentName)){
+                        CompanyTruckGroupBean cbean=new CompanyTruckGroupBean();
+                        cbean.setName(bean.getCompanyName());
+                        cbean.setId(id);
+                        List<TruckChildBean> tlist=new ArrayList<>();
+                        for(int j=listBean.size()-1;j>=0;j--){ //分公司
+                            CompanyBean beanj=listBean.get(j);
+                            String parentIdj=beanj.getParentId();
+                            if(parentIdj.equals(id)){
+                                TruckChildBean tbean=new TruckChildBean();
+                                tbean.setName(beanj.getCompanyName());
+                                tbean.setChildId(beanj.getId());
+                                tbean.setParentId(parentIdj);
+                                tlist.add(tbean);
+                            }
 
+                        }
+                        cbean.setChildren(tlist);
+                        mGroupList.add(cbean);
                     }
-                    cbean.setChildren(tlist);
-                    mGroupList.add(cbean);
                 }
             }
+            acache.put("truck_list",(Serializable) mGroupList);
         }
-        acache.put("truck_list",(Serializable) mGroupList);
         mTvBack = (TextView) findViewById(R.id.tv_back);
         mTvBack.setVisibility(View.VISIBLE);
         mTvBack.setOnClickListener(new View.OnClickListener() {

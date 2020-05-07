@@ -23,6 +23,7 @@ import cn.hand.tech.ui.weight.bean.CompanyBean;
 import cn.hand.tech.ui.weight.bean.CompanyResultBean;
 import cn.hand.tech.ui.weight.bean.CompanyTruckGroupBean;
 import cn.hand.tech.ui.weight.bean.TruckChildBean;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
 
@@ -35,7 +36,6 @@ public class CompanyTruckForRepairActivity extends Activity implements View.OnCl
 
 
     private ExpandableListView list_1;
-    private static final String TAG = "WeightFragment";
     private ACache acache;
     private CompanyTruckForRepairAdapter madapter;
     private TextView mTvBack;
@@ -53,7 +53,7 @@ public class CompanyTruckForRepairActivity extends Activity implements View.OnCl
         super.onCreate(savedInstanceState);
         mContext=this;
         setContentView(R.layout.activity_company_truck);
-        acache= ACache.get(mContext,TAG);
+        acache= ACache.get(mContext, CommonUtils.TAG);
         companyResult=(CompanyResultBean)acache.getAsObject("company_truck");
         findViews();
     }

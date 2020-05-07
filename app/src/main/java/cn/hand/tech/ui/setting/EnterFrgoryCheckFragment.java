@@ -672,7 +672,7 @@ public class EnterFrgoryCheckFragment extends BaseFragment implements  IAutoChec
 
         if(companyResult !=null){
             try{
-                List<String> sensorList=companyResult.getActiveChannels(); //设备存在多少通道
+                List<String> sensorList=companyResult.getSensorChannel(); //设备存在多少通道
                 if(sensorList !=null && sensorList.size() >0){
                     sensorHaveList=sensorList;
                     DLog.e("AutoCheckAct","doInfo="+sensorList.size()+"/"+ Arrays.asList(sensorHaveList));

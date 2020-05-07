@@ -83,7 +83,7 @@ public class PassCheckAct extends Activity {
                 String date=et_date.getText().toString().trim();
                 String fazhi=et_fa.getText().toString().trim();
                 if(Tools.isEmpty(date) || Tools.isEmpty(fazhi)){
-                    showTips("时间或阀值不能为空");
+                    showTips("时间或域值不能为空");
                     return;
                 }
                 String adValue=et_ad_value.getText().toString();

@@ -28,17 +28,25 @@
             android:maxLength="16"
             android:layout_marginRight="10dp"
             />
+
+        <CheckBox
+            android:id="@+id/comListAct_comListAdp_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/iv_truckInfo_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_arrow_bto"
             android:scaleType="centerCrop"
-            android:layout_marginRight="20dp"
+            android:visibility="gone"
+            android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             />
-
     </RelativeLayout>
 
 </LinearLayout>

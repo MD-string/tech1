@@ -122,47 +122,43 @@ public class InformationBasicPresenter {
         }
     }
 
-//    /**
-//     *判断车辆是否在线
-//     */
-//    public void checkCarOnline(HashMap<String, String> mapParams) {
-//
-//        try {
-//            HttpHandler.getInstance().postBle(null, UrlConstant.getInstance(mContext).IS_ONLINE, mapParams, new NetCallBack() {
-//                @Override
-//                public void onSuccess(String result, String executeStatus) {//
-//                    JSONObject jsonObject = null;
-//                    String runStatus="0";
-//                    try {
-//                        if(!Tools.isEmpty(result) ){
-//                            jsonObject = new JSONObject(result.toString());
-//                            runStatus = jsonObject.getString("runStatus");
-//                        }else{
-//                            runStatus="0";
-//                        }
-//                        mView.onlineSuccess(runStatus);
-//                    } catch (Exception e) {
-//                        mView.onlineSuccess(runStatus);
-//                        //                        e.printStackTrace();
-//                    }
-//
-//                }
-//                @Override
-//                public void onException(String errorCode, String errorMsg) {
-//                    mView.onlineFail("获取车辆在线状况信息失败");
-//
-//                }
-//                @Override
-//                public void onError(Exception e) {
-//                    mView.onlineFail("获取车辆在线状况信息失败");
-//                }
-//            });
-//
-//        } catch (Exception e1) {
-//            mView.onlineFail("获取车辆在线状况信息失败");
-//            e1.printStackTrace();
-//        }
-//    }
+
+    /**
+     * 上传写入系数日志
+     */
+    public void upLoadWriteRatio( final HashMap<String, String> map) {
+        try {
+
+            String url = UrlConstant.HttpUrl.URL_UPLOAD_WRITE_RATIO;
+            DLog.e("upLoadLog","上传写入系数log日志URL=="+url+map.toString());
+            HttpHandler.getInstance().postBle(null,url, map, new NetCallBack() {
+                @Override
+                public void onSuccess(String result, String executeStatus) {
+                    try {
+                        mView.uploadRadioSuccess("上传写入系数日志成功");
+                        DLog.e("upLoadLog","上传写入系数日志URL==成功");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                @Override
+                public void onException(String errorCode, String errorMsg) {
+                    DLog.e("upLoadLog","上传log日志URL=="+errorMsg);
+                    mView.uploadFail(errorMsg);
+
+                }
+                @Override
+                public void onError(Exception e) {
+                    mView.uploadFail("上传写入系数日志失败");
+                }
+            });
+
+        } catch (Exception e1) {
+            mView.uploadFail("上传写入系数日志失败");
+            e1.printStackTrace();
+        }
+    }
     /**
      * 上传 人物头像
      */

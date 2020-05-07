@@ -17,6 +17,7 @@ import cn.hand.tech.bean.HDKRModel;
 import cn.hand.tech.ble.bleUtil.BleConstant;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.ui.home.BaseFragment;
+import cn.hand.tech.utils.CommonUtils;
 import cn.hand.tech.utils.ToastUtil;
 
 /*
@@ -28,7 +29,6 @@ public class PassSettingFragment extends BaseFragment  {
     private ACache acache;
     private HDKRModel channelModel;
     private Button bt_sure;
-    private static final String TAG = "WeightFragment";
     private String mtag;
 
     @Override
@@ -37,7 +37,7 @@ public class PassSettingFragment extends BaseFragment  {
         context=getActivity();
         View view = inflater.inflate(R.layout.activity_pass_choose, container, false);
         mtag=getArguments().getString("pass_tag");
-        acache= ACache.get(context,TAG);
+        acache= ACache.get(context, CommonUtils.TAG);
         initView(view);
 
         return view;

@@ -113,7 +113,12 @@ public class BluetoothLeService extends Service {
                     HDSendDataModel mode=   (HDSendDataModel)intent.getExtras().getSerializable("coefficient_act");
                     doSendWritePara(mode);
 
-                }else if(action.equals(BleConstant.ACTION_BLE_WRITE_KB)){
+                }else if(action.equals(BleConstant.ACTION_BLE_WRITE_COE1)){
+                    HDSendDataModel mode=   (HDSendDataModel)intent.getExtras().getSerializable("coefficient_act1");
+                    String num=intent.getExtras().getString("sensor_number","0");
+                    doSendWritePara1(mode,num);
+                }
+                else if(action.equals(BleConstant.ACTION_BLE_WRITE_KB)){
                     HDSendDataModel mode=   (HDSendDataModel)intent.getExtras().getSerializable("local_data_detail");
                     doSendWritePara(mode);
                 }else if(action.equals(BleConstant.ACTION_BLE_START_SEARCH)){
@@ -162,6 +167,7 @@ public class BluetoothLeService extends Service {
         IntentFilter filter = new IntentFilter();
         filter.addAction(BleConstant.ACTION_BLE_READ_NOTY);
         filter.addAction(BleConstant.ACTION_BLE_WRITE_COE);
+        filter.addAction(BleConstant.ACTION_BLE_WRITE_COE1);
         filter.addAction(BleConstant.ACTION_BLE_WRITE_KB);
         filter.addAction(BleConstant.ACTION_BLE_START_SEARCH);
         filter.addAction(BleConstant.ACTION_BLE_STOP_SEARCH);
@@ -689,6 +695,18 @@ public class BluetoothLeService extends Service {
     public void doSendWritePara(HDSendDataModel para){
         if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
             HDBLESend.SendWritePara(mNotifyCharacteristic, mBluetoothGatt, para);
+        }
+    }
+    //写数据
+    public void doSendWritePara1(HDSendDataModel para,String num){
+        if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
+            if("2".equals(num)){
+                HDBLESend.SendWritePara_2(mNotifyCharacteristic, mBluetoothGatt, para);
+            }else if("3".equals(num)){
+                HDBLESend.SendWritePara_3(mNotifyCharacteristic, mBluetoothGatt, para);
+            }else if("4".equals(num)){
+                HDBLESend.SendWritePara_4(mNotifyCharacteristic, mBluetoothGatt, para);
+            }
         }
     }
     //写固件更新
