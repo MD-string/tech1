@@ -58,7 +58,7 @@ import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
 import cn.hand.tech.weiget.BottomSelectPopupWindow;
 import cn.hand.tech.weiget.CustomDatePicker;
-import cn.hand.tech.weiget.CustomDialog;
+import cn.hand.tech.weiget.MyCustomDialog;
 
 
 /**
@@ -86,7 +86,7 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
     private String xp1,xp2,tp1,tp2,fj1,fj2,cx1,cx2,it1,it2;
     private String name_xp1,name_xp2,name_tp1,name_tp2,name_fj1,name_fj2,name_cx1,name_cx2,name_it1,name_it2;
     private String stuckNumber;
-    private CustomDialog dialog;
+    private MyCustomDialog dialog;
     private AlertDialog adddialog;
 
     public static final int MAX_SHEET_COUNT = 1;// 详情最多张s
@@ -691,10 +691,10 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
         ToastUtil.getInstance().showCenterMessage(mContext,tip);
     }
 
-    //上传系数
+    //写入系数
     private void uploadRatio(){
         try{
-            showProgressDialog();
+            showProgressDialog("写入系数中...");
             isWriteOK=false;
 
             String number="0";
@@ -703,13 +703,19 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
                 if(("1,2").equals(mSensorNumb)){
                     model.mmv1=0.0002f;
                     model.mmv2=0.002f;
-                    model.setRatioStr("0.0002,0.002");
+
+                    model.mmv3=0.000f;
+                    model.mmv4=0.000f;
+
+                    model.setRatioStr("0.0002,0.002,0.000,0.000");
                     number="2";
                 }else if(("1,2,3").equals(mSensorNumb)){
                     model.mmv1=0.0001f;
                     model.mmv2=0.0001f;
                     model.mmv3=0.002f;
-                    model.setRatioStr("0.0001,0.0001,0.002");
+
+                    model.mmv4=0.000f;
+                    model.setRatioStr("0.0001,0.0001,0.002,0.000");
                     number="3";
                 }else if(("1,2,3,4").equals(mSensorNumb)){
                     model.mmv1=0.0001f;
@@ -719,19 +725,29 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
                     model.setRatioStr("0.0001,0.0001,0.001,0.001");
                     number="4";
                 }else{
+                    model.mmv1=0.000f;
+                    model.mmv2=0.000f;
+                    model.mmv3=0.000f;
+                    model.mmv4=0.000f;
+                    model.setRatioStr("0.000,0.000,0.000,0.000");
                     number="0";
                 }
             }else if(mchildCode.equals("0101")){
                 if(("1,2").equals(mSensorNumb)){
                     model.mmv1=0.0015f;
                     model.mmv2=0.0015f;
-                    model.setRatioStr("0.0015,0.0015");
+
+                    model.mmv3=0.000f;
+                    model.mmv4=0.000f;
+                    model.setRatioStr("0.0015,0.0015,0.000,0.000");
                     number="2";
                 }else if(("1,2,3").equals(mSensorNumb)){
                     model.mmv1=0.001f;
                     model.mmv2=0.001f;
                     model.mmv3=0.001f;
-                    model.setRatioStr("0.001,0.001,0.001");
+
+                    model.mmv4=0.000f;
+                    model.setRatioStr("0.001,0.001,0.001,0.000");
                     number="3";
                 }else if(("1,2,3,4").equals(mSensorNumb)){
                     model.mmv1=0.001f;
@@ -741,22 +757,51 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
                     model.setRatioStr("0.001,0.001,0.001,0.001");
                     number="4";
                 }else{
+                    model.mmv1=0.000f;
+                    model.mmv2=0.000f;
+                    model.mmv3=0.000f;
+                    model.mmv4=0.000f;
+                    model.setRatioStr("0.000,0.000,0.000,0.000");
                     number="0";
                 }
             }else{
+                model.mmv1=0.000f;
+                model.mmv2=0.000f;
+                model.mmv3=0.000f;
+                model.mmv4=0.000f;
+                model.setRatioStr("0.000,0.000,0.000,0.000");
                 DLog.e("UpBinActFromAddCar","uploadRatio=车辆类型=>"+"不是袋装也不是散装");
             }
 
-            acache.put("sensor_string",model.getRatioStr());
+            model.mmv5 =0.000f;
+            model.mmv6 =0.000f;
+            model.mmv7 =0.000f;
+            model.mmv8 =0.000f;
+            model.mmv9 =0.000f;
+            model.mmv10 =0.000f;
+            model.mmv11 =0.000f;
+            model.mmv12 =0.000f;
+            model.mmv13 =0.000f;
+            model.mmv14 =0.000f;
+            model.mmv15 =0.000f;
+            model.mmv16 =0.000f;
+            String other=",0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000";
+            acache.put("sensor_string",model.getRatioStr()+other);
             Date date   =   new   Date(System.currentTimeMillis());//获取当前时间
             String now=simpleDateFormat.format(date);
             acache.put("set_sensor_date",now);
             doStartTimer(); //开始计时 8秒钟
 
+//            Bundle bundle=new Bundle();
+//            bundle.putSerializable("coefficient_act1",model);
+//            bundle.putString("sensor_number",number);
+//            Intent readIntent=new Intent(BleConstant.ACTION_BLE_WRITE_COE1);
+//            readIntent.putExtras(bundle);
+//            sendBroadcast(readIntent);
+
             Bundle bundle=new Bundle();
-            bundle.putSerializable("coefficient_act1",model);
-            bundle.putString("sensor_number",number);
-            Intent readIntent=new Intent(BleConstant.ACTION_BLE_WRITE_COE1);
+            bundle.putSerializable("coefficient_act",model);
+            Intent readIntent=new Intent(BleConstant.ACTION_BLE_WRITE_COE);
             readIntent.putExtras(bundle);
             sendBroadcast(readIntent);
 
@@ -956,14 +1001,18 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
     /**
      * 显示进度对话框
      */
-    private void showProgressDialog() {
-        dialog = new CustomDialog(mContext, R.style.LoadDialog);
+    private void showProgressDialog(String text) {
+        if(dialog !=null){
+            dialog.dismiss();
+            dialog=null;
+        }
+        dialog = new MyCustomDialog(mContext, R.style.LoadDialog,text);
         dialog.show();
         //        new Thread("cancle_progressDialog") {
         //            @Override
         //            public void run() {
         //                try {
-        ////                    Thread.sleep(7000);
+        //                    Thread.sleep(7000);
         //                    // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
         //                    // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
         //                    if(dialog !=null ){
@@ -1092,40 +1141,40 @@ public class InformationBasicActivity extends AppCompatActivity implements View.
             receiver = null;
         }
     }
-//
-//    private void checkPermission() {
-//        //检查权限（NEED_PERMISSION）是否被授权 PackageManager.PERMISSION_GRANTED表示同意授权
-//        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //用户已经拒绝过一次，再次弹出权限申请对话框需要给用户一个解释
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission
-//                    .WRITE_EXTERNAL_STORAGE)) {
-//                //                Toast.makeText(this, "请开通相关权限，否则无法正常使用本应用！", Toast.LENGTH_SHORT).show();
-//            }
-//            //申请权限
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA}, REQUEST_WRITE_EXTERNAL_STORAGE);
-//
-//        } else {//已经授权
-//
-//            photoDialogPop();//下载文档
-//
-//            DLog.e( CommonUtils.TAG,"TAG_SERVICE"+ "checkPermission: 已经授权！");
-//        }
-//    }
-//
-//    //系统方法,从requestPermissions()方法回调结果
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        //确保是我们的请求
-//        if(requestCode == REQUEST_WRITE_EXTERNAL_STORAGE){
-//            mHandler.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    photoDialogPop();
-//                }
-//            });
-//        }
-//    }
+    //
+    //    private void checkPermission() {
+    //        //检查权限（NEED_PERMISSION）是否被授权 PackageManager.PERMISSION_GRANTED表示同意授权
+    //        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    //                != PackageManager.PERMISSION_GRANTED) {
+    //            //用户已经拒绝过一次，再次弹出权限申请对话框需要给用户一个解释
+    //            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission
+    //                    .WRITE_EXTERNAL_STORAGE)) {
+    //                //                Toast.makeText(this, "请开通相关权限，否则无法正常使用本应用！", Toast.LENGTH_SHORT).show();
+    //            }
+    //            //申请权限
+    //            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA}, REQUEST_WRITE_EXTERNAL_STORAGE);
+    //
+    //        } else {//已经授权
+    //
+    //            photoDialogPop();//下载文档
+    //
+    //            DLog.e( CommonUtils.TAG,"TAG_SERVICE"+ "checkPermission: 已经授权！");
+    //        }
+    //    }
+    //
+    //    //系统方法,从requestPermissions()方法回调结果
+    //    @Override
+    //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    //        //确保是我们的请求
+    //        if(requestCode == REQUEST_WRITE_EXTERNAL_STORAGE){
+    //            mHandler.post(new Runnable() {
+    //                @Override
+    //                public void run() {
+    //                    photoDialogPop();
+    //                }
+    //            });
+    //        }
+    //    }
 
     private SimpleDateFormat getDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);

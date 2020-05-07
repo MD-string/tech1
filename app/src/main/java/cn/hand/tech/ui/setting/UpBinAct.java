@@ -31,7 +31,7 @@ import cn.hand.tech.ble.bleUtil.BleConstant;
 import cn.hand.tech.ble.bleUtil.BluetoothUtil;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.log.DLog;
-import cn.hand.tech.ui.setting.adapter.UpBinAdapter;
+import cn.hand.tech.ui.setting.adapter.UpBinAdapterOld;
 import cn.hand.tech.ui.setting.bean.BGuJianBean;
 import cn.hand.tech.ui.setting.bean.CarNumberInfo;
 import cn.hand.tech.ui.setting.bean.GuJianBean;
@@ -74,7 +74,7 @@ public class UpBinAct extends Activity implements IUpdateView {
     private TextView tv_company_name,tv_car_number,tv_dev_id,tv_software_version;
     private List<BGuJianBean> mgList=new ArrayList<>();
     private ExpandableListView exlist_1;
-    private UpBinAdapter madapter;
+    private UpBinAdapterOld madapter;
     private AlertDialog tempDialog;
     private TextView tv_bin1_name,tv_bin_content;
     private LinearLayout ll_bin_1;
@@ -284,7 +284,7 @@ public class UpBinAct extends Activity implements IUpdateView {
         });
 
         exlist_1=(ExpandableListView)findViewById(R.id.exlist_1);
-        madapter=new UpBinAdapter(context, mgList, new UpBinAdapter.Callback() {
+        madapter=new UpBinAdapterOld(context, mgList, new UpBinAdapterOld.Callback() {
             @Override
             public void onTocheck(View view, int position,String id) {
                 madapter.setCheck(position);
@@ -486,7 +486,7 @@ public class UpBinAct extends Activity implements IUpdateView {
 
     @Override
     public void doCompanyError(String msg) {
-
+            showTips(msg);
     }
 
 
@@ -520,27 +520,29 @@ public class UpBinAct extends Activity implements IUpdateView {
                     bt_up_bin.setBackground(context.getResources().getDrawable(R.drawable.shape_bg_hui));
 
                 }else if(action.equals(BleConstant.ACTION_ING_BIN_SUSSESS)){ //成功应答
-                    String number=intent.getStringExtra("bin_number");
-                    double num=Double.parseDouble(number)+1d;
-                    double pageNuber=mGJbean.getPageNumber();
-                    mStatus="1";
-                    if(num >= pageNuber){
-                        DLog.e("UpBinAct","bin_number"+ "bin包上传完毕："+num);//开始上传bin文件
-                        tv_bao_over.setVisibility(View.GONE);//
-                        mGJbean.setNumber(num);
-                        Intent binIntent2=new Intent(BleConstant.ACTION_BIN_OVER);//正式升级
-                        context.sendBroadcast(binIntent2);
-                        isUpper="2";//完成升级
-                        mcache.put("bin_upper",isUpper);
+                    if(mGJbean !=null){
+                        String number=intent.getStringExtra("bin_number");
+                        double num=Double.parseDouble(number)+1d;
+                        double pageNuber=mGJbean.getPageNumber();
+                        mStatus="1";
+                        if(num >= pageNuber){
+                            DLog.e("UpBinAct","bin_number"+ "bin包上传完毕："+num);//开始上传bin文件
+                            tv_bao_over.setVisibility(View.GONE);//
+                            mGJbean.setNumber(num);
+                            Intent binIntent2=new Intent(BleConstant.ACTION_BIN_OVER);//正式升级
+                            context.sendBroadcast(binIntent2);
+                            isUpper="2";//完成升级
+                            mcache.put("bin_upper",isUpper);
 
-                    }else{
-                        DLog.e("UpBinAct","bin_number"+ "开始固件升级成功："+num);//开始上传bin文件
-                        mGJbean.setNumber(num);
-                        Intent binIntent1=new Intent(BleConstant.ACTION_UPDATE_BIN);//正式升级
-                        binIntent1.putExtra("start_bin_1",num);
-                        context.sendBroadcast(binIntent1);
-                        mHandler.sendEmptyMessage(2);
+                        }else{
+                            DLog.e("UpBinAct","bin_number"+ "开始固件升级成功："+num);//开始上传bin文件
+                            mGJbean.setNumber(num);
+                            Intent binIntent1=new Intent(BleConstant.ACTION_UPDATE_BIN);//正式升级
+                            binIntent1.putExtra("start_bin_1",num);
+                            context.sendBroadcast(binIntent1);
+                            mHandler.sendEmptyMessage(2);
 
+                        }
                     }
 
                 }else if(action.equals(BleConstant.ACTION_BIN_OVER_STATUS)){
@@ -600,17 +602,19 @@ public class UpBinAct extends Activity implements IUpdateView {
 
     //上传日志
     public void uploadLog(){
-        String gid=mGJbean.getId();
-        HashMap<String,String> hmap=new HashMap<>();
-        hmap.put("token",mtoken);
-        hmap.put("deviceId",mdevId);
-        hmap.put("binId",gid);//固件ID
-        hmap.put("content","安卓升级固件");//操作内容
-        if(Tools.isEmpty(mStatus)){
-            mStatus="0";
+        if(mGJbean !=null){
+            String gid=mGJbean.getId();
+            HashMap<String,String> hmap=new HashMap<>();
+            hmap.put("token",mtoken);
+            hmap.put("deviceId",mdevId);
+            hmap.put("binId",gid);//固件ID
+            hmap.put("content","安卓升级固件");//操作内容
+            if(Tools.isEmpty(mStatus)){
+                mStatus="0";
+            }
+            hmap.put("status",mStatus);//0:等待升级、1:正在升级、2:升级成功、3:升级超时、-1:升级失败
+            mpresenter.upLoadLog(hmap);
         }
-        hmap.put("status",mStatus);//0:等待升级、1:正在升级、2:升级成功、3:升级超时、-1:升级失败
-        mpresenter.upLoadLog(hmap);
     }
 
     public void onDestroy() {
@@ -622,6 +626,10 @@ public class UpBinAct extends Activity implements IUpdateView {
     }
 
     private void doAddTruck() {
+        if(adddialog !=null){
+            adddialog.cancel();
+            adddialog=null;
+        }
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View view = View.inflate(context, R.layout.dialog_for_login, null);
         builder.setView(view);

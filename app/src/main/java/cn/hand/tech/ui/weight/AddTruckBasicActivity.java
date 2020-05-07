@@ -979,7 +979,6 @@ public class AddTruckBasicActivity extends Activity implements View.OnClickListe
         //msg1  //是否存在安装信息   存在安装记录：0      不存在安装记录：1
         mHandler.sendEmptyMessage(1);
 
-        msg="1";
         if("1".equals(msg)){//未录入基本信息
             isEnter=false;
             btn_next.setEnabled(true);
