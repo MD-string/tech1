@@ -538,26 +538,35 @@ public class RepairAct extends Activity implements IRepairView,RepairAdapter.onN
                 String faultName=model.getFaultTypeName();//故障类型名称
 
                 List<String> fList=model.getFaultPhenomenon(); //维修现象
-                StringBuffer faStr=new StringBuffer();
-                for(int j=0;j<fList.size();j++){
-                    faStr.append(fList.get(j)+",");
+                if(fList !=null && fList.size() >0){
+                    StringBuffer faStr=new StringBuffer();
+                    for(int j=0;j<fList.size();j++){
+                        faStr.append(fList.get(j)+",");
+                    }
+                    String str=faStr.toString();
+                    str= str.substring(0,str.length() - 1);
+                    String oneFault=faultName+":"+str;
+                    faultList.add(oneFault);
+                }else{
+                    String oneFault1="";
+                    faultList.add(oneFault1);
                 }
-                String str=faStr.toString();
-                str= str.substring(0,str.length() - 1);
-                String oneFault=faultName+":"+str;
-                faultList.add(oneFault);
 
                 StringBuffer onGuide=new StringBuffer();
-                onGuide.append(faultName+":");
                 List<String> gList=model.getRepairedGuide();  //维修指导
                 if(gList !=null && gList.size() > 0){
-                    StringBuffer guideStr=new StringBuffer();
-                    for(int k=0;k<gList.size();k++){
-                        guideStr.append(gList.get(k)+",");
+                    onGuide.append(faultName+":");
+                    if(gList !=null && gList.size() > 0){
+                        StringBuffer guideStr=new StringBuffer();
+                        for(int k=0;k<gList.size();k++){
+                            guideStr.append(gList.get(k)+",");
+                        }
+                        String str1=guideStr.toString();
+                        str1= str1.substring(0,str1.length() - 1);
+                        onGuide.append(str1);
                     }
-                    String str1=guideStr.toString();
-                    str1= str1.substring(0,str1.length() - 1);
-                    onGuide.append(str1);
+                }else{
+                    onGuide.append(" ");
                 }
 
                 A1 bean=new A1();
@@ -842,27 +851,35 @@ public class RepairAct extends Activity implements IRepairView,RepairAdapter.onN
             String faultName=bean.getFaultTypeName();//故障类型名称
 
             List<String> fList=bean.getFaultPhenomenon(); //维修现象
-            StringBuffer faStr=new StringBuffer();
-            for(int j=0;j<fList.size();j++){
-                faStr.append(fList.get(j)+",");
+            String oneFault="(无)";
+            if(fList !=null && fList.size() >0 ){
+                StringBuffer faStr=new StringBuffer();
+                for(int j=0;j<fList.size();j++){
+                    faStr.append(fList.get(j)+",");
+                }
+                String str=faStr.toString();
+                str= str.substring(0,str.length() - 1);
+                 oneFault=faultName+":"+str;
             }
-            String str=faStr.toString();
-            str= str.substring(0,str.length() - 1);
-            String oneFault=faultName+":"+str;
+
 
             StringBuffer onGuide=new StringBuffer();
-            onGuide.append(faultName+":");
             List<String> gList=bean.getRepairedGuide();  //维修指导
-            if(gList !=null && gList.size() >0){
-                StringBuffer guideStr=new StringBuffer();
-                for(int k=0;k<gList.size();k++){
-                    guideStr.append(gList.get(k)+",");
+            if(gList!=null && gList.size() > 0){
+                onGuide.append(faultName+":");
+                if(gList !=null && gList.size() >0){
+                    StringBuffer guideStr=new StringBuffer();
+                    for(int k=0;k<gList.size();k++){
+                        guideStr.append(gList.get(k)+",");
+                    }
+                    String str1=guideStr.toString();
+                    str1= str1.substring(0,str1.length() - 1);
+                    onGuide.append(str1);
                 }
-                String str1=guideStr.toString();
-                str1= str1.substring(0,str1.length() - 1);
-                onGuide.append(str1);
+            }else{
+                onGuide.append("(无)");
             }
-            if(!Tools.isEmpty(oneFault)  && !Tools.isEmpty(onGuide.toString()) && !Tools.isEmpty(repairId)){
+            if(!Tools.isEmpty(repairId)){
                 //                SecondRepairAct.start(context,num,oneFault,onGuide,repairId,truckNum);
 
                 Intent intent = new Intent(RepairAct.this, SecondRepairAct.class);

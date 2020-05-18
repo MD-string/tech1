@@ -419,7 +419,7 @@ public class BaseCheckFragment extends BaseFragment implements  IAutoCheckView{
         bacache= ACache.get(BApplication.mContext,"ble");
         bacache.put("ble_fa","0");
         mdevId=  acache.getAsString("n_id");
-//        mdevId="431381525";                                     //test
+        //        mdevId="431381525";                                     //test
         String isCon = acache.getAsString("is_connect");
         if ("2".equals(isCon)) {
             isConnected = true;
@@ -1717,31 +1717,39 @@ public class BaseCheckFragment extends BaseFragment implements  IAutoCheckView{
                 else if(action.equals(BleConstant.ACTION_CHUAN_GAN_QI)){ //-	1：传感器正常 0不正常
                     if(!isConllOver){
                         try{
+
                             String sensor=intent.getStringExtra("senor_status");//0110000000000000
                             DLog.e(TAG,"当前传感器状态="+sensor);
-                            if(!Tools.isEmpty(sensor)  && !sensor.contains("0")){
-                                mHandler.sendEmptyMessage(9);
-                            }else{
-                                mHandler.sendEmptyMessage(8);
-                            }
 
-                            int leng=16;
-                            String strb="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16";
-                            String value="";
-                            StringBuilder senValue = new StringBuilder("2222222222222222");
-                            if(sensorHaveList !=null && sensorHaveList.size() >0){
-                                for(int i=0;i<sensorHaveList.size();i++){
-                                    int index=Integer.parseInt(sensorHaveList.get(i));
-                                    String status= String.valueOf(sensor.charAt(index-1));
-                                    senValue.replace(index-1,index,status);
+                            String hver=tv_hardver_dev.getText().toString();//通过硬件版本号第一位判断  V7版本 通过传感器状态判断 (7.3.0)
+
+                            if(!Tools.isEmpty(hver) && "7".equals(hver.charAt(1)+"")) {
+
+                                int leng = 16;
+                                String strb = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16";
+                                String value = "";
+                                StringBuilder senValue = new StringBuilder("2222222222222222");
+
+                                if (sensorHaveList != null && sensorHaveList.size() > 0) {
+                                    for (int i = 0; i < sensorHaveList.size(); i++) {
+                                        int index = Integer.parseInt(sensorHaveList.get(i));
+                                        String status = String.valueOf(sensor.charAt(index - 1));
+                                        senValue.replace(index - 1, index, status);
+                                    }
+                                    value = senValue.toString();
+                                } else {
+                                    value = sensor;
                                 }
-                                value=senValue.toString();
-                            }else{
-                                value=sensor;
-                            }
-                            DLog.e("ACTION_CHUAN_GAN_QI","sensorHaveList="+leng+"/"+senValue);
-                            doshowSennr4(value,strb,leng);                     //     2/2,3
+                                DLog.e("ACTION_CHUAN_GAN_QI", "sensorHaveList=" + leng + "/" + senValue + "/" + value);
+                                doshowSennr4(value, strb, leng);                     //     2/2,3
 
+                                if (!Tools.isEmpty(value) && !value.contains("0")) {
+                                    mHandler.sendEmptyMessage(9);
+                                } else {
+                                    mHandler.sendEmptyMessage(8);
+                                }
+
+                            }
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -1751,29 +1759,35 @@ public class BaseCheckFragment extends BaseFragment implements  IAutoCheckView{
                     if(!isConllOver) {
                         String colection = intent.getStringExtra("colection_status");
                         DLog.e(TAG, "当前采集器状态=" + colection);
-                        if (!Tools.isEmpty(colection) && !colection.contains("0")) {
-                            mHandler.sendEmptyMessage(9);
-                        } else {
-                            mHandler.sendEmptyMessage(8);
+
+                        String hver=tv_hardver_dev.getText().toString();//通过硬件版本号第一位判断  V4版本  通过采集器判断 (4.7.0)
+
+                        if(!Tools.isEmpty(hver) && "4".equals(hver.charAt(1)+"")){
+                            if (!Tools.isEmpty(colection) && !colection.contains("0")) {
+                                mHandler.sendEmptyMessage(9);
+                            } else {
+                                mHandler.sendEmptyMessage(8);
+                            }
+
+                            String[] cstr = colection.split(";");
+                            String one = cstr[0];
+                            StringBuffer sbuff = new StringBuffer();
+                            if (Tools.isEmpty(one) || "0".equals(one)) {
+                                sbuff.append("第一采集器:通道数" + "0" + "异常;");
+                            } else {
+                                sbuff.append("第一采集器:通道数" + one + "正常;");
+                            }
+                            String two = cstr[1];
+                            if (Tools.isEmpty(two) || "0".equals(two)) {
+                                sbuff.append("第二采集器:通道数" + "0" + "异常");
+                            } else {
+                                sbuff.append("第二采集器:通道数" + two + "正常");
+                            }
+                            //                    String three=cstr[2];
+                            //                    String four=cstr[3];
+                            tv_xcai_tag.setText(sbuff.toString());
                         }
 
-                        String[] cstr = colection.split(";");
-                        String one = cstr[0];
-                        StringBuffer sbuff = new StringBuffer();
-                        if (Tools.isEmpty(one) || "0".equals(one)) {
-                            sbuff.append("第一采集器:通道数" + "0" + "异常;");
-                        } else {
-                            sbuff.append("第一采集器:通道数" + one + "正常;");
-                        }
-                        String two = cstr[1];
-                        if (Tools.isEmpty(two) || "0".equals(two)) {
-                            sbuff.append("第二采集器:通道数" + "0" + "异常");
-                        } else {
-                            sbuff.append("第二采集器:通道数" + two + "正常");
-                        }
-                        //                    String three=cstr[2];
-                        //                    String four=cstr[3];
-                        tv_xcai_tag.setText(sbuff.toString());
                     }
                 }else if(action.equals(BleConstant.ACTION_RESTART_AUTO_CHECK)){
                     String tag=intent.getStringExtra("page_tag");

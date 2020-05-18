@@ -519,7 +519,7 @@ public class HDBLESend {
         int z1=trueLenth-size;
         StringBuffer sub=new StringBuffer();
         sub.append(binStr);
-        for (int k = 0; k < z1; k++) {
+        for (int k = 0; k < z1; k++) { //不满1024  凑成1024位
             sub.append("ff");
         }
         String bytestr=sub.toString();
@@ -1142,7 +1142,7 @@ public class HDBLESend {
     }
     public static Object readField(BluetoothGatt mBluetoothGatt, String name) throws IllegalAccessException, NoSuchFieldException {
         Field field = mBluetoothGatt.getClass().getDeclaredField(name);
-        field.setAccessible(true);
+        field.setAccessible(true);// f.setAccessible(true);得作用就是让我们在用反射时访问私有变量
         return field.get(mBluetoothGatt);
     }
 }

@@ -46,7 +46,7 @@ import cn.hand.tech.utils.ToastUtil;
 import cn.hand.tech.utils.Tools;
 
 /*
- *自动检测  主机检测
+ *自动检测  主机检测 （不用）
  */
 public class AutoCheckAct extends Activity implements  IAutoCheckView{
     private static final String TAG ="AutoCheckAct" ;

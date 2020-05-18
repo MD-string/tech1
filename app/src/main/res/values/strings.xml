@@ -2,7 +2,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">汉德装车pro</string>
-    <string name="app_version">v1.7.6</string>
+    <string name="app_version">v1.7.7</string>
     <!-- XListView -->
     <string name="hxlistview_header_hint_normal">向左拉动刷新</string>
     <string name="xlistview_header_hint_normal">下拉刷新</string>
