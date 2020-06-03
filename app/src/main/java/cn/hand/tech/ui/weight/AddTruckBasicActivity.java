@@ -13,10 +13,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +34,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import cn.hand.tech.R;
 import cn.hand.tech.bean.HDKRModel;
 import cn.hand.tech.ble.bleUtil.BleConstant;
@@ -63,7 +62,6 @@ import cn.hand.tech.weiget.TwoWheelSelectPopupWindow;
 
 
 /**
- * A simple {@link Fragment} subclass.
  * describe:添加车辆页  基本信息 页面
  */
 public class AddTruckBasicActivity extends Activity implements View.OnClickListener,IBasicView {

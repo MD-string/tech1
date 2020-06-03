@@ -1,7 +1,8 @@
 package cn.hand.tech.download;
 
 import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
+
+import androidx.collection.LruCache;
 
 /**
  * BitmapLruCache类 主要用于对于缓存爆满时，bitmap位图的释放

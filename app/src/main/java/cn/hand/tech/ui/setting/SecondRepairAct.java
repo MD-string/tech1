@@ -9,8 +9,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,6 +26,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import cn.hand.tech.R;
 import cn.hand.tech.bean.PicBean;
 import cn.hand.tech.common.ACache;

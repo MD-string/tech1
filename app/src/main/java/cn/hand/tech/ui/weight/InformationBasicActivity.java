@@ -8,8 +8,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +34,8 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import cn.hand.tech.R;
 import cn.hand.tech.bean.HDSendDataModel;
 import cn.hand.tech.ble.bleUtil.BleConstant;

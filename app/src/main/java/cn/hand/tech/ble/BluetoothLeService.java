@@ -124,7 +124,7 @@ public class BluetoothLeService extends Service {
                 }else if(action.equals(BleConstant.ACTION_BLE_START_SEARCH)){
                     startSearchBle();
                 }else if(action.equals(BleConstant.ACTION_BLE_STOP_SEARCH)){
-                   stopSearchBle();
+                    stopSearchBle();
                 }
                 else if(action.equals(BleConstant.ACTION_RELOAD_SYS)){ //重启主机
                     doReloadSYS();
@@ -254,24 +254,24 @@ public class BluetoothLeService extends Service {
                     //尝试重连三次
                     isConnected = false;
                     closeGatt();
-//                    if(!isReconnect){
-//                        if(ctime==2){
-//                            isReconnect=true;
-//                        }
-//                        ctime++;
-//                        mHandler.postDelayed(new Runnable() {//重连
-//                            @Override
-//                            public void run() {
-//                                connect(mBluetoothDeviceAddress);
-//                            }
-//                        },1000);
-//                        mConnectionState=STATE_CONNECTING;
-//                        DLog.e(TAG,"连接异常，进行重连第"+ctime+"次");
-//                    }else{
-                        mConnectionState=STATE_DISCONNECTED;
-                        broadcastUpdate(BleConstant.ACTION_BLE_CONNECTION_EXCEPTION);
-                        DLog.e(TAG,"立刻又返回133等其他状态时不再去重连");
-//                    }
+                    //                    if(!isReconnect){
+                    //                        if(ctime==2){
+                    //                            isReconnect=true;
+                    //                        }
+                    //                        ctime++;
+                    //                        mHandler.postDelayed(new Runnable() {//重连
+                    //                            @Override
+                    //                            public void run() {
+                    //                                connect(mBluetoothDeviceAddress);
+                    //                            }
+                    //                        },1000);
+                    //                        mConnectionState=STATE_CONNECTING;
+                    //                        DLog.e(TAG,"连接异常，进行重连第"+ctime+"次");
+                    //                    }else{
+                    mConnectionState=STATE_DISCONNECTED;
+                    broadcastUpdate(BleConstant.ACTION_BLE_CONNECTION_EXCEPTION);
+                    DLog.e(TAG,"立刻又返回133等其他状态时不再去重连");
+                    //                    }
                     break;
                 case 7:
                     isConnected = false;
@@ -349,7 +349,7 @@ public class BluetoothLeService extends Service {
 
             String name = device.getName();
             String address = device.getAddress();
-//            DLog.d( TAG,"//蓝牙地址==>"+device.getAddress() + "//名称==>" + name);
+            //            DLog.d( TAG,"//蓝牙地址==>"+device.getAddress() + "//名称==>" + name);
             if (name != null) {
                 name = name.trim();
             }
@@ -360,14 +360,14 @@ public class BluetoothLeService extends Service {
             bleDevice.setMacAddress(address);
             bleDevice.setRssi(rssi);
             bleDevice.setRealName(name);
-//            String addr=achace.getAsString("address_1");
+            //            String addr=achace.getAsString("address_1");
 
             if(
                     name.contains("HD")
                             || name.contains("LanQian")
-                 //        && !address.equalsIgnoreCase(addr)
+                //        && !address.equalsIgnoreCase(addr)
 
-                    ){
+            ){
 
 
                 Intent intent = new Intent(BleConstant.ACTION_BLE_DEVICE_FOUND);
@@ -623,7 +623,7 @@ public class BluetoothLeService extends Service {
                 gatt.setCharacteristicNotification(gattCharacteristic, true);
             }
 
-//            boolean isMtu=setMTU(53);
+            //            boolean isMtu=setMTU(53);
         }
 
     }
@@ -710,146 +710,157 @@ public class BluetoothLeService extends Service {
         }
     }
     //写固件更新
-    public void doStartUpdate(GuJianBean mode) {
-        if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
-            HDBLESend.SendStartUpdate(mNotifyCharacteristic, mBluetoothGatt,mode);
-        }
+    public void doStartUpdate(final GuJianBean mode) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
+                    HDBLESend.SendStartUpdate(mNotifyCharacteristic, mBluetoothGatt,mode);
+                }
+            }
+        }).start();
+
     }
-            //写固件更新
-    public void doUpdateBin(GuJianBean mode,double number){
-        if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
-            HDBLESend.SendupdateBin(mNotifyCharacteristic, mBluetoothGatt, mode,number);
-        }
+    //写固件更新
+    public void doUpdateBin(final GuJianBean mode,final double number){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
+                    HDBLESend.SendupdateBin(mNotifyCharacteristic, mBluetoothGatt, mode,number);
+                }
+            }
+            }).start();
     }
 
-    //完成固件更新
-    public void doFinishBin(GuJianBean mode){
-        if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
-            HDBLESend.sendFinishBin(mNotifyCharacteristic, mBluetoothGatt, mode);
-        }
-    }
-    //读取设备ID
-    public void doGetDeviceID(){
-        if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
-            HDBLESend.readDeviceID(mNotifyCharacteristic, mBluetoothGatt);
-        }
-    }
-
-    //发送读取命令
-    public void doSendReadPara(){
-        if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
-            HDBLESend.SendReadPara(mNotifyCharacteristic, mBluetoothGatt);
-        }
-    }
-    //重启主机
-    public void doReloadSYS(){
-        if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
-            boolean isReloadSuccess=HDBLESend.ReloadSYS(mNotifyCharacteristic, mBluetoothGatt);
-            if(isReloadSuccess){
-                Intent readIntent=new Intent(BleConstant.ACTION_RELOAD_SYS_SUCCESS);
-                sendBroadcast(readIntent);
+                //完成固件更新
+        public void doFinishBin(GuJianBean mode){
+            if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
+                HDBLESend.sendFinishBin(mNotifyCharacteristic, mBluetoothGatt, mode);
             }
         }
-    }
-    //恢复出厂设置
-    public void doReturnBack(){
-        if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
-            boolean isReturnSuccess=HDBLESend.doRenturnBack(mNotifyCharacteristic, mBluetoothGatt);
-            if(isReturnSuccess){
-                Intent readIntent=new Intent(BleConstant.ACTION_RETURN_BACK_SUCCESS);
-                sendBroadcast(readIntent);
+        //读取设备ID
+        public void doGetDeviceID(){
+            if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
+                HDBLESend.readDeviceID(mNotifyCharacteristic, mBluetoothGatt);
             }
         }
-    }
 
-    //每次写入20个字节 把数据分解成16个字节一个部分一个部分
-    private List<byte[]> splitSendData(byte[] data) {
-        if(data == null) return null;
-        List<byte[]> datas = new ArrayList<byte[]>();
-        if(data.length > 16){
-            int num = data.length % 16== 0 ? data.length / 16 : data.length / 16 + 1;
-            for(int i = 0; i < num; i ++) {
-                if(data.length % 16 == 0){
-                    byte[] d = new byte[16];
-                    for(int j = 0; j < 16 && i * 16 + j < data.length ; j ++) {
-                        d[j] = data[i * 16 + j];
-                    }
-                    datas.add(d);
-                } else {
-                    byte[] d;
-                    if(i == num - 1) {
-                        d = new byte[data.length - i * 16];
+        //发送读取命令
+        public void doSendReadPara(){
+            if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
+                HDBLESend.SendReadPara(mNotifyCharacteristic, mBluetoothGatt);
+            }
+        }
+        //重启主机
+        public void doReloadSYS(){
+            if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
+                boolean isReloadSuccess=HDBLESend.ReloadSYS(mNotifyCharacteristic, mBluetoothGatt);
+                if(isReloadSuccess){
+                    Intent readIntent=new Intent(BleConstant.ACTION_RELOAD_SYS_SUCCESS);
+                    sendBroadcast(readIntent);
+                }
+            }
+        }
+        //恢复出厂设置
+        public void doReturnBack(){
+            if (mNotifyCharacteristic != null && mBluetoothGatt != null) {
+                boolean isReturnSuccess=HDBLESend.doRenturnBack(mNotifyCharacteristic, mBluetoothGatt);
+                if(isReturnSuccess){
+                    Intent readIntent=new Intent(BleConstant.ACTION_RETURN_BACK_SUCCESS);
+                    sendBroadcast(readIntent);
+                }
+            }
+        }
+
+        //每次写入20个字节 把数据分解成16个字节一个部分一个部分
+        private List<byte[]> splitSendData(byte[] data) {
+            if(data == null) return null;
+            List<byte[]> datas = new ArrayList<byte[]>();
+            if(data.length > 16){
+                int num = data.length % 16== 0 ? data.length / 16 : data.length / 16 + 1;
+                for(int i = 0; i < num; i ++) {
+                    if(data.length % 16 == 0){
+                        byte[] d = new byte[16];
+                        for(int j = 0; j < 16 && i * 16 + j < data.length ; j ++) {
+                            d[j] = data[i * 16 + j];
+                        }
+                        datas.add(d);
                     } else {
-                        d = new byte[16];
+                        byte[] d;
+                        if(i == num - 1) {
+                            d = new byte[data.length - i * 16];
+                        } else {
+                            d = new byte[16];
+                        }
+                        for(int j = 0; j < 16 && i * 16 + j < data.length ; j ++) {
+                            d[j] = data[i * 16 + j];
+                        }
+                        datas.add(d);
                     }
-                    for(int j = 0; j < 16 && i * 16 + j < data.length ; j ++) {
-                        d[j] = data[i * 16 + j];
+                }
+            } else {
+                datas.add(data);
+            }
+            return datas;
+        }
+
+
+        /*-------------------------------- 关闭所有 ---------------------*/
+
+        public  void closeGatt() {
+            if (mBluetoothGatt != null) {
+                mHandler.removeCallbacksAndMessages(null);
+                if (mBluetoothAdapter.isEnabled()) {
+                    try {
+                        refreshCache(mBluetoothGatt);
+                    } catch (DeadObjectException e) {
+                        e.printStackTrace();
                     }
-                    datas.add(d);
+                    if(mBluetoothGatt !=null){
+                        mBluetoothGatt.close();
+                    }
+                    mBluetoothGatt = null;
+                    achace.put("address_1","");
                 }
             }
-        } else {
-            datas.add(data);
         }
-        return datas;
-    }
 
+        private void refreshCache(BluetoothGatt gatt) throws DeadObjectException {
 
-    /*-------------------------------- 关闭所有 ---------------------*/
-
-    public  void closeGatt() {
-        if (mBluetoothGatt != null) {
-            mHandler.removeCallbacksAndMessages(null);
-            if (mBluetoothAdapter.isEnabled()) {
-                try {
-                    refreshCache(mBluetoothGatt);
-                } catch (DeadObjectException e) {
-                    e.printStackTrace();
+            try {
+                BluetoothGatt localBluetoothGatt = gatt;
+                Method localMethod = localBluetoothGatt.getClass().getMethod("refresh");
+                if (localMethod == null) {
+                    return;
                 }
-                if(mBluetoothGatt !=null){
-                    mBluetoothGatt.close();
-                }
-                mBluetoothGatt = null;
-                achace.put("address_1","");
+                localMethod.invoke(localBluetoothGatt);
+                DLog.e(TAG,"刷新蓝牙设备缓存成功");
+            } catch (Exception localException) {
+                DLog.e(TAG,"当刷新设备时Exception==" + localException.getMessage().toString());
             }
         }
-    }
 
-    private void refreshCache(BluetoothGatt gatt) throws DeadObjectException {
 
-        try {
-            BluetoothGatt localBluetoothGatt = gatt;
-            Method localMethod = localBluetoothGatt.getClass().getMethod("refresh");
-            if (localMethod == null) {
-                return;
-            }
-            localMethod.invoke(localBluetoothGatt);
-            DLog.e(TAG,"刷新蓝牙设备缓存成功");
-        } catch (Exception localException) {
-            DLog.e(TAG,"当刷新设备时Exception==" + localException.getMessage().toString());
+        /**
+         * 获取当前连接状态
+         *
+         * @return
+         */
+        public int getCurrentConnState() {
+            return mConnectionState;
         }
+
+        /**
+         * 更新广播
+         *
+         * @param action
+         */
+        private void broadcastUpdate(final String action) {
+            final Intent intent = new Intent(action);
+            sendBroadcast(intent);
+        }
+
+
+
     }
-
-
-    /**
-     * 获取当前连接状态
-     *
-     * @return
-     */
-    public int getCurrentConnState() {
-        return mConnectionState;
-    }
-
-    /**
-     * 更新广播
-     *
-     * @param action
-     */
-    private void broadcastUpdate(final String action) {
-        final Intent intent = new Intent(action);
-        sendBroadcast(intent);
-    }
-
-
-
-}

@@ -8,9 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -26,6 +23,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.ui.setting.adapter.TruckNeedRepairAdapter;
@@ -43,7 +42,6 @@ import cn.hand.tech.utils.Tools;
 
 
 /**
- * A simple {@link Fragment} subclass.
  * describe:需要维修车辆
  */
 public class TruckNeedRepairActivity extends Activity implements View.OnClickListener,INeedRepairView,TruckNeedRepairAdapter.onPhoneLisenter {

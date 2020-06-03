@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.ui.setting.adapter.BindCarAdapter;

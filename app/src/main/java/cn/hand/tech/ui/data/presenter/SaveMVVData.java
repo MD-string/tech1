@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.content.FileProvider;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +13,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.core.content.FileProvider;
 import cn.hand.tech.BApplication;
 import cn.hand.tech.R;
 import cn.hand.tech.bean.WeightDataBean;

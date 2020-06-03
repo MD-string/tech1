@@ -2,10 +2,11 @@ package cn.hand.tech.weiget;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ListView;
+
+import androidx.annotation.RequiresApi;
 
 public class MyListView extends ListView {
 

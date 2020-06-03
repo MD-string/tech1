@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
+import androidx.annotation.Nullable;
 import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.ui.setting.bean.ClearZeroModel;

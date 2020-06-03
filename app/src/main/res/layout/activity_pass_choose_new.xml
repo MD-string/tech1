@@ -137,10 +137,10 @@
             android:background="#38999999" />
 
     </LinearLayout>
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/id_page_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/ll_tab_title" >
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 </LinearLayout>

@@ -2,7 +2,6 @@ package cn.hand.tech.utils;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -14,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by wcf on 2018/3/13 15:42.
@@ -30,7 +31,7 @@ public final class EditTextUtil {
 
         filters[0] = new InputFilter.LengthFilter(length) {
             public CharSequence filter(@NonNull CharSequence source, int start, int end,
-                @NonNull Spanned dest, int dstart, int dend) {
+                                       @NonNull Spanned dest, int dstart, int dend) {
                 if (dest.toString().length() >= length) {
                     return "";
                 }

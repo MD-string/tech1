@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -22,6 +20,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.common.ConsTantsCode;
@@ -40,7 +39,6 @@ import cn.hand.tech.utils.Tools;
 
 
 /**
- * A simple {@link Fragment} subclass.
  * describe:公司列表
  */
 public class CompanyListActivity extends Activity implements View.OnClickListener,ICompanyListView {

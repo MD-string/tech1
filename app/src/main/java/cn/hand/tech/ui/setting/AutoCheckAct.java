@@ -10,8 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +26,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import cn.hand.tech.BApplication;
 import cn.hand.tech.R;
 import cn.hand.tech.ble.bean.GPRSbean;

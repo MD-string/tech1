@@ -3,8 +3,6 @@ package cn.hand.tech.ui.setting;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.log.DLog;

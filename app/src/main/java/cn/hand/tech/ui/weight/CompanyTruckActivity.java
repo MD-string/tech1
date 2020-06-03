@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -28,7 +27,6 @@ import cn.hand.tech.utils.Tools;
 
 
 /**
- * A simple {@link Fragment} subclass.
  * describe:公司车辆
  */
 public class CompanyTruckActivity extends Activity implements View.OnClickListener,ICompyanView {

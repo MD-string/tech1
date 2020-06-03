@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 
+import androidx.annotation.RequiresApi;
 import cn.hand.tech.BApplication;
 import cn.hand.tech.R;
 import cn.hand.tech.ble.bean.GPRSbean;

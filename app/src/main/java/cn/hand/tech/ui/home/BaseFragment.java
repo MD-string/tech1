@@ -2,8 +2,8 @@ package cn.hand.tech.ui.home;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
+import androidx.fragment.app.Fragment;
 import cn.hand.tech.log.DLog;
 import cn.hand.tech.net.NetBroadcastReceiver.NetEventHandler;
 import cn.hand.tech.ui.BaseActivity;

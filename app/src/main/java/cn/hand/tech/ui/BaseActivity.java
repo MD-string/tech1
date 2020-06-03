@@ -3,7 +3,6 @@ package cn.hand.tech.ui;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,6 +15,7 @@ import android.widget.LinearLayout;
 
 import java.util.HashMap;
 
+import androidx.fragment.app.FragmentActivity;
 import cn.hand.tech.R;
 import cn.hand.tech.common.DAppManager;
 import cn.hand.tech.log.DLog;

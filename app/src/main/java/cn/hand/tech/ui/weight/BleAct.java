@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -21,6 +20,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import cn.hand.tech.R;
 import cn.hand.tech.ble.bean.BleDevice;
 import cn.hand.tech.ble.bleUtil.BleConstant;

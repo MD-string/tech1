@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
 import cn.hand.tech.R;
 import cn.hand.tech.bean.HDKRModel;
 import cn.hand.tech.bean.HDSendDataModel;

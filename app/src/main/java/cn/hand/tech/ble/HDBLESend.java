@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import java.lang.reflect.Field;
@@ -16,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import androidx.annotation.RequiresApi;
 import cn.hand.tech.bean.HDSendDataModel;
 import cn.hand.tech.ble.bleUtil.BluetoothUtil;
 import cn.hand.tech.ble.bleUtil.CRC16;
@@ -455,10 +455,12 @@ public class HDBLESend {
                 //
                 //        }
                 List<byte[]> mlist=splitSendData(send_data);
+
                 for(int i=0;i<mlist.size();i++){
                     try {
                         byte[] bb= mlist.get(i);
                         System.out.println(Arrays.toString(bb));
+                        characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
                         //                        mWriteCharacteristic(characteristic,bluetoothGatt,bb);
                         characteristic.setValue(bb);
                         boolean issuccess=bluetoothGatt.writeCharacteristic(characteristic);
@@ -467,6 +469,7 @@ public class HDBLESend {
                         while (!issuccess){
                             Thread.sleep(20);
                             byte[] bb1= mlist.get(i);
+                            characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
                             characteristic.setValue(bb1);
                             boolean issuccess1=bluetoothGatt.writeCharacteristic(characteristic);
                             DLog.e("SendupdateBin","SendupdateBin:" + "====》issuccess1: "+issuccess1);

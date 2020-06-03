@@ -8,7 +8,6 @@ import android.graphics.Paint.FontMetricsInt;
 import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +17,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.core.content.ContextCompat;
 import cn.hand.tech.R;
 
 /**

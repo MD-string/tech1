@@ -20,7 +20,6 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
 import android.util.Base64;
 import android.util.Log;
 
@@ -37,6 +36,7 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import androidx.core.content.FileProvider;
 import cn.hand.tech.BApplication;
 import cn.hand.tech.R;
 

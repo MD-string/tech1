@@ -2,12 +2,12 @@ package cn.hand.tech.mail;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.content.FileProvider;
 
 import java.io.File;
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import cn.hand.tech.BApplication;
 import cn.hand.tech.R;
 import cn.hand.tech.log.DLog;

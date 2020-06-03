@@ -14,12 +14,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -37,6 +31,12 @@ import com.tencent.bugly.beta.Beta;
 
 import java.io.Serializable;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import cn.hand.tech.R;
 import cn.hand.tech.ble.BluetoothLeService;
 import cn.hand.tech.common.ACache;

@@ -6,8 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -27,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
 import cn.hand.tech.R;
 import cn.hand.tech.common.ACache;
 import cn.hand.tech.log.DLog;
@@ -39,7 +38,6 @@ import cn.hand.tech.utils.ToastUtil;
 
 
 /**
- * A simple {@link Fragment} subclass.
  * describe:添加车辆页
  */
 public class AddTruckActivity extends AppCompatActivity implements View.OnClickListener,ICompyanView {

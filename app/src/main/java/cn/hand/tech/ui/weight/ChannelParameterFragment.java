@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +32,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import cn.hand.tech.R;
 import cn.hand.tech.bean.HDKRModel;
 import cn.hand.tech.bean.HDModelData;
